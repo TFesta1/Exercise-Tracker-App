@@ -1,0 +1,338 @@
+<!-- Type "!", and press enter. Emmet will make the base code for html -->
+<!DOCTYPE html>
+<html lang="en">
+    <!-- https://bulma.io/documentation/layout/hero/ -->
+    <!-- https://newpaltz-examples.onrender.com/static/bulma/todo.html -->
+    <!-- https://fontawesome.com/v4/icons/ -->
+    <head>
+        <!-- Defines the letter-to-number relations (ex: a=26...) -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- hints about the size of the initial size of the viewport. Used by mobile devices only. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>First Bulma Example</title>
+    </head>
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color: rgba(0, 209, 178, 1);">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="https://bulma.io">
+                <img src="https://bulma.io/images/bulma-logo.png" style="filter: grayscale(100%); -webkit-filter: grayscale(100%);" width="112" height="28">
+              </a>
+          
+              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" >
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+          
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-start">
+                <a class="navbar-item">
+                  Home
+                </a>
+          
+                <a class="navbar-item">
+                  Documentation
+                </a>
+          
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a class="navbar-link">
+                    More
+                  </a>
+          
+                  <div class="navbar-dropdown">
+                    <a class="navbar-item">
+                      About
+                    </a>
+                    <a class="navbar-item">
+                      Jobs
+                    </a>
+                    <a class="navbar-item">
+                      Contact
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item">
+                      Report an issue
+                    </a>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="navbar-end">
+                <div class="navbar-item">
+                  <div class="buttons">
+                    <!-- <i class="fa fa-download has-text-white" style="font-size:20px;"  aria-hidden="true">Download</i> -->
+
+                    <a class="button is-primary mr-3" href="https://github.com/jgthms/bulma/releases/download/0.9.4/bulma-0.9.4.zip">
+                      <span class="icon is-hidden-touch is-hidden-desktop-only">
+                        <i class="fa fa-download"></i>
+                      </span>
+                      <span>Download</span>
+                    </a>
+                    
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+        </nav>
+        <br>
+
+       
+        
+        <div class="columns container" style="padding:50px; height:700px;">
+            <div class="is-one-third" style="position:relative; left:30px; top:6px;">
+                <div class="card">
+                    <header class="card-header">
+                      <p class="card-header-title">
+                        Component
+                      </p>
+                      <button class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                          <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                    </header>
+                    <div class="card-content">
+                      <div class="content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                        <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+                        <br>
+                        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                      </div>
+                    </div>
+                    <footer class="card-footer">
+                      <a href="#" class="card-footer-item">Save</a>
+                      <a href="#" class="card-footer-item">Edit</a>
+                      <a href="#" class="card-footer-item">Delete</a>
+                    </footer>
+                  </div>
+
+            </div>
+            <div class="is-one-third" style="padding:50px; position:relative; bottom:43px;">
+                <nav class="panel" style="padding:50px">
+                    <p class="panel-tabs">
+                      <!-- <a class="is-active">All</a>
+                      <a>Public</a>
+                      <a>Private</a>
+                      <a>Sources</a>
+                      <a>Forks</a> -->
+                      <div class="column tabs is-boxed">
+                        <ul>
+                        <li class="is-active">
+                            <a>
+                                <span class="icon is-small"><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+                                <span>Current</span>
+                                
+                            </a>
+                              
+                            
+                                
+                            <!-- </nav> -->
+                        </li>
+                        <li>
+                            <a>
+                            <span class="icon is-small"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></span>
+                            <span>Completed</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <span class="icon is-small"><i class="fa fa-calendar-o has-text-black" aria-hidden="true"></i></span>
+                            <span>Upcoming</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                            <span class="icon is-small"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
+                            <span>All</span>
+                            </a>
+                        </li>
+                        </ul>
+                    </div>
+                      
+    
+                    </p>
+                    <div class="panel-block">
+                        <p class="control has-icons-left">
+                          <input class="input" type="text" placeholder="New Task">
+                          <span class="icon is-left">
+                            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                          </span>
+                        </p>
+                      </div>
+                      <label class="panel-block is-checked">
+                        <input type="checkbox" checked>
+                        Make Bulma great again
+                      </label>
+                      <label class="panel-block">
+                        <input type="checkbox">
+                        Add some more features
+                      </label>
+                      <label class="panel-block">
+                        <input type="checkbox">
+                        Make github account
+                      </label>
+                      <label class="panel-block">
+                        <input type="checkbox">
+                        Learn how to use github
+                      </label>
+                    <label class="panel-block">
+                      <input type="checkbox">
+                      add a .gitignore
+                    </label>
+                    
+                  </nav>
+
+            </div>
+
+            <div class="is-one-third" style="position: relative; left:7%;">
+                <p class="title">Table of contents</p>
+                <p class="subtitle">Intra-page navigation</p>
+                <aside class="menu">
+                    <p class="menu-label">
+                      General
+                    </p>
+                    <ul class="menu-list">
+                      <li><a>Dashboard</a></li>
+                      <li><a>Customers</a></li>
+                    </ul>
+                    <p class="menu-label">
+                      Administration
+                    </p>
+                    <ul class="menu-list">
+                      <li><a>Team Settings</a></li>
+                      <li>
+                        <a class="is-active">Manage Your Team</a>
+                        <ul>
+                          <li><a>Members</a></li>
+                          <li><a>Plugins</a></li>
+                          <li><a>Add a member</a></li>
+                        </ul>
+                      </li>
+                      <li><a>Invitations</a></li>
+                      <li><a>Cloud Storage Environment Settings</a></li>
+                      <li><a>Authentication</a></li>
+                    </ul>
+                    <p class="menu-label">
+                      Transactions
+                    </p>
+                    <ul class="menu-list">
+                      <li><a>Payments</a></li>
+                      <li><a>Transfers</a></li>
+                      <li><a>Balance</a></li>
+                    </ul>
+                  </aside>
+
+            </div>
+        </div>
+
+        <div class="container" style="width:30%; padding-bottom: 30px; position:relative; right:7%; bottom:180px;">
+            <article class="message">
+                <div class="message-header has-background-success">
+                  <p>Make a github account</p>
+                  <button class="delete" aria-label="delete"></button>
+                </div>
+                <div class="message-body has-text-success" style="background-color:#EBFFFC;">
+                    Go to <a href="https://github.com/">github.com</a> and create an account.<br/>That's where you'll be able to share your work with the world. thats where we will be putting all of our code for this class.
+                    <progress class="progress is-primary" value="60" max="100">15%</progress>
+                </div>
+                
+              </article>
+            
+        </div>
+
+        <div class="container box" style="width:30%; padding-bottom: 30px; position:relative; right:7%; bottom:180px;">
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Text input">
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input is-success" type="text" placeholder="Text input" value="bulma">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fa fa-check"></i>
+              </span>
+            </div>
+            <p class="help is-success">This username is available</p>
+          </div>
+          
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
+              <span class="icon is-small is-left">
+                <i class="fa fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fa fa-exclamation-triangle"></i>
+              </span>
+            </div>
+            <p class="help is-danger">This email is invalid</p>
+          </div>
+          
+          <div class="field">
+            <label class="label">Subject</label>
+            <div class="control">
+              <div class="select">
+                <select>
+                  <option>Select dropdown</option>
+                  <option>With options</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+              <textarea class="textarea" placeholder="Textarea"></textarea>
+            </div>
+          </div>
+          
+          <div class="field">
+            <div class="control">
+              <label class="checkbox">
+                <input type="checkbox">
+                I agree to the <a href="#">terms and conditions</a>
+              </label>
+            </div>
+          </div>
+          
+          <div class="field">
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="question">
+                Yes
+              </label>
+              <label class="radio">
+                <input type="radio" name="question">
+                No
+              </label>
+            </div>
+          </div>
+          
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-link">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button is-link is-light">Cancel</button>
+            </div>
+          </div>
+        </div>
+        
+    </body>
+</html>
