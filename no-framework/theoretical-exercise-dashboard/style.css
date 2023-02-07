@@ -1,0 +1,198 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+    width: 100%;
+    background: #E5E7EB;
+    position: relative;
+    display: flex; /* Align in one row (two sections/elements aligned in rows) */
+}
+
+/* background on the menu */
+#menu {
+    background: #111827;
+    width: 300px;
+    height: 100%;
+}
+
+#menu .logo {
+    /* Essentially put everything in one row */
+    display: flex;/* Align in one row */
+    align-items: center;/* Align in the middle */
+    color: #fff; /* White color */
+    padding: 30px 0 0 30px; /* Top, right, bottom, left */
+}
+
+/* Fix the logo width */
+#menu .logo img{
+    width: 40%;
+    margin-right: 15px; /* Adding space between the logo and the list*/
+}
+
+#menu .items {
+    margin-top:40px; /* Add space on the top*/
+}
+
+#menu .items li{
+    list-style: none;
+    padding: 15px 0;
+    cursor: pointer;
+    transition: 0.3s ease; /* Make the transition smooth */
+    
+}
+
+/* Background color of the whole list item on hovering */
+#menu .items li:hover{
+    background-color: #253047; 
+}
+
+#menu .items li i{
+    color: rgb(134, 141, 151);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center; /* Align the icon in the middle */
+    font-size: 14px; 
+    margin: 0 10px 0 25px; /* Padding to the right and left to make it go from the wall on both sides*/
+}
+
+#menu .items li i:hover{
+    
+    cursor: pointer; /* Change the cursor to a hand */
+}
+
+
+/* On the SELECTED child, make the border left (only the first child). If we select dashboard, makes the left border white */
+#menu .items li:nth-child(1){
+    border-left: 4px solid #fff;
+    
+}
+
+/* change the color of icons if someone hovers on a list tag */
+#menu .items li:hover i {
+    color: #F3F4F6;
+    
+}
+
+/* Text color on hover */
+#menu .items li:hover a {
+    color: #F3F4F6;
+
+
+}
+
+#menu .items li i a{
+    text-decoration: none; /* Remove the underline */
+    color: rgb(134, 141, 151); /* Make text grey */
+    font-weight: 300px; /* Make text lighter */
+    transition: 0.3s ease; /* Make the transition smooth */
+}
+
+
+#interface {
+    width: calc(100% - 300px); /* Take the whole width and subtract 300px since that's the menubar */
+}
+
+/* Space between the searchbar and our PFP */
+#interface .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 15px 30px;
+    border-bottom: 3px solid #594ef7;
+}
+
+#interface .navigation .search {
+    display: flex; /* both in one row */
+    justify-content: flex-start; /* Align in the middle */
+    align-items: center;
+    padding: 10px 14px;
+    border:1px solid #d7dbe6;
+    border-radius: 4px;
+}
+
+/* From our input section, remove the border */
+#interface .navigation .search input{
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Add more space between search icon and text */
+#interface .navigation .search i{
+    margin-right: 14px;
+}
+
+#interface .navigation .profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+#interface .navigation .profile i{
+    margin-right: 20px;
+    font-size: 19px;
+    font-weight: 400;
+}
+
+/* Width and height of img */
+#interface .navigation .profile img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+/* Changing the style of our title */
+.i-name {
+    color: #444a53;
+    padding: 30px 30px 0 30px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.values {
+    padding: 30px 30px 0 30px;
+}
+
+.values .val-box {
+    background: white;
+    width: 235px;
+    padding: 16px 20px; 
+    border-radius: 5px;
+    /* Text in one row */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.values .val-box i{
+    font-size: 25px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    background: chartreuse;
+    margin-right: 15px; /* Add space between the icon and the text */
+}
+
+.values .val-box h3{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.values .val-box span{
+    font-size: 15px;
+    color: grey;
+}
