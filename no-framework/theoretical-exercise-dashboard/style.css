@@ -162,6 +162,10 @@ body {
 
 .values {
     padding: 30px 30px 0 30px;
+    display: flex; /* Align in one row */
+    justify-content: space-between; /* Space between the boxes */
+    align-items: center; /* Align in the middle */
+    flex-wrap: wrap; /* If the screen is too small, wrap the boxes */
 }
 
 .values .val-box {
@@ -183,8 +187,28 @@ body {
     border-radius: 50%;
     text-align: center;
     color: white;
-    background: chartreuse;
     margin-right: 15px; /* Add space between the icon and the text */
+}
+
+
+/* The first icon's background color */
+.values .val-box:nth-child(1) i {
+    background: #7874EC;
+}
+
+/* 2nd */
+.values .val-box:nth-child(2) i {
+    background: #5C8AF0;
+}
+
+/* 3rd */
+.values .val-box:nth-child(3) i {
+    background: #E45D99;
+}
+
+/* 4th */
+.values .val-box:nth-child(4) i {
+    background: #74DAEC;
 }
 
 .values .val-box h3{
@@ -195,4 +219,73 @@ body {
 .values .val-box span{
     font-size: 15px;
     color: grey;
+}
+
+.board {
+    /* Border radius and background color */
+    width: 94%;  /* Not 100% since we want to remove the slider on the bottom*/
+    margin: 30px 0 30px 30px; /* Top, right, bottom, left */
+    overflow: auto;
+    background: white;
+    border-radius: 8px;
+}
+
+.board img {
+    /* Fix the image on the table */
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.board h5 {
+    font-weight: 600;
+    font-size: 14px;
+
+}
+
+.board p {
+    font-weight: 400;
+    font-size: 13px;
+    color: gray;
+}
+
+.board .people {
+    /* The text is in one row */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: start;
+}
+
+table {
+    /* Remove the border of the table */
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid whitesmoke; /* Add a border on the bottom of each row */
+}
+
+thead td {
+    /* Border on top and change the text */
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 400;
+    background: #F9FAF8;
+    text-align: start;
+    padding: 15px;
+}
+
+tbody tr td {
+    padding: 10px 15px; /* space from topbottom and leftright */
+}
+
+.active p {
+    background: #d7fada;
+    padding: 2px 10px; 
+    display: inline-block; /* Make it in one row */
+    border-radius: 40px; /* Make it round */
+    color: #2b2b2b;
 }
