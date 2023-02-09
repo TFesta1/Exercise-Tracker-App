@@ -328,12 +328,30 @@ tbody tr td {
         width: 270px;
         position: fixed;
         left: -270px; /* Hide the menu */
+        transition: 0.3s ease;
+    }
+    /* active class */
+    #menu.active{
+        left: 0px;
+    }
+    /* Display the menu button for devices */
+    #menu-btn {
+        display: initial;
     }
     #interface {
         width: 100%;
         margin-left: 0px; /* Move the interface to the right and fix it*/
         display: inline-block;
+        transition: 0.3s ease;
     }
+    /* If our menu class is active, change the interface */
+    #menu.active ~ #interface {
+        /*270px was taken by our menu)*/
+        width: calc(100% - 270px);
+        margin-left: 270px;
+        transition: 0.3s ease;
+    }
+
     /* Space between the searchbar and our PFP */
     #interface .navigation {
         width: 100%;
@@ -345,5 +363,47 @@ tbody tr td {
 
     .values .val-box {
         padding: 16px 20px;
+        margin: 10px 20px 10px 0;
+    }
+
+    
+    .board {
+        /* Border radius and background color */
+        width: 92%;  /* Not 100% since we want to remove the slider on the bottom*/
+        padding: 0;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
     }
 }
+
+/* For phones */
+@media (max-width: 477px) {
+    #interface .navigation {
+        padding: 15px;
+    }
+
+    #interface .navigation .search input{
+        width: 150px;
+    }
+
+    .i-name {
+        padding: 30px 15px 0 15px;
+    }
+    .values {
+        padding: 15px 15px 0 15px;
+    }
+
+    .values .val-box {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .board {
+        margin: 30px 15px 30px 15px;
+    }
+}
+
