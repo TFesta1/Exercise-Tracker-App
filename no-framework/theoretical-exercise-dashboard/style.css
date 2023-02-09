@@ -19,6 +19,10 @@ body {
     background: #111827;
     width: 300px;
     height: 100%;
+    /* Make it stay on the side */
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 #menu .logo {
@@ -97,6 +101,8 @@ body {
 
 #interface {
     width: calc(100% - 300px); /* Take the whole width and subtract 300px since that's the menubar */
+    margin-left: 300px; /* Move the interface to the right and fix it*/
+    position: relative;
 }
 
 /* Space between the searchbar and our PFP */
@@ -107,6 +113,8 @@ body {
     background: white;
     padding: 15px 30px;
     border-bottom: 3px solid #594ef7;
+    position: fixed;
+    width: calc(100% - 300px);
 }
 
 #interface .navigation .search {
@@ -151,6 +159,20 @@ body {
     border-radius: 50%;
 }
 
+.n1 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Only displayed on tablets */
+#menu-btn {
+    display: none;
+    color: #2b2b2b;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+}
 
 /* Changing the style of our title */
 .i-name {
@@ -158,6 +180,7 @@ body {
     padding: 30px 30px 0 30px;
     font-size: 24px;
     font-weight: 700;
+    margin-top: 70px; /* Makes dashboard heading visible */
 }
 
 .values {
@@ -288,4 +311,39 @@ tbody tr td {
     display: inline-block; /* Make it in one row */
     border-radius: 40px; /* Make it round */
     color: #2b2b2b;
+}
+
+.edit a{
+    text-decoration: none; /* Remove the underline */
+    font-size: 14px;
+    color: #554cd1;
+    font-weight: 600;
+}
+
+
+
+@media (max-width: 769px) {
+    /* For an IPAD, change the settings */
+    #menu {
+        width: 270px;
+        position: fixed;
+        left: -270px; /* Hide the menu */
+    }
+    #interface {
+        width: 100%;
+        margin-left: 0px; /* Move the interface to the right and fix it*/
+        display: inline-block;
+    }
+    /* Space between the searchbar and our PFP */
+    #interface .navigation {
+        width: 100%;
+    }
+    .values {
+        padding: 30px 30px 0 30px;
+        justify-content: flex-start;
+    }
+
+    .values .val-box {
+        padding: 16px 20px;
+    }
 }
