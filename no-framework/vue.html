@@ -21,14 +21,14 @@
 								<img src="https://bulma.io/images/bulma-logo.png" style="filter: grayscale(100%); -webkit-filter: grayscale(100%);" width="112" height="28">
 							</a>
 					
-							<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" >
+							<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" :class="{ 'is-active': isMenuActive }" @click="isMenuActive = !isMenuActive" >
 								<span aria-hidden="true"></span>
 								<span aria-hidden="true"></span>
 								<span aria-hidden="true"></span>
 							</a>
 						</div>
 					
-						<div id="navbarBasicExample" class="navbar-menu">
+						<div id="navbarBasicExample" class="navbar-menu"  :class="{ 'is-active': isMenuActive }">
 							<div class="navbar-start">
 								<a class="navbar-item">
 									Home
@@ -124,36 +124,14 @@
 											<a>Forks</a> -->
 											<div class="column tabs is-boxed">
 												<ul>
-												<li class="is-active">
+													<li v-for="tab in tabs" :class="{ 'is-active': currentTab == tab.name}" @click="currentTab = tab.name">
 														<a>
-																<span class="icon is-small"><i class="fa fa-list-alt" aria-hidden="true"></i></span>
-																<span>Current</span>
-																
+															<span class="icon is-small"><i :class="tab.icon" aria-hidden="true"></i></span>
+															<span>{{ tab.name }}</span>
 														</a>
-															
-														
-																
-														<!-- </nav> -->
-												</li>
-												<li>
-														<a>
-														<span class="icon is-small"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></span>
-														<span>Completed</span>
-														</a>
-												</li>
-												<li>
-														<a>
-														<span class="icon is-small"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-														<span>Upcoming</span>
-														</a>
-												</li>
-												<li>
-														<a>
-														<span class="icon is-small"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
-														<span>All</span>
-														</a>
-												</li>
+													</li>
 												</ul>
+												
 										</div>
 											
 		
@@ -166,26 +144,11 @@
 													</span>
 												</p>
 											</div>
-											<label class="panel-block is-checked">
-												<input type="checkbox" checked>
-												Make Bulma great again
-											</label>
-											<label class="panel-block">
-												<input type="checkbox">
-												Add some more features
-											</label>
-											<label class="panel-block">
-												<input type="checkbox">
-												Make github account
-											</label>
-											<label class="panel-block">
-												<input type="checkbox">
-												Learn how to use github
-											</label>
-										<label class="panel-block">
-											<input type="checkbox">
-											add a .gitignore
-										</label>
+											<a v-for="item in items" class="panel-block is-checked">
+												<input type="checkbox" :checked="item.completed">
+													{{ item.name }}
+											</a>
+											
 										
 									</nav>
 
@@ -336,7 +299,9 @@
 		</div>
 		<!-- cdnjs.com search jquery and copy the script tag -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-		<script>
+		
+		
+		<!-- <script>
 			// First-class citizen: function as a parameter, so we can pass in any function
 			$(function() {
 				// finds all of the icons on the page, and make a change.  "cssFunction", "value"   OR a jsonObject {}
@@ -362,6 +327,37 @@
 					}
 				});
 			});
+		</script> -->
+
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+		<script>
+
+			Vue.createApp({
+				// Modifying nav-burger class
+				data() {
+				return {
+							isMenuActive: false,
+							currentTab: "All",
+							tabs: [
+								{ name: "All", icon: "fa fa-list" },
+								{ name: "Completed", icon: "fa fa-check" },
+								{ name: "Current", icon: "fa fa-spinner" },
+								{ name: "Overdue", icon: "fa fa-exclamation-triangle" },
+								// 
+							],
+							items: [
+								{ name: "Learn Vue", completed: true},
+								{ name: "Learn Vue", completed: false},
+								{ name: "Learn Vue", completed: true},
+								{ name: "Learn Vue", completed: true},
+
+							]
+						}
+					}
+			}).mount('body')
 		</script>
+
 		</body>
 </html>
