@@ -14,6 +14,11 @@ body {
     display: flex; /* Align in one row (two sections/elements aligned in rows) */
 }
 
+h3 {
+    width: 100%;
+    position: relative;
+}
+
 /* background on the menu */
 #menu {
     background: #111827;
@@ -183,6 +188,30 @@ body {
     margin-top: 70px; /* Makes dashboard heading visible */
 }
 
+
+
+.add-workout {
+    display: inline-block; /* Allows it to be positioned horizontally*/
+    border: none; /* Removes default button border */
+    background-color: #3498db;
+    color: white; 
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+    transition: all 0.2s ease-in-out; /* Smooth transition effect for the hover state */
+    position: absolute; /* Disregard where this is relative to it's parent elem */
+    right: 30px; /* Puts it near the RHS of the screen */
+  }
+
+  /* When we hover the class .add-workout */
+.add-workout:hover {
+    background-color: #2980b9;
+    transform: scale(1.1);
+    cursor: pointer; /* Change the cursor to a hand */
+}
+
 .values {
     padding: 30px 30px 0 30px;
     display: flex; /* Align in one row */
@@ -330,6 +359,10 @@ tbody tr td {
         left: -270px; /* Hide the menu */
         transition: 0.3s ease;
     }
+    /* Adjusts it to move when the screen width changes */
+    .add-workout {
+        right: 10px;
+    }
     /* active class */
     #menu.active{
         left: 0px;
@@ -392,6 +425,10 @@ tbody tr td {
 
     .i-name {
         padding: 30px 15px 0 15px;
+    }
+    /* Adjusts it to move when the screen width changes */
+    .add-workout {
+        right: 5px;
     }
     .values {
         padding: 15px 15px 0 15px;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="exerciseStyle.css">
     
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
@@ -55,7 +55,13 @@
         <!-- The title -->
         <h3 class="i-name">
             Dashboard
+            <button class="add-workout">
+                <i></i>
+                Add Workout
+            </button>
         </h3>
+
+        
 
         <div class="values">
             <div class="val-box">
@@ -184,7 +190,7 @@
             </table>
         </div>
     </section>
-
+    <!-- We'll move this functionality later to VueJS -->
     <script>
         $('#menu-btn').click(function(){
             // Activate the "active" class

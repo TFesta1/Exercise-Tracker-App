@@ -22,3 +22,10 @@ const server = http.createServer((req, res) => {
 server.listen(port, () => 
     console.log(`Server running at http://${hostname}:${port}/`)
 );
+
+
+// For installing dependencies:
+// npm install express-handlebars express-session mongoose passport passport-local
+
+// For running the server:
+// npm run dev
