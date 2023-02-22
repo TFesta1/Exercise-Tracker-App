@@ -1,9 +1,15 @@
 const http = require('http'); //https://nodejs.org/en/docs/guides/getting-started-guide/
+const mongoose = require("mongoose")
 // Two seperate module systems
 // CommonJS, ES6, and the subdivision of TypeScript
 const hostname = '127.0.0.1';
 // If there's an env var set, use that. Otherwise, use 3000
 const port = process.env.PORT || 3000 ; //80 for unsecure HTTP traffic, 443 for secure HTTPS traffic
+
+
+const uri = "mongodb+srv://tfest:unsecurePass@cluster0.nptuzeh.mongodb.net/?retryWrites=true&w=majority"
+mongoose.set('strictQuery', false); //To prep for the change, use setQuery to true
+mongoose.connect(uri)
 
 // Start variables as "const", then change to "let" if needed
 
