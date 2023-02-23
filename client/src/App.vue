@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+  // Keyword "setup" is required for the script to be recognized as a composition API
+  import { RouterLink, RouterView } from 'vue-router'
+  import HelloWorld from './components/HelloWorld.vue' //a component
+
+  
 </script>
 
 <template>
@@ -17,6 +20,8 @@ import HelloWorld from './components/HelloWorld.vue'
     </div>
   </header>
 
+
+  <!-- Displays depending on what the RouterLink is -->
   <RouterView />
 </template>
 
