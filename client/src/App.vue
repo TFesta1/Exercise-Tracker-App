@@ -2,6 +2,7 @@
   // Keyword "setup" is required for the script to be recognized as a composition API
   import { RouterLink, RouterView } from 'vue-router'
   import HelloWorld from './components/HelloWorld.vue' //a component
+  import ExerciseView from './views/ExerciseView.vue';
 
   
 </script>
@@ -12,6 +13,7 @@
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
+      
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
