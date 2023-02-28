@@ -6,8 +6,7 @@
   import Register from './views/Register.vue';
   import NavBar from './components/NavBar.vue';
   import FriendsTable from './components/FriendsTable.vue';
-  import currentWorkout from './components/currentWorkout.vue';
-  import 
+  import CurrentWorkout from './components/CurrentWorkout.vue';
 
   
 
@@ -15,13 +14,17 @@
 </script>
 
 <template>
-  <ExerciseView />
-  <currentWorkout />
-  <FriendsTable />
+  <!-- These two things should always be here -->
+  <!-- <ExerciseView /> -->
+  <NavBar />
+
+  <!-- Displays depending on what the RouterLink is -->
+  <!-- <currentWorkout /> -->
+  <!-- <FriendsTable /> -->
 
 
   <div class="container">
-    <!-- <RouterView /> -->
+    <RouterView />
   </div>
 
   <!-- Displays depending on what the RouterLink is -->

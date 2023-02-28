@@ -207,7 +207,8 @@ h3 {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
     transition: all 0.2s ease-in-out; /* Smooth transition effect for the hover state */
     position: absolute; /* Disregard where this is relative to it's parent elem */
-    right: 30px; /* Puts it near the RHS of the screen */
+    left: 1750%; /* Puts it near the RHS of the screen */
+    top: 100px; /* Move it a little down */
   }
 
   /* When we hover the class .add-workout */
