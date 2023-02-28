@@ -1,657 +1,98 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
     <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="exerciseStyle.css">
-    
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="exerciseStyle.css">
+        
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
-    <!-- jQuery -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script> -->
-    <title>Exercise Tracker</title>
-</head>
-<body>
-    
-    <section id="menu">
-        <div class="logo">
-            <!-- Adding the logo -->
-            <img src="images/logo.png" alt="logo">
-            <h2>Dynamic</h2>
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/> -->
+        <!-- jQuery -->
+        <!-- <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script> -->
+        <title>Exercise Tracker</title>
+    </head>
+    <body>
+        
+        <section id="menu">
+            <div class="logo">
+                <!-- Adding the logo -->
+                <img src="images/logo.png" alt="logo">
+                <h2 class="dynamic">Dashboard</h2>
 
-        </div>
+            </div>
+            
 
-        <div class="items">
-            <li><i class="fa fa-pie-chart" aria-hidden="true"><a href="#">Dashboard</a></i></li>
-            <li><i class="fa fa-user" aria-hidden="true"><a href="#">Statistics</a></i></li>
-            <li><i class="fa fa-id-badge" aria-hidden="true"><a href="#">Friends Activity</a></i></li>
-            <li><i class="fa fa-filter" aria-hidden="true"><a href="#">People Search</a></i></li>
-            <li><i class="fa fa-lock" aria-hidden="true"><a href="#">Admin</a></i></li>
-            <!-- Font awesome icon for friends activity -->
+            <div class="items">
+                <ul>
+                    <li><i class="fas fa-pie-chart" aria-hidden="true"><a href="#">Dashboard</a></i></li>
+                    <li><i class="fas fa-user" aria-hidden="true"><a href="#">Statistics</a></i></li>
+                    <li><i class="fas fa-id-badge" aria-hidden="true"><a href="#">Friends Activity</a></i></li>
+                    <li><i class="fas fa-filter" aria-hidden="true"><a href="#">People Search</a></i></li>
+                    <li><i class="fas fa-lock" aria-hidden="true"><a href="#">Admin</a></i></li>
+
+                </ul>
+                
+                <!-- Font awesome icon for friends activity -->
 
 
+
+                
+
+            </div>
+        </section>
+
+        <section id="interface">
+            <div class="navigation">
+                <div class="n1" style="">
+                    <!-- <div>
+                        <i id="menu-btn" class="fa fa-bars"></i>
+                    </div> -->
+                    <div class="search">
+                        <!-- Icon -->
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <!-- Input field -->
+                        <input type="text" placeholder="Search">
+                    </div>
+                </div>
+
+                <!-- Bell icon and pfp on top right -->
+                <div class="profile">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    <img src="images/1.png" alt="pfp">
+                </div>
+            </div>
+
+            <!-- The title -->
+            <h3 class="i-name">
+                <!-- Dashboard -->
+                <button class="add-workout">
+                    <i></i>
+                    Add Workout
+                </button>
+            </h3>
 
             
 
-        </div>
-    </section>
+            
 
-    <section id="interface">
-        <div class="navigation">
-            <div class="n1">
-                <div>
-                    <i id="menu-btn" class="fa fa-bars"></i>
-                </div>
-                <div class="search">
-                    <!-- Icon -->
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                    <!-- Input field -->
-                    <input type="text" placeholder="Search">
-                </div>
-            </div>
-
-            <!-- Bell icon and pfp on top right -->
-            <div class="profile">
-                <i class="fa fa-bell" aria-hidden="true"></i>
-                <img src="images/1.png" alt="pfp">
-            </div>
-        </div>
-
-        <!-- The title -->
-        <h3 class="i-name">
-            Dashboard
-            <button class="add-workout">
-                <i></i>
-                Add Workout
-            </button>
-        </h3>
-
+            
+        </section>
         
-
-        <div class="values">
-            <div class="val-box">
-                <i class="fa fa-users"></i>
-                <div>
-                    <h3>Legs</h3>
-                    <span>Workout Today</span>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa fa-level-up"></i>
-                <div>
-                    <h3>Normal</h3>
-                    <span>Intensity</span>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa fa-globe"></i>
-                <div>
-                    <h3>In X Days</h3>
-                    <span>Rest Day</span>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fa fa-thermometer-three-quarters"></i>
-                <div>
-                    <h3>For X Days</h3>
-                    <span>Streak</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Creating the table -->
-        <div class="board">
-            <table width="100%">
-                <thead>
-                    <!-- Add a row -->
-                    <tr> 
-                        <!-- Add a column -->
-                        <td>Name</td>
-                        <td>Intensity</td>
-                        <td>Workout</td>
-                        <td>Rest</td>
-                        <td>Streak</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="people">
-                            <!-- Their pfp image -->
-                            <img src="images/1.png" alt="pfp">
-                            <div class="people-de">
-                                <!-- Their name -->
-                                <h5>John Doe</h5>
-                                <!-- Their email -->
-                                <p>john@example.com</p>
-                            </div>
-                        </td>
-
-                        <td class="people-des">
-                            <!-- Their intensity -->
-                            <h5>Normal</h5>
-                            <p>Go at a normal pace</p>
-                        </td>
-
-                        <td class="active"><p>Active</p></td>
-                        <td class="role">
-                            <p>Owner</p>
-                        </td>
-
-                        <td class="edit"><a href="#">Edit</a></td>
-                    </tr>
-                    <tr>
-                        <td class="people">
-                            <!-- Their pfp image -->
-                            <img src="images/2.png" alt="pfp">
-                            <div class="people-de">
-                                <!-- Their name -->
-                                <h5>John Doe</h5>
-                                <!-- Their email -->
-                                <p>john@example.com</p>
-                            </div>
-                        </td>
-
-                        <td class="people-des">
-                            <!-- Their intensity -->
-                            <h5>Normal</h5>
-                            <p>Go at a normal pace</p>
-                        </td>
-
-                        <td class="active"><p>Active</p></td>
-                        <td class="role">
-                            <p>Owner</p>
-                        </td>
-
-                        <td class="edit"><a href="#">Edit</a></td>
-                    </tr>
-                    <tr>
-                        <td class="people">
-                            <!-- Their pfp image -->
-                            <img src="images/3.png" alt="pfp">
-                            <div class="people-de">
-                                <!-- Their name -->
-                                <h5>John Doe</h5>
-                                <!-- Their email -->
-                                <p>john@example.com</p>
-                            </div>
-                        </td>
-
-                        <td class="people-des">
-                            <!-- Their intensity -->
-                            <h5>Normal</h5>
-                            <p>Go at a normal pace</p>
-                        </td>
-
-                        <td class="active"><p>Active</p></td>
-                        <td class="role">
-                            <p>Owner</p>
-                        </td>
-
-                        <td class="edit"><a href="#">Edit</a></td>
-                    </tr>
-                    
-                    
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <!-- We'll move this functionality later to VueJS -->
-    
-    
-</body>
-</html>
+        
+    </body>
+    </html>
 
 
 </template>
 
 <style>
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-
-body {
-    width: 100%;
-    background: #E5E7EB;
-    position: relative;
-    display: flex; /* Align in one row (two sections/elements aligned in rows) */
-}
-
-h3 {
-    width: 100%;
-    position: relative;
-}
-
-/* background on the menu */
-#menu {
-    background: #111827;
-    width: 300px;
-    height: 100%;
-    /* Make it stay on the side */
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-#menu .logo {
-    /* Essentially put everything in one row */
-    display: flex;/* Align in one row */
-    align-items: center;/* Align in the middle */
-    color: #fff; /* White color */
-    padding: 30px 0 0 30px; /* Top, right, bottom, left */
-}
-
-/* Fix the logo width */
-#menu .logo img{
-    width: 40%;
-    margin-right: 15px; /* Adding space between the logo and the list*/
-}
-
-#menu .items {
-    margin-top:40px; /* Add space on the top*/
-}
-
-#menu .items li{
-    list-style: none;
-    padding: 15px 0;
-    cursor: pointer;
-    transition: 0.3s ease; /* Make the transition smooth */
-    
-}
-
-/* Background color of the whole list item on hovering */
-#menu .items li:hover{
-    background-color: #253047; 
-}
-
-#menu .items li i{
-    color: rgb(134, 141, 151);
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center; /* Align the icon in the middle */
-    font-size: 14px; 
-    margin: 0 10px 0 25px; /* Padding to the right and left to make it go from the wall on both sides*/
-}
-
-#menu .items li i:hover{
-    
-    cursor: pointer; /* Change the cursor to a hand */
-}
-
-
-/* On the SELECTED child, make the border left (only the first child). If we select dashboard, makes the left border white */
-#menu .items li:nth-child(1){
-    border-left: 4px solid #fff;
-    
-}
-
-/* change the color of icons if someone hovers on a list tag */
-#menu .items li:hover i {
-    color: #F3F4F6;
-    
-}
-
-/* Text color on hover */
-#menu .items li:hover a {
-    color: #F3F4F6;
-
-
-}
-
-#menu .items li i a{
-    text-decoration: none; /* Remove the underline */
-    color: rgb(134, 141, 151); /* Make text grey */
-    font-weight: 300px; /* Make text lighter */
-    transition: 0.3s ease; /* Make the transition smooth */
-}
-
-
-#interface {
-    width: calc(100% - 300px); /* Take the whole width and subtract 300px since that's the menubar */
-    margin-left: 300px; /* Move the interface to the right and fix it*/
-    position: relative;
-}
-
-/* Space between the searchbar and our PFP */
-#interface .navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    padding: 15px 30px;
-    border-bottom: 3px solid #594ef7;
-    position: fixed;
-    width: calc(100% - 300px);
-}
-
-#interface .navigation .search {
-    display: flex; /* both in one row */
-    justify-content: flex-start; /* Align in the middle */
-    align-items: center;
-    padding: 10px 14px;
-    border:1px solid #d7dbe6;
-    border-radius: 4px;
-}
-
-/* From our input section, remove the border */
-#interface .navigation .search input{
-    border: none;
-    outline: none;
-    font-size: 14px;
-}
-
-/* Add more space between search icon and text */
-#interface .navigation .search i{
-    margin-right: 14px;
-}
-
-#interface .navigation .profile {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-}
-
-#interface .navigation .profile i{
-    margin-right: 20px;
-    font-size: 19px;
-    font-weight: 400;
-}
-
-/* Width and height of img */
-#interface .navigation .profile img {
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.n1 {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-/* Only displayed on tablets */
-#menu-btn {
-    display: none;
-    color: #2b2b2b;
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 20px;
-}
-
-/* Changing the style of our title */
-.i-name {
-    color: #444a53;
-    padding: 30px 30px 0 30px;
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 70px; /* Makes dashboard heading visible */
-}
-
-
-
-.add-workout {
-    display: inline-block; /* Allows it to be positioned horizontally*/
-    border: none; /* Removes default button border */
-    background-color: #3498db;
-    color: white; 
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 50px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
-    transition: all 0.2s ease-in-out; /* Smooth transition effect for the hover state */
-    position: absolute; /* Disregard where this is relative to it's parent elem */
-    right: 30px; /* Puts it near the RHS of the screen */
-  }
-
-  /* When we hover the class .add-workout */
-.add-workout:hover {
-    background-color: #2980b9;
-    transform: scale(1.1);
-    cursor: pointer; /* Change the cursor to a hand */
-}
-
-.values {
-    padding: 30px 30px 0 30px;
-    display: flex; /* Align in one row */
-    justify-content: space-between; /* Space between the boxes */
-    align-items: center; /* Align in the middle */
-    flex-wrap: wrap; /* If the screen is too small, wrap the boxes */
-}
-
-.values .val-box {
-    background: white;
-    width: 235px;
-    padding: 16px 20px; 
-    border-radius: 5px;
-    /* Text in one row */
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.values .val-box i{
-    font-size: 25px;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    border-radius: 50%;
-    text-align: center;
-    color: white;
-    margin-right: 15px; /* Add space between the icon and the text */
-}
-
-
-/* The first icon's background color */
-.values .val-box:nth-child(1) i {
-    background: #7874EC;
-}
-
-/* 2nd */
-.values .val-box:nth-child(2) i {
-    background: #5C8AF0;
-}
-
-/* 3rd */
-.values .val-box:nth-child(3) i {
-    background: #E45D99;
-}
-
-/* 4th */
-.values .val-box:nth-child(4) i {
-    background: #74DAEC;
-}
-
-.values .val-box h3{
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.values .val-box span{
-    font-size: 15px;
-    color: grey;
-}
-
-.board {
-    /* Border radius and background color */
-    width: 94%;  /* Not 100% since we want to remove the slider on the bottom*/
-    margin: 30px 0 30px 30px; /* Top, right, bottom, left */
-    overflow: auto;
-    background: white;
-    border-radius: 8px;
-}
-
-.board img {
-    /* Fix the image on the table */
-    width: 45px;
-    height: 45px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 15px;
-}
-
-.board h5 {
-    font-weight: 600;
-    font-size: 14px;
-
-}
-
-.board p {
-    font-weight: 400;
-    font-size: 13px;
-    color: gray;
-}
-
-.board .people {
-    /* The text is in one row */
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: start;
-}
-
-table {
-    /* Remove the border of the table */
-    border-collapse: collapse;
-}
-
-tr {
-    border-bottom: 1px solid whitesmoke; /* Add a border on the bottom of each row */
-}
-
-thead td {
-    /* Border on top and change the text */
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 400;
-    background: #F9FAF8;
-    text-align: start;
-    padding: 15px;
-}
-
-tbody tr td {
-    padding: 10px 15px; /* space from topbottom and leftright */
-}
-
-.active p {
-    background: #d7fada;
-    padding: 2px 10px; 
-    display: inline-block; /* Make it in one row */
-    border-radius: 40px; /* Make it round */
-    color: #2b2b2b;
-}
-
-.edit a{
-    text-decoration: none; /* Remove the underline */
-    font-size: 14px;
-    color: #554cd1;
-    font-weight: 600;
-}
-
-
-
-@media (max-width: 769px) {
-    /* For an IPAD, change the settings */
-    #menu {
-        width: 270px;
-        position: fixed;
-        left: -270px; /* Hide the menu */
-        transition: 0.3s ease;
-    }
-    /* Adjusts it to move when the screen width changes */
-    .add-workout {
-        right: 10px;
-    }
-    /* active class */
-    #menu.active{
-        left: 0px;
-    }
-    /* Display the menu button for devices */
-    #menu-btn {
-        display: initial;
-    }
-    #interface {
-        width: 100%;
-        margin-left: 0px; /* Move the interface to the right and fix it*/
-        display: inline-block;
-        transition: 0.3s ease;
-    }
-    /* If our menu class is active, change the interface */
-    #menu.active ~ #interface {
-        /*270px was taken by our menu)*/
-        width: calc(100% - 270px);
-        margin-left: 270px;
-        transition: 0.3s ease;
-    }
-
-    /* Space between the searchbar and our PFP */
-    #interface .navigation {
-        width: 100%;
-    }
-    .values {
-        padding: 30px 30px 0 30px;
-        justify-content: flex-start;
-    }
-
-    .values .val-box {
-        padding: 16px 20px;
-        margin: 10px 20px 10px 0;
-    }
-
-    
-    .board {
-        /* Border radius and background color */
-        width: 92%;  /* Not 100% since we want to remove the slider on the bottom*/
-        padding: 0;
-        overflow-x: auto;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-}
-
-/* For phones */
-@media (max-width: 477px) {
-    #interface .navigation {
-        padding: 15px;
-    }
-
-    #interface .navigation .search input{
-        width: 150px;
-    }
-
-    .i-name {
-        padding: 30px 15px 0 15px;
-    }
-    /* Adjusts it to move when the screen width changes */
-    .add-workout {
-        right: 5px;
-    }
-    .values {
-        padding: 15px 15px 0 15px;
-    }
-
-    .values .val-box {
-        width: 100%;
-        margin: 8px 0;
-    }
-
-    .board {
-        margin: 30px 15px 30px 15px;
-    }
-}
+    @import "@/assets/exercise.css";
 
 
 </style>
