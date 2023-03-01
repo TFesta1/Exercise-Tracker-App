@@ -80,10 +80,41 @@ h3 {
 
 
 /* On the SELECTED child, make the border left (only the first child). If we select dashboard, makes the left border white */
-#menu .items li:nth-child(1){
+/* #menu .items li:nth-child(1){
     border-left: 4px solid #fff;
     
+} */
+
+
+/* #menu .items .menu-item:nth-child(1) {
+    border-left: 4px solid #fff;
+} */
+
+
+/* Access the id for #add-border */
+.add-border {
+    border-left: 4px solid #fff;
 }
+
+/* #menu-item2 {
+    border-left: 4px solid #fff;
+}
+#menu-item3 {
+    border-left: 4px solid #fff;
+}
+#menu-item4 {
+    border-left: 4px solid #fff;
+}
+#menu-item5 {
+    border-left: 4px solid #fff;
+} */
+
+
+
+/* #menu .items RouterLink:nth-child(1){
+    border-left: 4px solid #fff;
+    
+} */
 
 /* change the color of icons if someone hovers on a list tag */
 #menu .items li:hover i {
@@ -133,6 +164,52 @@ h3 {
     border:1px solid #d7dbe6;
     border-radius: 4px;
 }
+
+/* Searchbar and the PFP is present */
+.normal-nav-space
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* justify-content: flex-end; */
+    background: white;
+    padding: 15px 30px;
+    border-bottom: 3px solid #594ef7;
+    position: fixed;
+    width: calc(100% - 300px);
+}
+
+
+/* When the searchbar is hidden */
+.unnormal-nav-space {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    justify-content: flex-end;
+    background: white;
+    padding: 15px 30px;
+    border-bottom: 3px solid #594ef7;
+    position: fixed;
+    width: calc(100% - 300px);
+}
+
+
+/* We're going to want to hide the search, but this is when it's not hidden */
+.normal-search {
+    display: flex; /* both in one row */
+    justify-content: flex-start; /* Align in the middle */
+    align-items: center;
+    padding: 10px 14px;
+    border:1px solid #d7dbe6;
+    border-radius: 4px;
+}
+
+
+/* Hidden search with the PFP still present. Be sure to also have the class unnormal-nav-space active*/
+.hide-search {
+    display: none;
+}
+
 
 /* From our input section, remove the border */
 #interface .navigation .search input{
