@@ -32,7 +32,19 @@
                 <span>Streak</span>
             </div>
         </div>
+        <h3 class="i-name">
+            <button class="add-workout">
+                <i></i>
+                Add Workout
+            </button>
+        </h3>
+        
+        
     </div>
+    <div class="values">
+        Workout:
+    </div>
+    
     
 </template>
 

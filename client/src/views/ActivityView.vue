@@ -1,10 +1,11 @@
 <script setup lang="ts">
-    import CurrentWorkout from '@/components/CurrentWorkout.vue';
+    import FriendsTable from '@/components/FriendsTable.vue';
+
     
 </script>
 
 <template>
-    <CurrentWorkout />
+    <FriendsTable />
     
 
 </template>

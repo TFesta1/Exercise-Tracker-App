@@ -26,7 +26,7 @@
     <section id="menu">
         <div class="logo">
             <!-- Adding the logo -->
-            <img src="images/logo.png" alt="logo">
+            <img src="../assets/profile-pictures/logo.png" alt="logo">
             <h2 class="dynamic">{{ dynamicLabel }}</h2>
 
         </div>

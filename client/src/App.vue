@@ -7,6 +7,7 @@
   import NavBar from './components/NavBar.vue';
   import FriendsTable from './components/FriendsTable.vue';
   import CurrentWorkout from './components/CurrentWorkout.vue';
+  import PfpSearch from './components/PfpSearch.vue';
 
   
 
@@ -17,7 +18,7 @@
   <!-- These two things should always be here -->
   <!-- <ExerciseView /> -->
   <NavBar />
-
+  <PfpSearch />
   <!-- Displays depending on what the RouterLink is -->
   <!-- <currentWorkout /> -->
   <!-- <FriendsTable /> -->

@@ -29,6 +29,8 @@ h3 {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10; /* Bring this element to the front */
+    
 }
 
 #menu .logo {
@@ -165,44 +167,6 @@ h3 {
     border-radius: 4px;
 }
 
-/* Searchbar and the PFP is present */
-.normal-nav-space
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* justify-content: flex-end; */
-    background: white;
-    padding: 15px 30px;
-    border-bottom: 3px solid #594ef7;
-    position: fixed;
-    width: calc(100% - 300px);
-}
-
-
-/* When the searchbar is hidden */
-.unnormal-nav-space {
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-    justify-content: flex-end;
-    background: white;
-    padding: 15px 30px;
-    border-bottom: 3px solid #594ef7;
-    position: fixed;
-    width: calc(100% - 300px);
-}
-
-
-/* We're going to want to hide the search, but this is when it's not hidden */
-.normal-search {
-    display: flex; /* both in one row */
-    justify-content: flex-start; /* Align in the middle */
-    align-items: center;
-    padding: 10px 14px;
-    border:1px solid #d7dbe6;
-    border-radius: 4px;
-}
 
 
 /* Hidden search with the PFP still present. Be sure to also have the class unnormal-nav-space active*/
@@ -283,15 +247,19 @@ h3 {
     border-radius: 50px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
     transition: all 0.2s ease-in-out; /* Smooth transition effect for the hover state */
-    position: absolute; /* Disregard where this is relative to it's parent elem */
-    left: 1750%; /* Puts it near the RHS of the screen */
-    top: 100px; /* Move it a little down */
+    
+     /* Position and transform */
+    position: absolute;
+    /* top: 50%; */
+    right: 50%;
+    transform: translate(50%, -10%); /* Moves the button to the center of the screen */
+    
   }
 
   /* When we hover the class .add-workout */
 .add-workout:hover {
     background-color: #2980b9;
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
     cursor: pointer; /* Change the cursor to a hand */
 }
 
@@ -364,6 +332,15 @@ h3 {
     overflow: auto;
     background: white;
     border-radius: 8px;
+
+    /* Position and transform */
+    position: absolute;
+    top: -40%;
+    transform: translateY(40%);
+
+    /* position: relative;
+    top: 130px;  */
+
 }
 
 .board img {

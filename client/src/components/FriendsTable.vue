@@ -21,7 +21,7 @@
                 <tr>
                     <td class="people">
                         <!-- Their pfp image -->
-                        <img src="images/1.png" alt="pfp">
+                        <img src="../assets/profile-pictures/1.png" alt="pfp">
                         <div class="people-de">
                             <!-- Their name -->
                             <h5>John Doe</h5>
@@ -46,7 +46,7 @@
                 <tr>
                     <td class="people">
                         <!-- Their pfp image -->
-                        <img src="images/2.png" alt="pfp">
+                        <img src="../assets/profile-pictures/2.png" alt="pfp">
                         <div class="people-de">
                             <!-- Their name -->
                             <h5>John Doe</h5>
@@ -71,7 +71,7 @@
                 <tr>
                     <td class="people">
                         <!-- Their pfp image -->
-                        <img src="images/3.png" alt="pfp">
+                        <img src="../assets/profile-pictures/3.png" alt="pfp">
                         <div class="people-de">
                             <!-- Their name -->
                             <h5>John Doe</h5>

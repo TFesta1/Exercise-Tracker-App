@@ -1,4 +1,6 @@
 <script setup lang="ts">
+    import { useRoute } from 'vue-router'
+    const route = useRoute()
 
 </script>
 
@@ -17,45 +19,49 @@
         <title>Exercise Tracker</title>
     </head>
     <body>
+
+        <!-- 
+
+            :class="{ 'search': $route.path === '/search',
+                                'hide-search': $route.path !== '/search'}"
+         -->
         
         
 
-        <section id="interface">
-            <div class="navigation">
-                <div class="n1" style="">
-                    <!-- <div>
-                        <i id="menu-btn" class="fa fa-bars"></i>
-                    </div> -->
-                    <div class="search">
-                        <!-- Icon -->
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                        <!-- Input field -->
-                        <input type="text" placeholder="Search">
-                    </div>
-                </div>
-
-                <!-- Bell icon and pfp on top right -->
-                <div class="profile">
-                    <i class="fa fa-bell" aria-hidden="true"></i>
-                    <img src="images/1.png" alt="pfp">
+    <section id="interface">
+        <div class="navigation">
+            <div class="">
+                <!-- If the route is NOT search, hide the search bar. Otherwise, have the search bar-->
+                <div :class="{ 'hide-search': $route.path !== '/search', 
+                                'search': $route.path === '/search' }">
+                    <!-- Icon -->
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <!-- Input field -->
+                    <input type="text" placeholder="Search">
                 </div>
             </div>
 
-            <!-- The title -->
-            <h3 class="i-name">
-                <!-- Dashboard -->
-                <button class="add-workout">
-                    <i></i>
-                    Add Workout
-                </button>
-            </h3>
+            <!-- Bell icon and pfp on top right -->
+            <div class="profile">
+                <i class="fa fa-bell" aria-hidden="true"></i>
+                <img src="../assets/profile-pictures/1.png" alt="pfp">
+            </div>
+        </div>
 
-            
+        <!-- The title -->
+        <!-- <h3 class="i-name">
+            <button class="add-workout">
+                <i></i>
+                Add Workout
+            </button>
+        </h3> -->
 
-            
+        
 
-            
-        </section>
+        
+
+        
+    </section>
         
         
     </body>
