@@ -1,4 +1,6 @@
 <script setup lang="ts">
+    import { useSession, login } from "@/model/session"
+
     
 
 </script>
@@ -16,6 +18,8 @@
     <body>
 
     </body>
+    <!-- Originally: /login  method is post 
+    action="/login" method="post"-->
     <form action="/login" method="post">
         <div>
             <!-- {{#if error}}
@@ -42,7 +46,8 @@
                 required/>
         </div>
         <div>
-            <input type="submit" value="Login" />
+            <!--  -->
+            <input type="submit" value="Login" @click="login" />
         </div>
 
     </form>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   // Keyword "setup" is required for the script to be recognized as a composition API
-  import { RouterLink, RouterView } from 'vue-router'
+  import { RouterLink, RouterView, useRoute } from 'vue-router'
   import ExerciseView from './views/ExerciseView.vue';
   import Login from './views/Login.vue';
   import Register from './views/Register.vue';
@@ -8,7 +8,17 @@
   import FriendsTable from './components/FriendsTable.vue';
   import CurrentWorkout from './components/CurrentWorkout.vue';
   import PfpSearch from './components/PfpSearch.vue';
+  import { computed } from 'vue'
 
+
+  const dynamicLabel = computed(() => {
+      const route = useRoute()
+      if (route.path === '/') {
+          return 'Login'
+      } else if (route.path === '/statistics') {
+          return 'Register'
+      }
+    })
   
 
   
@@ -17,8 +27,9 @@
 <template>
   <!-- These two things should always be here -->
   <!-- <ExerciseView /> -->
-  <NavBar />
-  <PfpSearch />
+  <!-- Don't display a navbar if we're not at the main dashboard page -->
+  <NavBar v-if="$route.path !== '/login' && $route.path !== '/register'"/>
+  <PfpSearch v-if="$route.path !== '/login' && $route.path !== '/register'"/>
   <!-- Displays depending on what the RouterLink is -->
   <!-- <currentWorkout /> -->
   <!-- <FriendsTable /> -->

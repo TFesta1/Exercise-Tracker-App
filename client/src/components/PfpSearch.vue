@@ -1,6 +1,34 @@
 <script setup lang="ts">
-    import { useRoute } from 'vue-router'
-    const route = useRoute()
+    import { ref, onMounted, onUnmounted } from 'vue';
+    import { useSession, login } from "@/model/session"
+
+
+    const isDropdownOpen = ref(false); //true/false dictating of t he dropdoown is open or not
+    const profileDropdown = ref<HTMLElement | null>(null); //ref to the profile. It's on the button, but we didn't really make the pfp dropdown yet
+
+    const handleDocumentClick = (event: MouseEvent) => {
+        // If the dropdown is open, and the profileDropdown is open, and the profileDropdown does not contain the target (the thing you clicked on), then close the dropdown
+      if (isDropdownOpen.value && profileDropdown.value && !profileDropdown.value.contains(event.target as HTMLElement)) {
+        isDropdownOpen.value = false;
+      }
+    };
+
+    onMounted(() => {
+      profileDropdown.value = document.querySelector('.profile-dropdown') as HTMLElement; //assigning the profileDropdown to the profileDropdown ref
+      document.addEventListener('click', handleDocumentClick);
+    });
+
+    onUnmounted(() => {
+      document.removeEventListener('click', handleDocumentClick); //remove the event listener when the component is unmounted (removed from the scene)
+    });
+
+    function logout() {
+        session.user = null;
+        // console.log(`Logged out ${session.user}`)
+    }
+
+    const session = useSession();
+
 
 </script>
 
@@ -44,9 +72,20 @@
             <!-- Bell icon and pfp on top right -->
             <div class="profile">
                 <i class="fa fa-bell" aria-hidden="true"></i>
-                <img src="../assets/profile-pictures/1.png" alt="pfp">
+                <img src="../assets/profile-pictures/1.png" alt="pfp" ref="profileDropdown" @click="isDropdownOpen = !isDropdownOpen">
+                
+                
+                <ul class="menu" v-if="isDropdownOpen">
+                    <li><a href="#" @click="logout">Logout</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+                
+
             </div>
+
+                
         </div>
+        
 
         <!-- The title -->
         <!-- <h3 class="i-name">

@@ -20,6 +20,33 @@ h3 {
 }
 
 
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+.menu li {
+    display: block;
+    background-color: grey;
+}
+
+.menu li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.menu li a:hover {
+    background-color: #eee;
+}
+
+
+
 /* background on the menu */
 #menu {
     background: #111827;
@@ -76,7 +103,6 @@ h3 {
 }
 
 #menu .items li i:hover{
-    
     cursor: pointer; /* Change the cursor to a hand */
 }
 
@@ -191,7 +217,6 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
 }
 
 #interface .navigation .profile i{
@@ -206,6 +231,7 @@ h3 {
     height: 30px;
     object-fit: cover;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .n1 {
