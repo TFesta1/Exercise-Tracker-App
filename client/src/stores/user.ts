@@ -9,21 +9,21 @@ import router from '@/router/index'
 
 
 // Update this whenever you add new functions so that you can export a specified type
-export type UserStore = {
-    state: {
-        name: string,
-        username: string,
-        error: string,
-    },
-    getters: {
-        isLoggedIn: boolean,
-    },
-    actions: {
-        getUser: () => Promise<void>,
-        login: (username: string, password: string) => Promise<boolean>,
-        logout: () => Promise<void>,
-    },
-}
+// export type UserStore = {
+//     state: {
+//         name: string,
+//         username: string,
+//         error: string,
+//     },
+//     getters: {
+//         isLoggedIn: boolean,
+//     },
+//     actions: {
+//         getUser: () => Promise<void>,
+//         login: (username: string, password: string) => Promise<boolean>,
+//         logout: () => Promise<void>,
+//     },
+// }
 
 
 
@@ -46,6 +46,7 @@ const actions = {
         if (user == null) return;
         state.name = user.name
         state.username = user.username
+
     },
     async login(username: string, password: string) {
         const user = await Request.login(username, password)
@@ -67,6 +68,11 @@ const actions = {
     async logout() {
         state.name = ''
         state.username = ''
+        router.push('/login')
+    },
+    async getUserName()
+    {
+        return state.username
     }
 }
 

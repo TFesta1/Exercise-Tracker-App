@@ -1,10 +1,11 @@
 <script setup lang="ts">
-    import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
+    import { defineComponent, ref, onMounted, onUnmounted, inject, computed } from 'vue';
     import { useSession, login } from "@/model/session"
-    import userStore from "@/stores/user";
+    import { useRoute } from 'vue-router'
+    const route = useRoute()
+    // import userStore from "@/stores/user";
   
-  
-    onMounted(userStore.getUser)
+   
 
 
     const isDropdownOpen = ref(false); //true/false dictating of t he dropdoown is open or not
@@ -30,6 +31,26 @@
         session.user = null;
         // console.log(`Logged out ${session.user}`)
     }
+    const userStore = inject('userStore') as any;
+
+    onMounted(userStore.getUser)
+    const username = ref("Hello ")
+
+    async function logUserName() {
+        const result = await userStore.getUserName();
+        username.value += result
+        // console.log(result); // logs "tanner"
+    }
+    logUserName();
+
+    const dynamicLabel = computed(() => {
+        const route = useRoute()
+        if (route.path !== '/') {
+            return ''
+        } else {
+            return username.value
+        }
+    })
 
     const session = useSession();
 
@@ -71,6 +92,9 @@
                     <!-- Input field -->
                     <input type="text" placeholder="Search">
                 </div>
+            </div>
+            <div>
+                <h3>{{ dynamicLabel }}</h3>
             </div>
 
             <!-- Bell icon and pfp on top right -->

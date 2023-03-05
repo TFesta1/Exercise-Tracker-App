@@ -2,7 +2,12 @@
     import { useSession, login } from "@/model/session"
     import { defineComponent, reactive } from "vue";
     // import userStore from "@/stores/user";
-    import { onMounted, provide, inject  } from "vue";
+    import { onMounted, provide, inject, ref  } from "vue";
+    // @ goes to the src file
+    // import router from '@/router/index'
+
+
+    // import users from "@/../public/data/users.json"
 
     // import { UserStore } from '@/stores/user';
 
@@ -11,6 +16,16 @@
 
     // Bad code since it's using "as any" but it's because it's not a defined type. It's just explicitly exported variables
     const userStore = inject('userStore') as any;
+    const router = inject('router') as any;
+
+    if (userStore.getters.isLoggedIn){
+        router.push('/')
+    }
+    
+
+   
+
+
     
     const form = reactive({
         username: "",
@@ -77,6 +92,11 @@
         </div>
 
     </form>
+
+    <div class="display-pass-user-list">
+        <h2>FOR TESTING ONLY</h2>
+        <p>user: tanner<br>pass: tanner<br><br>user: admin<br>pass: admin</p>
+    </div>
     
 </template>
 
