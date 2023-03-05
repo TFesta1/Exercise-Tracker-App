@@ -9,7 +9,17 @@
   import CurrentWorkout from './components/CurrentWorkout.vue';
   import PfpSearch from './components/PfpSearch.vue';
   import { computed } from 'vue'
+  import { defineComponent, onMounted, inject } from 'vue'
 
+
+  const userStore = inject('userStore') as any;
+
+
+
+  
+  
+  
+  // onMounted(userStore.getUser)
 
   const dynamicLabel = computed(() => {
       const route = useRoute()
@@ -28,8 +38,10 @@
   <!-- These two things should always be here -->
   <!-- <ExerciseView /> -->
   <!-- Don't display a navbar if we're not at the main dashboard page -->
-  <NavBar v-if="$route.path !== '/login' && $route.path !== '/register'"/>
-  <PfpSearch v-if="$route.path !== '/login' && $route.path !== '/register'"/>
+  <!-- v-if="userStore.getters.isLoggedIn" -->
+  <NavBar v-if="userStore.getters.isLoggedIn"/>
+  <PfpSearch v-if="userStore.getters.isLoggedIn"/>
+  <!-- <Login v-if="!userStore.getters.isLoggedIn"/> -->
   <!-- Displays depending on what the RouterLink is -->
   <!-- <currentWorkout /> -->
   <!-- <FriendsTable /> -->

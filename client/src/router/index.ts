@@ -7,10 +7,14 @@ import { createRouter, createWebHistory, type NavigationGuardNext, type RouteLoc
 import { useSession } from '@/model/session'
 import LoginVue from '@/views/Login.vue'
 import RegisterVue from '@/views/Register.vue'
+import userStore from '@/stores/user'
+// import userStore from '@/stores/user'
+
+import { defineComponent, onMounted, inject } from 'vue'
 
 
 
-
+// onMounted(userStore.getUser)
 
 
 const router = createRouter({
@@ -20,7 +24,7 @@ const router = createRouter({
       path: '/',
       name: 'exercise',
       component: ExerciseView,
-      // beforeEnter: secureRoute,
+      beforeEnter: secureRoute,
     },
     {
       path: '/statistics',
@@ -65,8 +69,7 @@ const router = createRouter({
 
 // If there's no user, we get sent to the login page
 function secureRoute (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
-  const session = useSession()
-  if(session.user){
+  if(userStore.getters.isLoggedIn){
     next()
   }
   else {

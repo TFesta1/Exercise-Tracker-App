@@ -1,6 +1,10 @@
 <script setup lang="ts">
-    import { ref, onMounted, onUnmounted } from 'vue';
+    import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
     import { useSession, login } from "@/model/session"
+    import userStore from "@/stores/user";
+  
+  
+    onMounted(userStore.getUser)
 
 
     const isDropdownOpen = ref(false); //true/false dictating of t he dropdoown is open or not
@@ -76,7 +80,7 @@
                 
                 
                 <ul class="menu" v-if="isDropdownOpen">
-                    <li><a href="#" @click="logout">Logout</a></li>
+                    <li><a href="#" @click="userStore.logout()">Logout</a></li>
                     <li><a href="#">Settings</a></li>
                 </ul>
                 
