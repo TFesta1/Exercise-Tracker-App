@@ -274,25 +274,120 @@ h3 {
 
 
 
+
+
+/* Add Workout button */
+.add-workout-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .add-workout {
-    display: inline-block; /* Allows it to be positioned horizontally*/
-    border: none; /* Removes default button border */
-    background-color: #3498db;
-    color: white; 
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 50px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
-    transition: all 0.2s ease-in-out; /* Smooth transition effect for the hover state */
-    
-     /* Position and transform */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #043906;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px #121212;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 3px 3px #000000;
+
     position: absolute;
     /* top: 50%; */
     right: 50%;
     transform: translate(50%, -10%); /* Moves the button to the center of the screen */
-    
-  }
+}
+
+
+.add-workout i {
+    display: inline-block;
+    background-size: cover;
+}
+
+/* Modal */
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    width: 500px;
+    background-color: #212121;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 5px 5px #000000;
+}
+
+.modal h2 {
+    margin-top: 0;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.modal label {
+font-size: 1.2rem;
+margin-bottom: 5px;
+}
+
+.modal input[type="text"],
+.modal input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #212121;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.modal input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6262;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px #121212;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 3px 3px #000000;
+}
+
+.modal input[type="submit"]:hover {
+    background-color: #5059ff;
+}
+  
+  
+
+  
 
   /* When we hover the class .add-workout */
 .add-workout:hover {

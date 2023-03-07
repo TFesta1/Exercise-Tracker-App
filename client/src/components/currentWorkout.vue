@@ -32,6 +32,29 @@
                 <span>Streak</span>
             </div>
         </div>
+        <!-- display:flex to show it, use Vue3 to show/hide it -->
+        <div class="modal-container" style="display:none">
+            <div class="modal">
+                <h2>Add Workout</h2>
+                <form>
+                <label>
+                    Name:
+                    <input type="text" name="name" />
+                </label>
+                <label>
+                    Description:
+                    <textarea name="description"></textarea>
+                </label>
+                <label>
+                    Date:
+                    <input type="date" name="date" />
+                </label>
+                <button type="submit">Submit</button>
+                </form>
+                <button class="close-modal">Close</button>
+            </div>
+            <div class="modal-background"></div>
+        </div>
         <h3 class="i-name">
             <button class="add-workout">
                 <i></i>
