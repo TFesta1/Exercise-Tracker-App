@@ -1,0 +1,34 @@
+[
+    {
+        "username": "tanner",
+        "name": "Tanner",
+        "profilePicture": "https://i.postimg.cc/FKSgv48G/img3.jpg",
+        "intensity": "Normal",
+        "workout": "Legs",
+        "streak": 0  
+    },
+    {
+        "username": "admin",
+        "name": "Admin",
+        "profilePicture": "https://i.postimg.cc/cLRLGkTw/img2.jpg",
+        "intensity": "High",
+        "workout": "Arms",
+        "streak": 2     
+    },
+    {
+        "username": "plotkin",
+        "name": "Plotkin",
+        "profilePicture": "https://i.postimg.cc/zBXBjwCW/img1.jpg",
+        "intensity": "Normal",
+        "workout": "Back",
+        "streak": 3     
+    },
+    {
+        "username": "humsa",
+        "name": "Humsa",
+        "profilePicture": "https://i.postimg.cc/3R980MmH/img4.png",
+        "intensity": "Easy",
+        "workout": "Shoulders",
+        "streak": 10      
+    }
+]

@@ -35,7 +35,7 @@ const router = createRouter({
       path: '/',
       name: 'exercise',
       component: ExerciseView,
-      beforeEnter: secureRoute,
+      // beforeEnter: secureRoute,
     },
     {
       path: '/statistics',

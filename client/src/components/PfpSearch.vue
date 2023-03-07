@@ -4,8 +4,13 @@
     import { useRoute } from 'vue-router'
     // import type UserStore from '@/stores/user';
     import type UserStore from '@/stores/user';
+    import { getActivities } from '@/model/activities';
     const route = useRoute()
+    const activities = getActivities()
     // import userStore from "@/stores/user";
+
+
+    
   
    
 
@@ -34,6 +39,7 @@
         // console.log(`Logged out ${session.user}`)
     }
     const userStore = inject('userStore') as typeof UserStore;
+    const pfp = ref("")
 
     onMounted(userStore.getUser)
     const username = ref("Hello ")
@@ -44,6 +50,19 @@
         username.value += result
         // usernameRaw.value = result
         // console.log(`usernameRaw ${usernameRaw.value}`); // logs "tanner"
+
+        // Given the username, log our PFP
+        // pfp.value = map()
+
+        for (const activity of activities)
+        {
+            // console.log(activity.username)
+            // console.log(result)
+            if (activity.username == result) {
+                pfp.value = activity.profilePicture
+                // console.log(`pfp ${pfp.value}`)
+            }
+        }
     }
     logUserName();
 
@@ -54,7 +73,6 @@
         } else {
             return username.value
         }
-        return username.value;
     })
 
     const session = useSession();
@@ -105,7 +123,7 @@
             <!-- Bell icon and pfp on top right -->
             <div class="profile">
                 <i class="fa fa-bell" aria-hidden="true"></i>
-                <img src="../assets/profile-pictures/1.png" alt="pfp" ref="profileDropdown" @click="isDropdownOpen = !isDropdownOpen">
+                <img :src="pfp" alt="pfp" ref="profileDropdown" @click="isDropdownOpen = !isDropdownOpen">
                 
                 
                 <ul class="menu" v-if="isDropdownOpen">
