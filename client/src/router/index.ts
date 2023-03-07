@@ -16,6 +16,17 @@ import { defineComponent, onMounted, inject } from 'vue'
 
 // onMounted(userStore.getUser)
 
+// const username = ref("")
+
+// async function logUserName() {
+//     const result = await userStore.getUserName();
+//     username.value += result
+//     // console.log(result); // logs "tanner"
+// }
+// logUserName();
+
+// console.log('username: ' + username.value + "from router");
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

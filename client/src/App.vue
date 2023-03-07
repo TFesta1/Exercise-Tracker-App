@@ -9,9 +9,9 @@
   import CurrentWorkout from './components/CurrentWorkout.vue';
   import PfpSearch from './components/PfpSearch.vue';
   import { computed } from 'vue'
-  import { defineComponent, onMounted, inject } from 'vue'
+  import { defineComponent, onMounted, inject, ref} from 'vue'
 
-  const userStore = inject('userStore') as any;
+  const userStore = inject('userStore') as any;  
 
   // Just for testing purposes so we don't have to login each time
   // userStore.login("tanner", "tanner")

@@ -22,10 +22,6 @@
         router.push('/')
     }
     
-
-   
-
-
     
     const form = reactive({
         username: "",

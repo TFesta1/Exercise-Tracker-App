@@ -3,7 +3,7 @@
     import FriendsTable from '@/components/FriendsTable.vue';
     const userStore = inject('userStore') as any;
 
-    onMounted(userStore.getUser)
+    // onMounted(userStore.getUser)
     const username = ref(null)
     const isAdmin = ref(false)
 

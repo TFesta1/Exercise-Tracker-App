@@ -35,11 +35,13 @@
 
     onMounted(userStore.getUser)
     const username = ref("Hello ")
+    const usernameRaw = ref("")
 
     async function logUserName() {
         const result = await userStore.getUserName();
         username.value += result
-        // console.log(result); // logs "tanner"
+        // usernameRaw.value = result
+        // console.log(`usernameRaw ${usernameRaw.value}`); // logs "tanner"
     }
     logUserName();
 
@@ -50,6 +52,7 @@
         } else {
             return username.value
         }
+        return username.value;
     })
 
     const session = useSession();
