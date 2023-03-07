@@ -31,7 +31,6 @@ import router from '@/router/index'
 const state = reactive({
     name: '',
     username: '',
-
     error: '',
 })
 
@@ -40,6 +39,7 @@ const getters = reactive({
 })
 
 const actions = {
+    //Maybe it's getUser
     async getUser() {
         // Checks if a user is logged in
         const user = await Request.getUsers()
@@ -72,6 +72,7 @@ const actions = {
     },
     async getUserName()
     {
+        
         return state.username
     }
 }
