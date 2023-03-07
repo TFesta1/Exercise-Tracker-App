@@ -8,6 +8,16 @@
         "name": "Admin",
         "username": "admin",
         "password": "admin"    
+    },
+    {
+        "name": "Plotkin",
+        "username": "plotkin",
+        "password": "plotkin"    
+    },
+    {
+        "name": "humsa",
+        "username": "humsa",
+        "password": "humsa"    
     }
 
 ]

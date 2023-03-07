@@ -2,6 +2,8 @@
     import { defineComponent, ref, onMounted, onUnmounted, inject, computed } from 'vue';
     import { useSession, login } from "@/model/session"
     import { useRoute } from 'vue-router'
+    // import type UserStore from '@/stores/user';
+    import type UserStore from '@/stores/user';
     const route = useRoute()
     // import userStore from "@/stores/user";
   
@@ -31,7 +33,7 @@
         session.user = null;
         // console.log(`Logged out ${session.user}`)
     }
-    const userStore = inject('userStore') as any;
+    const userStore = inject('userStore') as typeof UserStore;
 
     onMounted(userStore.getUser)
     const username = ref("Hello ")

@@ -38,21 +38,40 @@ const getters = reactive({
     isLoggedIn: computed(() => state.username !== '')
 })
 
-const actions = {
+export type UserStore = {
+    state: {
+        name: string,
+        username: string,
+        error: string,
+    },
+    getters: {
+        isLoggedIn: boolean,
+    },
+    actions: {
+        getUser: () => Promise<void>,
+        login: (username: string, password: string) => Promise<boolean>,
+        logout: () => Promise<void>,
+        getUserName: () => Promise<string>,
+    },
+}
+
+const actions: UserStore['actions'] = {
     //Maybe it's getUser
     async getUser() {
         // Checks if a user is logged in
         const user = await Request.getUsers()
         if (user == null) return;
-        state.name = user.name
-        state.username = user.username
+
+        // Don't update the state since this changes the logged in user
+        // state.name = user.name
+        // state.username = user.username
 
     },
-    async login(username: string, password: string) {
+    async login(username: string, password: string): Promise<boolean> {
         const user = await Request.login(username, password)
         if (user == null) {
             state.error = 'Invalid username or password'
-            return;
+            return false;
         }
         // If we find a user, update the state
         state.name = user.name
@@ -70,7 +89,7 @@ const actions = {
         state.username = ''
         router.push('/login')
     },
-    async getUserName()
+    async getUserName() : Promise<string>
     {
         
         return state.username
