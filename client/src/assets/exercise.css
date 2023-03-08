@@ -272,10 +272,6 @@ h3 {
     bottom: 20px;
 }
 
-
-
-
-
 /* Add Workout button */
 .add-workout-wrapper {
     display: flex;
@@ -304,10 +300,42 @@ h3 {
     transform: translate(50%, -10%); /* Moves the button to the center of the screen */
 }
 
-
 .add-workout i {
     display: inline-block;
     background-size: cover;
+}
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+}
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: rgba(0,0,0,0.5); /*semi-transparent black*/
+
 }
 
 /* Modal */
@@ -321,16 +349,27 @@ h3 {
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 10;
 }
 
 .modal {
-    width: 500px;
     background-color: #212121;
     color: white;
-    padding: 20px;
+    padding: 60px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 5px 5px #000000;
+    z-index: 99;
+    width: 80%;
+    max-width: 500px;
+    height: 80%;
+    max-height: 400px;
+    
+    transform: translate(20%, 0%);
+    top: 0%;
+    left: -30%;
+
+
 }
 
 .modal h2 {
@@ -351,9 +390,11 @@ h3 {
 }
 
 .modal label {
-font-size: 1.2rem;
-margin-bottom: 5px;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
 }
+
+
 
 .modal input[type="text"],
 .modal input[type="number"] {
@@ -365,7 +406,30 @@ margin-bottom: 5px;
     background-color: #212121;
     color: white;
     font-size: 1.2rem;
+    border: 1px solid white; /* Adds a border to the input */
 }
+
+.workoutValues {
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 500px;
+    width: 60%;
+
+    display: flex; /* Align in one row */
+    justify-content: space-between; /* Space between the boxes */
+    align-items: center; /* Align in the middle */
+    flex-wrap: wrap; /* If the screen is too small, wrap the boxes */
+}
+
+/* padding: 30px 30px 0 400px;
+    
+    margin-top: 40px; */
 
 .modal input[type="submit"] {
     width: 100%;
@@ -387,9 +451,7 @@ margin-bottom: 5px;
   
   
 
-  
-
-  /* When we hover the class .add-workout */
+/* When we hover the class .add-workout */
 .add-workout:hover {
     background-color: #2980b9;
     /* transform: scale(1.1); */

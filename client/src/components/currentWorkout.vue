@@ -1,4 +1,16 @@
 <script setup lang="ts">
+    import { ref } from 'vue'
+    import { getWorkouts } from '@/model/workouts';
+
+    const clickedAddWorkout = ref(false)
+    // Switch the value whenever we either click AddWorkout, or "Close" so that we can open the modal and hide the add-workout button accordingly
+    function addWorkout() {
+        clickedAddWorkout.value = !clickedAddWorkout.value;
+    }
+
+    const workouts = getWorkouts();
+
+
 
 </script>
 
@@ -33,7 +45,7 @@
             </div>
         </div>
         <!-- display:flex to show it, use Vue3 to show/hide it -->
-        <div class="modal-container" style="display:none">
+        <div class="modal-container" :style="{ display: clickedAddWorkout ? 'flex' : 'none' }">
             <div class="modal">
                 <h2>Add Workout</h2>
                 <form>
@@ -51,12 +63,12 @@
                 </label>
                 <button type="submit">Submit</button>
                 </form>
-                <button class="close-modal">Close</button>
+                <button class="close-modal" @click="addWorkout">Close</button>
             </div>
             <div class="modal-background"></div>
         </div>
         <h3 class="i-name">
-            <button class="add-workout">
+            <button class="add-workout" @click="addWorkout" :style="{ display: clickedAddWorkout ? 'none' : 'flex' }">
                 <i></i>
                 Add Workout
             </button>
@@ -64,8 +76,10 @@
         
         
     </div>
-    <div class="values">
-        Workout:
+    <div class="workoutValues" v-for="workout in workouts">
+        <p>{{ workout.description.replace(/,/g, ', ') }}</p>
+        <p>{{ workout.workoutType }}</p>
+        <p>{{ workout.intensity }}</p>
     </div>
     
     
