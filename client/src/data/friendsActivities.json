@@ -2,6 +2,8 @@
     {
         "username": "tanner",
         "name": "Tanner",
+        "email": "festat1@newpaltz.edu",
+        "isAdmin": false,
         "profilePicture": "https://i.postimg.cc/FKSgv48G/img3.jpg",
         "intensity": "Normal",
         "workout": "Legs",
@@ -10,6 +12,8 @@
     {
         "username": "admin",
         "name": "Admin",
+        "email": "admin@admin.org",
+        "isAdmin": true,
         "profilePicture": "https://i.postimg.cc/cLRLGkTw/img2.jpg",
         "intensity": "High",
         "workout": "Arms",
@@ -18,6 +22,8 @@
     {
         "username": "plotkin",
         "name": "Plotkin",
+        "email": "plotkinm@newpaltz.edu",
+        "isAdmin": false,
         "profilePicture": "https://i.postimg.cc/zBXBjwCW/img1.jpg",
         "intensity": "Normal",
         "workout": "Back",
@@ -26,6 +32,8 @@
     {
         "username": "humza",
         "name": "Humza",
+        "email": "shahh8@newpaltz.edu",
+        "isAdmin": false,
         "profilePicture": "https://i.postimg.cc/3R980MmH/img4.png",
         "intensity": "Easy",
         "workout": "Shoulders",

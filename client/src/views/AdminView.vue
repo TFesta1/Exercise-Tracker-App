@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { ref, inject, onMounted } from 'vue'
-    import FriendsTable from '@/components/FriendsTable.vue';
+    import AdminTable from '@/components/AdminTable.vue'
     import type UserStore from '@/stores/user';
     const userStore = inject('userStore') as typeof UserStore;
 
@@ -32,8 +32,7 @@
 <template>
 
     <div v-if="isAdmin" class="">
-        <FriendsTable />
-        
+        <AdminTable />
     </div>
     
 

@@ -9,33 +9,11 @@
 
     {
         "username": "tanner",
-        "workoutType": "Legs",
-        "description": "Squats 2x4, Lunges 2x6, Leg Press 2x10, Leg Extensions 2x10, Leg Curls 3x5, Calf Raises 2x2, Hamstring Curls 3x3, Hip Abduction 4x4, Hip Adduction 2x6, Glute Bridges 4x6",
-        "intensity": "High"
-
-    },
-
-    {
-        "username": "tanner",
-        "workoutType": "Legs",
-        "description": "Squats 2x4, Lunges 2x6, Leg Press 2x10, Leg Extensions 2x10, Leg Curls 3x5, Calf Raises 2x2, Hamstring Curls 3x3, Hip Abduction 4x4, Hip Adduction 2x6, Glute Bridges 4x6",
-        "intensity": "High"
-
-    },
-
-    {
-        "username": "tanner",
-        "workoutType": "Legs",
-        "description": "Squats 2x4, Lunges 2x6, Leg Press 2x10, Leg Extensions 2x10, Leg Curls 3x5, Calf Raises 2x2, Hamstring Curls 3x3, Hip Abduction 4x4, Hip Adduction 2x6, Glute Bridges 4x6",
-        "intensity": "High"
-
-    },
-
-    {
-        "username": "tanner",
-        "workoutType": "Legs",
-        "description": "Squats 2x4, Lunges 2x6, Leg Press 2x10, Leg Extensions 2x10, Leg Curls 3x5, Calf Raises 2x2, Hamstring Curls 3x3, Hip Abduction 4x4, Hip Adduction 2x6, Glute Bridges 4x6",
-        "intensity": "High"
+        "workoutType": "Back",
+        "description": "Pull Ups 2x4, Lat Pull Downs 2x6, Seated Rows 2x10, Deadlifts 2x10, Bent Over Rows 3x5, Shrugs 2x2, Hyperextensions 3x3, Reverse Flys 4x4, Cable Rows 2x6, Face Pulls 4x6",
+        "intensity": "Normal"
 
     }
+
+   
 ]
