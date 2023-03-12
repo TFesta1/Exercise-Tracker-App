@@ -7,7 +7,8 @@
         "profilePicture": "https://i.postimg.cc/FKSgv48G/img3.jpg",
         "intensity": "Normal",
         "workout": "Legs",
-        "streak": 0  
+        "streak": 13,
+        "rest": 2
     },
     {
         "username": "admin",
@@ -17,7 +18,8 @@
         "profilePicture": "https://i.postimg.cc/cLRLGkTw/img2.jpg",
         "intensity": "High",
         "workout": "Arms",
-        "streak": 2     
+        "streak": 2,
+        "rest": 0
     },
     {
         "username": "plotkin",
@@ -27,7 +29,8 @@
         "profilePicture": "https://i.postimg.cc/zBXBjwCW/img1.jpg",
         "intensity": "Normal",
         "workout": "Back",
-        "streak": 3     
+        "streak": 3,
+        "rest": 1  
     },
     {
         "username": "humza",
@@ -37,6 +40,7 @@
         "profilePicture": "https://i.postimg.cc/3R980MmH/img4.png",
         "intensity": "Easy",
         "workout": "Shoulders",
-        "streak": 10      
+        "streak": 10,
+        "rest": 4
     }
 ]

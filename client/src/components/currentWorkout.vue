@@ -4,6 +4,16 @@
     import Workout from '@/model/workouts';
     import workouts from '@/model/workouts';
     import type UserStore from '@/stores/user';
+    import { getActivities } from '@/model/activities';
+
+
+    const activities = getActivities();
+    const streak = ref(0);
+    const rest = ref(0);
+
+    
+
+    
 
     
 
@@ -33,7 +43,13 @@
         const result = await userStore.getUserName();
         username.value = result;
         changingWorkouts.value = getUserWorkouts(result);
-        // router.push("/statistics")
+        activities.forEach((activity) => {
+            if (activity.username == result)
+            {
+                streak.value = activity.streak;
+                rest.value = activity.rest;
+            }
+        });
     }
 
     // onMounted()
@@ -55,6 +71,8 @@
     onMounted(async () => {
         await getUsername()
     });
+
+
 
 
     
@@ -156,14 +174,14 @@
         <div class="val-box">
             <i class="fas fa-globe"></i>
             <div>
-                <h3>In X Days</h3>
+                <h3>In {{ rest }} Days</h3>
                 <span>Rest Day</span>
             </div>
         </div>
         <div class="val-box">
             <i class="fas fa-thermometer-three-quarters"></i>
             <div>
-                <h3>For X Days</h3>
+                <h3>For {{ streak }} Days</h3>
                 <span>Streak</span>
             </div>
         </div>
@@ -259,8 +277,12 @@
     cursor: pointer;
     border-radius: 5px;
     position: relative;
+    width: 150px;
+    position: relative;
+    right: -2%;
     top: 10px;
-    left: 10px;
+
+
 }
 
 .close-modal {

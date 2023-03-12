@@ -424,10 +424,15 @@ h3 {
     width: 60%;
     margin-left: 600px;
 
-    display: flex;
+    /* display: grid; */
     flex-wrap: wrap;
     justify-content: center; /* Center the boxes horizontally */
     align-items: center; /* Center the boxes vertically */
+    white-space: pre-wrap; /* Preserve line breaks in the text */
+}
+
+.workoutValues p, .workoutValues div {
+    display: block;
 }
 
 /* padding: 30px 30px 0 400px;
