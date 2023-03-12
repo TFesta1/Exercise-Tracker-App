@@ -24,6 +24,7 @@ export function addToWorkout(workout: Workout){
 
 export function removeWorkout(index: number){
     workouts.value.splice(index, 1);
+    // console.log("Workout removed " + workouts.value )
 }
 
 export default workouts;

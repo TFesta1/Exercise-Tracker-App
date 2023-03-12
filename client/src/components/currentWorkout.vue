@@ -126,6 +126,12 @@
         addToWorkout(workout)
         userWorkouts()
     }
+
+    async function asyncRemove(i: number){
+        // Remove a workout and update the list of users
+        await removeWorkout(i)
+        userWorkouts()
+    }
     getUsername()
     
 
@@ -210,7 +216,7 @@
             Intensity: {{ workout.intensity }}
         </div> 
 
-        <button class="trash-button" @click="removeWorkout(i)">
+        <button class="trash-button" @click="asyncRemove(i)">
             <span class="icon">
                 <i class="fas fa-trash"></i>
             </span>
