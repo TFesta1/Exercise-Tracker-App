@@ -68,18 +68,25 @@ const actions: UserStore['actions'] = {
 
     },
     async login(username: string, password: string): Promise<boolean> {
+        
         const user = await Request.login(username, password)
+        
         if (user == null) {
             state.error = 'Invalid username or password'
             return false;
         }
+        // while(user.username == '')
+        // {
+        //     await actions.getUser()
+        // }
         // If we find a user, update the state
         state.name = user.name
         state.username = user.username
         state.error = ''
+        
 
         // Redirect to our homepage
-        router.push('/')
+        // router.push('/')
         
         return true
     },
@@ -91,7 +98,11 @@ const actions: UserStore['actions'] = {
     },
     async getUserName() : Promise<string>
     {
-        
+        // Wait for the state to get a username
+        while(state.username == '')
+        {
+            await actions.getUser()
+        }
         return state.username
     }
 }

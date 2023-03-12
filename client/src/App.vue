@@ -14,7 +14,7 @@
   const userStore = inject('userStore') as any;  
 
   // Just for testing purposes so we don't have to login each time
-  userStore.login("admin", "admin")
+  userStore.login("tanner", "tanner")
   
   // onMounted(userStore.getUser)
 

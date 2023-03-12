@@ -1,8 +1,12 @@
 <script setup lang="ts">
-    import { ref, reactive, inject, computed } from 'vue'
-    import { getWorkouts, removeWorkout } from '@/model/workouts';
+    import { ref, reactive, inject, computed, onMounted } from 'vue'
+    import { getWorkouts, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
+    import Workout from '@/model/workouts';
     import workouts from '@/model/workouts';
     import type UserStore from '@/stores/user';
+
+    
+
 
     const clickedAddWorkout = ref(false)
     // Switch the value whenever we either click AddWorkout, or "Close" so that we can open the modal and hide the add-workout button accordingly
@@ -20,24 +24,45 @@
         }
     });
 
-    
+    const changingWorkouts = ref();
 
+    const router = inject('router') as any;
     const userStore = inject('userStore') as typeof UserStore;
     const username = ref("")
     async function getUsername() {
         const result = await userStore.getUserName();
         username.value = result;
+        changingWorkouts.value = getUserWorkouts(result);
+        // router.push("/statistics")
     }
-    getUsername()
+
+    // onMounted()
+    
+    // getUsername()
+    
+
+    async function userWorkouts() {
+        const user = await userStore.getUserName();
+        changingWorkouts.value = getUserWorkouts(user);
+        return changingWorkouts;
+    };
+
+    
+
+    changingWorkouts.value = userWorkouts();
 
 
-    const filteredWorkouts = computed(() => {
-        return workouts.value.filter(workout => workout.username === username.value)
-    })
-    const displayWorkouts = computed(() => {
-        // If we have ANY saved workouts for this person, this becomes true
-        return filteredWorkouts.value.length > 0
-    })
+    onMounted(async () => {
+        await getUsername()
+    });
+
+
+    
+
+    // const displayWorkouts = computed(() => {
+    //     // If we have ANY saved workouts for this person, this becomes true
+    //     return changingWorkouts.value.length > 0
+    // })
 
     /*
         const allWorkouts: Workout[] = [
@@ -82,7 +107,7 @@
         intensity: ''
     })
 
-    const onSubmit = () => 
+    async function onSubmit() 
     {
         console.log(form.name)
         console.log(form.description)
@@ -91,16 +116,17 @@
             alert('Please fill out all fields')
             return
         }
-        
         const workout = {
-            username: username.value,
+            username: await userStore.getUserName(),
             workoutType: form.name,
             description: form.description,
             intensity: form.intensity
         }
-        workouts.value.push(workout)
-        console.log(workouts.value)
+
+        addToWorkout(workout)
+        userWorkouts()
     }
+    getUsername()
     
 
 </script>
@@ -171,25 +197,24 @@
         
         
     </div>
-    <div v-if="displayWorkouts">
-        <div class="workoutValues" v-for="workout,i in workouts">
-            <h2>{{ workout.workoutType }}</h2>
+    
+    <div class="workoutValues" v-for="workout,i in changingWorkouts">
+        <h2>{{ workout.workoutType }}</h2>
+        <br>
+
+        <p>{{ workout.description.replace(/,/g, ', ') }}</p>
+        
+        
+        <div class="intensity">
             <br>
+            Intensity: {{ workout.intensity }}
+        </div> 
 
-            <p>{{ workout.description.replace(/,/g, ', ') }}</p>
-            
-            
-            <div class="intensity">
-                <br>
-                Intensity: {{ workout.intensity }}
-            </div> 
-
-            <button class="trash-button" @click="removeWorkout(i)">
-                <span class="icon">
-                    <i class="fas fa-trash"></i>
-                </span>
-            </button>
-        </div>
+        <button class="trash-button" @click="removeWorkout(i)">
+            <span class="icon">
+                <i class="fas fa-trash"></i>
+            </span>
+        </button>
     </div>
     
     

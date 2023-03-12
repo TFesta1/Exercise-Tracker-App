@@ -12,6 +12,10 @@ export function getWorkouts(): Workout[] {
     return allWorkouts;
 }
 
+export function getUserWorkouts(user: string){
+    return allWorkouts.filter(workout => workout.username === user);
+}
+
 const workouts = ref(getWorkouts())
 
 export function addToWorkout(workout: Workout){
