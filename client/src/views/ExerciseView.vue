@@ -10,5 +10,5 @@
 </template>
 
 <style>
-    @import "@/assets/exercise.css";
+
 </style>

@@ -86,7 +86,7 @@ const actions: UserStore['actions'] = {
         
 
         // Redirect to our homepage
-        // router.push('/')
+        // router.push('/statistics')
         
         return true
     },
