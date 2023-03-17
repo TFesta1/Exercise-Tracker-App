@@ -91,7 +91,7 @@
 
     <div class="display-pass-user-list">
         <h2>FOR TESTING ONLY</h2>
-        <p>user: tanner<br>pass: tanner<br><br>user: admin<br>pass: admin</p>
+        <p>user: tanner<br>pass: tanner<br><br>user: admin<br>pass: admin<br><br>user: plotkin<br>pass: plotkin<br><br>user: humza<br>pass: humza</p>
     </div>
     
 </template>
