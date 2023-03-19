@@ -10,8 +10,8 @@
   import PfpSearch from './components/PfpSearch.vue';
   import { computed } from 'vue'
   import { defineComponent, onMounted, inject, ref} from 'vue'
-
-  const userStore = inject('userStore') as any;  
+  import type UserStore from '@/stores/user';
+  const userStore = inject('userStore') as typeof UserStore;
 
   // Just for testing purposes so we don't have to login each time
   userStore.login("tanner", "tanner")
@@ -34,7 +34,7 @@
   <!-- Don't display a navbar if we're not at the main dashboard page -->
   <!-- v-if="userStore.getters.isLoggedIn" -->
   <NavBar v-if="userStore.getters.isLoggedIn"/>
-  <PfpSearch v-if="userStore.getters.isLoggedIn"/>
+  <!-- <PfpSearch v-if="userStore.getters.isLoggedIn"/> -->
   <!-- <Login v-if="!userStore.getters.isLoggedIn"/> -->
   <!-- Displays depending on what the RouterLink is -->
   <!-- <currentWorkout /> -->

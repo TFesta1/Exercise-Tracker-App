@@ -3,6 +3,8 @@
     import { defineComponent, reactive } from "vue";
     // import userStore from "@/stores/user";
     import { onMounted, provide, inject, ref  } from "vue";
+    import type UserStore from '@/stores/user';
+    const userStore = inject('userStore') as typeof UserStore;
     // @ goes to the src file
     // import router from '@/router/index'
 
@@ -15,7 +17,6 @@
     // provide("userStore", userStore)
 
     // Bad code since it's using "as any" but it's because it's not a defined type. It's just explicitly exported variables
-    const userStore = inject('userStore') as any;
     const router = inject('router') as any;
 
     if (userStore.getters.isLoggedIn){

@@ -1,8 +1,19 @@
 <script setup lang="ts">
     import { RouterLink, RouterView } from 'vue-router'
-    import { ref } from 'vue'
+    import { ref, inject } from 'vue'
+    import type { Ref } from 'vue';
     import { useRoute } from 'vue-router'
     import { computed } from 'vue'
+    import PfpSearch from './PfpSearch.vue'
+    import type UserStore from '@/stores/user';
+    const userStore = inject('userStore') as typeof UserStore;
+
+    const menuRef = ref<HTMLElement | null>(null);
+    const menuRefDefined = computed(() => Boolean(menuRef.value));
+    
+    
+
+
     
 
     const dynamicLabel = computed(() => {
@@ -23,8 +34,9 @@
 </script>
 
 <template>
-    <section id="menu">
+    <section id="menu" ref="menuRef" >
         <div class="logo">
+
             <!-- Adding the logo -->
             <img src="../assets/profile-pictures/logo.png" alt="logo">
             <h2 class="dynamic">{{ dynamicLabel }}</h2>
@@ -41,7 +53,12 @@
                 <RouterLink to='/admin'><li :class="{ 'add-border': $route.path === '/admin' }"><i class="fas fa-lock" aria-hidden="true"><a href="#">Admin</a></i></li></RouterLink>
             </ul>
         </div>
+        
     </section>
+    <template v-if="menuRefDefined">
+        <PfpSearch :menuRef="menuRef!" v-if="userStore.getters.isLoggedIn" @update-menu-ref="menuRef = $event"/>
+    </template>
+    
 </template>
 
 <style scoped>

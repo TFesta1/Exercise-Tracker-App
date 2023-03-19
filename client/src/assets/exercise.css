@@ -615,14 +615,23 @@ tbody tr td {
     font-weight: 600;
 }
 
+.menuBar {
+    display: none;  /* Hide the menu bar */
+    position: fixed;
+}
+
 
 
 @media (max-width: 769px) {
+    .menuBar {
+        display: initial; /* Display the menu bar */
+        cursor: pointer;
+    }
     /* For an IPAD, change the settings */
     #menu {
         width: 270px;
         position: fixed;
-        left: -270px; /* Hide the menu */
+        left: -270px;
         transition: 0.3s ease;
     }
     /* Adjusts it to move when the screen width changes */

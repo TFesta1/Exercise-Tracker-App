@@ -1,13 +1,130 @@
 <script setup lang="ts">
-    import { defineComponent, ref, onMounted, onUnmounted, inject, computed } from 'vue';
+    import { defineComponent, ref, onMounted, onUnmounted, inject, computed, watchEffect, watch } from 'vue';
+    import type { Ref } from 'vue'
     import { useSession, login } from "@/model/session"
     import { useRoute } from 'vue-router'
     // import type UserStore from '@/stores/user';
     import type UserStore from '@/stores/user';
     import { getActivities } from '@/model/activities';
+    import NavBar from './NavBar.vue';
     const route = useRoute()
     const activities = getActivities()
+
+    const menuActiveOnShortScreen = ref(false);
+    const buttonClickRef = ref<HTMLElement | null>(null);
     // import userStore from "@/stores/user";
+    
+    const menuComponentRef = ref(NavBar);
+
+
+    const props = defineProps({
+        menuRef: {
+            type: Object as () => HTMLElement,
+            required: true,
+        },
+    });
+
+    // update-menu-ref is the name of the event we're going to emit to 
+    const emit = defineEmits(['update-menu-ref']);
+    
+
+    // const toggleMenu = () => {
+    //   menuRef.value.classList.toggle('show');
+    // };
+    function toggleMenu() {
+        const screenWidth = window.innerWidth;
+        const menuElem = props.menuRef
+        if (screenWidth <= 769) {
+            // If we're in a smaller screen
+            if (menuActiveOnShortScreen.value == false)
+            {
+                menuElem.style.left = '0';
+                menuActiveOnShortScreen.value = true;
+                
+
+            }
+            else if (menuActiveOnShortScreen.value == true)
+            {
+                menuElem.style.left = '-270px';
+                menuActiveOnShortScreen.value = false;
+                // if (buttonClickRef.value != null)
+                // {
+                //     buttonClickRef.value.style.position = 'absolute';
+                //     buttonClickRef.value.style.right = '500px';
+                // }
+            }
+            
+
+        }
+        
+        console.log(menuActiveOnShortScreen.value)
+        
+        
+        
+    }
+
+    watchEffect(() => {
+        const screenWidth = window.innerWidth;
+        if (screenWidth > 769) {
+            const menuElem = props.menuRef
+            menuElem.style.left = '0px';
+            emit('update-menu-ref', menuElem);
+            menuActiveOnShortScreen.value = false;
+        }   
+
+        if (menuActiveOnShortScreen.value)
+        {
+            if (buttonClickRef.value != null)
+            {
+                buttonClickRef.value.style.position = 'absolute';
+                buttonClickRef.value.style.left = '500px';
+                buttonClickRef.value.style.bottom = "-7px";
+            }
+
+        }
+        else 
+        {
+            if (buttonClickRef.value != null)
+            {
+                buttonClickRef.value.style.position = 'absolute';
+                buttonClickRef.value.style.left = '0px';
+                buttonClickRef.value.style.bottom = "-7px";
+            }
+        }
+
+        
+        
+        // $emit('update-menu-ref', menuElem);
+
+        // your watchEffect code here
+        // console.log(props.menuRef)
+        // if (screenWidth <= 769) {
+            // props.menuRef.style.left = '-270px';
+        // menuElem.classList.remove('menu');
+        // Show
+        // menuElem.style.left = '0px';
+        // console.log(menuElem.style.left);
+
+        // Hide
+        // menuElem.style.left = '-270px';
+
+        // Since this is a reference, we can't directly modify the real element. Thus, we emit it
+        // emit('update-menu-ref', menuElem);
+
+        // } else {
+        //     menuElem.classList.remove('menu');
+        // }
+    })
+        
+    // watchEffect(() => {
+    //   const screenWidth = window.innerWidth;
+    //   console.log(props.menuRef.value)
+    // //   if (screenWidth <= 769) {
+    // //     props.menuRef.value.style.left('show');
+    // //   } else {
+    // //     props.menuRef.value.classList.remove('show');
+    // //   }
+    // });
 
 
     
@@ -106,6 +223,11 @@
 
     <section id="interface">
         <div class="navigation">
+            <div class="menuBar" @click="toggleMenu" style="position: fixed;">
+                <i class="fas fa-bars" ref="buttonClickRef"></i>
+            </div>
+            
+
             <div class="">
                 <!-- If the route is NOT search, hide the search bar. Otherwise, have the search bar-->
                 <div :class="{ 'hide-search': $route.path !== '/search', 
@@ -159,5 +281,6 @@
 </template>
 
 <style scoped>
+
 
 </style>
