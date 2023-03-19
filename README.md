@@ -1,7 +1,7 @@
 # Exercise Tracker App
 
-To run the website locally, cd into the client folder, then run the command: ```npm run dev```
-
+To run the website locally, cd into the client folder, then run the command: 
+```npm run dev```
 
 ## Description
 
