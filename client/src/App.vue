@@ -1,8 +1,7 @@
 <script setup lang="ts">
   // Keyword "setup" is required for the script to be recognized as a composition API
-  import { RouterView, useRoute } from 'vue-router'
+  import { RouterView } from 'vue-router'
   import NavBar from './components/NavBar.vue';
-  import { computed } from 'vue'
   import { inject } from 'vue'
   import type UserStore from '@/stores/user';
   const userStore = inject('userStore') as typeof UserStore;
