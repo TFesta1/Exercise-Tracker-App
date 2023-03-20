@@ -1,31 +1,15 @@
 <script setup lang="ts">
   // Keyword "setup" is required for the script to be recognized as a composition API
-  import { RouterLink, RouterView, useRoute } from 'vue-router'
-  import ExerciseView from './views/ExerciseView.vue';
-  import Login from './views/Login.vue';
-  import Register from './views/Register.vue';
+  import { RouterView, useRoute } from 'vue-router'
   import NavBar from './components/NavBar.vue';
-  import FriendsTable from './components/FriendsTable.vue';
-  import CurrentWorkout from './components/CurrentWorkout.vue';
-  import PfpSearch from './components/PfpSearch.vue';
   import { computed } from 'vue'
-  import { defineComponent, onMounted, inject, ref} from 'vue'
+  import { inject } from 'vue'
   import type UserStore from '@/stores/user';
   const userStore = inject('userStore') as typeof UserStore;
 
   // Just for testing purposes so we don't have to login each time
   userStore.login("tanner", "tanner")
   
-  // onMounted(userStore.getUser)
-
-  const dynamicLabel = computed(() => {
-      const route = useRoute()
-      if (route.path === '/') {
-          return 'Login'
-      } else if (route.path === '/statistics') {
-          return 'Register'
-      }
-  })
 </script>
 
 <template>
