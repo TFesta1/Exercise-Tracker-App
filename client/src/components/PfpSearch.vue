@@ -65,14 +65,10 @@
 
     watchEffect(() => {
         const screenWidth = window.innerWidth;
-        if (screenWidth > 769) {
-            const menuElem = props.menuRef
-            menuElem.style.left = '0px';
-            emit('update-menu-ref', menuElem);
-            menuActiveOnShortScreen.value = false;
-        }   
+        const menuElem = props.menuRef
+        
 
-        if (menuActiveOnShortScreen.value)
+        if (menuActiveOnShortScreen.value == true)
         {
             if (buttonClickRef.value != null)
             {
@@ -80,6 +76,7 @@
                 buttonClickRef.value.style.left = '500px';
                 buttonClickRef.value.style.bottom = "-7px";
             }
+            
 
         }
         else 
@@ -90,7 +87,26 @@
                 buttonClickRef.value.style.left = '0px';
                 buttonClickRef.value.style.bottom = "-7px";
             }
+            // if (screenWidth > 769)
+            // {
+            //     menuElem.style.left = '0px';
+            //     emit('update-menu-ref', menuElem);
+            // }
+            // else
+            // {
+            //     menuElem.style.left = '-270px';
+            //     emit('update-menu-ref', menuElem);
+            // }
+            // 
+
         }
+
+        if (screenWidth > 769) {
+            menuElem.style.left = '0px';
+            emit('update-menu-ref', menuElem);
+            menuActiveOnShortScreen.value = false;
+        }  
+        
 
         
         
