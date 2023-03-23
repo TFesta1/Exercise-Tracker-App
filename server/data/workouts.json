@@ -1,0 +1,38 @@
+{
+    "legs": [
+        {
+          "sets": 3,
+          "rest": 60,
+          "supersets": true,
+          "squats": 3,
+          "lunges": 10,
+          "leg press": 10
+        },
+        {
+          "sets": 4,
+          "rest": 90,
+          "supersets": false,
+          "deadlifts": 3,
+          "leg curls": 12,
+          "calf raises": 15
+        }
+    ],
+    "back": [
+        {
+          "sets": 3,
+          "rest": 60,
+          "supersets": true,
+          "pull-ups": 8,
+          "seated rows": 10,
+          "lat pulldowns": 12
+        },
+        {
+          "sets": 4,
+          "rest": 90,
+          "supersets": false,
+          "barbell rows": 5,
+          "back extensions": 12,
+          "shrugs": 15
+        }
+    ]
+}

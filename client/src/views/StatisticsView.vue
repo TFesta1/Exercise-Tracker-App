@@ -1,14 +1,38 @@
 <script setup lang="ts">
     import ApexCharts from "apexcharts";
-    import { ref, onMounted, computed, watchEffect } from 'vue'
+    import { ref, onMounted, computed, watchEffect, inject } from 'vue'
+    import { getprData, type prDataNumbers } from '@/model/prDataModel';
+    import type UserStore from '@/stores/user'
 
+    const userStore = inject('userStore') as typeof UserStore
+
+    const username = ref('')
+    const numbersPr = ref([] as prDataNumbers[]);
+    const numbers = ref([] as number[]);
+    const squatData = ref([] as number[]);
+    const chestData = ref([] as number[]);
+    const deadliftData = ref([] as number[]);
+
+    
+    async function getUsername() {
+        const result = await userStore.getUserName();
+        // console.log(`result ${result}`)
+        username.value = result;
+        numbersPr.value = getprData(username.value);
+        squatData.value = numbersPr.value[0].squatsData
+        chestData.value = numbersPr.value[0].chestData
+        deadliftData.value = numbersPr.value[0].deadliftData
+    }
     // Define a constant reference array of numbers
-    const numbers = ref([] as number[])
 
     const title = ref('Squat Progress')
 
+    onMounted(() => {
+        getUsername()
+    })
 
 
+    console.log(numbers.value);
     const chartData = computed(() => {
         if (title.value == 'Squat Progress')
         {

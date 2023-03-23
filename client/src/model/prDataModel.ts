@@ -22,5 +22,5 @@ export interface prDataNumbers {
 }
 
 export function getprData(username: string): prDataNumbers[] {
-    return prData.filter(prData => prData.username === username);
+    return prData.filter(prData => prData.username === username)
 }
