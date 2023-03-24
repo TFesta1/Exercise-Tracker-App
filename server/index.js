@@ -4,12 +4,9 @@ const port = process.env.PORT || 3000 ; //80 for unsecure HTTP traffic, 443 for 
 const express = require('express')
 const app = express()
 const workouts = require('./controllers/workouts')
-
-
+const path = require('path');
 
 const http = require('http'); //https://nodejs.org/en/docs/guides/getting-started-guide/
-
-
 
 const uri = "mongodb+srv://tfest:unsecurePass@cluster0.nptuzeh.mongodb.net/?retryWrites=true&w=majority"
 mongoose.set('strictQuery', false); //To prep for the change, use setQuery to true
@@ -17,20 +14,20 @@ mongoose.connect(uri)
 
 // Start variables as "const", then change to "let" if needed
 
-
 // function(req, res) => {}    OR   (req, res) => {};.
 // The difference is that the first one is a function declaration, and the second one is a function expression, which means that the second one is a function that is assigned to a variable.
 
 // When a request is made, the server will respond with "Hello World"
 
-
-
+// Middleware
 app
-    .get('/', (req, res) => {
-        res.send('Hello World! From Express')
-    })
-    .use('/workouts', workouts)
+    .use(express.json())
+    .use(express.static(path.join(__dirname, '../client/dist')))
 
+// Catch all
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+})
 
 // Stops node from closing down, listens to network traffic
 app.listen(port, () => 
