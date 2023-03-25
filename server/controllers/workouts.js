@@ -8,6 +8,38 @@ router
         const list = model.getWorkouts();
         res.send(list);
     })
+    .get('/search/:q', (req, res) => {
+        const term = req.params.q;
+        // console.log({ term });
+        const list = model.searchWorkouts(term);
+        res.send(list);
+    })
+
+    .post('/', (req, res) => {
+        const info = req.body;
+
+        // console.log({ info });
+        // console.log( req.query.workoutTitle );
+        // console.log( req.params );
+        // console.log( req.headers );
+
+        const dataAdded = model.addWorkout(req.query.workoutTitle, info);
+        res.send(dataAdded);
+    })
+
+    .patch('/update', (req, res) => {
+        const product = req.body;
+        model.updateProduct(product);
+        res.send(product);
+    })
+
+    .delete('/:title', (req, res) => {
+        const title = req.params.title;
+        const delItem = model.deleteWorkout(title);
+        res.send(delItem);
+    })
+
+
 //     // List specifics to general
 //     .get("/search/:q", (req, res) => {
 //         const term = req.params.q;

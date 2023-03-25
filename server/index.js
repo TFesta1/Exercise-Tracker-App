@@ -24,6 +24,15 @@ app
     .use(express.json())
     .use(express.static(path.join(__dirname, '../client/dist')))
 
+// Actions
+app
+    .get('/api/v1/', (req, res) => {
+        res.send('Hello World! From Express')
+    })
+    .use('/api/v1/workouts', workouts)
+
+
+
 // Catch all
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'))

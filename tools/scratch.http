@@ -1,5 +1,24 @@
 
 
 ###
-GET http://localhost:3000/workouts
+GET http://localhost:3000/api/v1/workouts
 ###
+
+###
+GET http://localhost:3000/api/v1/workouts/search/legs
+
+###
+POST http://localhost:3000/api/v1/workouts?workoutTitle="Cardio"
+Content-Type: application/json
+
+{
+    "sets": 3,
+    "rest": 60,
+    "supersets": true,
+    "squats": 3,
+    "lunges": 10,
+    "leg press": 10  
+}
+
+###
+DELETE http://localhost:3000/api/v1/workouts/legs
