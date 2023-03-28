@@ -20,5 +20,12 @@ Content-Type: application/json
     "leg press": 10  
 }
 
+
 ###
-DELETE http://localhost:3000/api/v1/workouts/legs
+GET http://localhost:3000/api/v1/workouts/getUserWorkouts/tanner
+
+###
+
+
+###
+DELETE http://localhost:3000/api/v1/workouts/0
