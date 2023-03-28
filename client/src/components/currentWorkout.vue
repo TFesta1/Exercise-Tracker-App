@@ -1,8 +1,6 @@
 <script setup lang="ts">
     import { ref, reactive, inject, computed, onMounted } from 'vue'
     import { getWorkouts, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
-    import Workout from '@/model/workouts';
-    import workouts from '@/model/workouts';
     import type UserStore from '@/stores/user';
     import { getActivities } from '@/model/activities';
 
@@ -10,11 +8,6 @@
     const activities = getActivities();
     const streak = ref(0);
     const rest = ref(0);
-
-    
-
-    
-
     
 
 
@@ -42,7 +35,10 @@
     async function getUsername() {
         const result = await userStore.getUserName();
         username.value = result;
-        changingWorkouts.value = getUserWorkouts(result);
+        // changingWorkouts.value = getUserWorkouts(result);
+        getUserWorkouts(result).then((data) => {
+            changingWorkouts.value = data;
+        });
         activities.forEach((activity) => {
             if (activity.username == result)
             {
@@ -59,65 +55,19 @@
 
     async function userWorkouts() {
         const user = await userStore.getUserName();
-        changingWorkouts.value = getUserWorkouts(user);
+        // changingWorkouts.value = getUserWorkouts(user);
+        getUserWorkouts(user).then((data) => {
+            changingWorkouts.value = data;
+        });
+
+        removeWorkout
+
         return changingWorkouts;
     };
-
-    
-
-    changingWorkouts.value = userWorkouts();
-
 
     onMounted(async () => {
         await getUsername()
     });
-
-
-
-
-    
-
-    // const displayWorkouts = computed(() => {
-    //     // If we have ANY saved workouts for this person, this becomes true
-    //     return changingWorkouts.value.length > 0
-    // })
-
-    /*
-        const allWorkouts: Workout[] = [
-    {
-        username: "tanner",
-        workoutType: "Legs",
-        description: "Squats 2x4, Lunges 2x6, Leg Press 2x10, Leg Extensions 2x10, Leg Curls 3x5, Calf Raises 2x2, Hamstring Curls 3x3, Hip Abduction 4x4, Hip Adduction 2x6, Glute Bridges 4x6",
-        intensity: "High"
-    }
-];
-
-    */
-
-    // const addWorkoutA = async (req: Request, res: Response) => {
-    //     const response = await fetch('/api/addWorkout', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(state.newWorkout)
-    //     });
-
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! status: ${response.status}`);
-    //     }
-
-    //     const responseBody = await response.json();
-
-    //     // Do something with the response body
-    //     console.log(responseBody);
-
-
-    //     // Add the new workout to the array
-    //     // allWorkouts.push(workout);
-
-    //     // // Send a response indicating success
-    //     res.status(200).send('Workout added successfully');
-    // };
-    // addWorkoutA();
 
     const form = reactive({
         name: '',
@@ -147,7 +97,9 @@
 
     async function asyncRemove(i: number){
         // Remove a workout and update the list of users
-        await removeWorkout(i)
+        await removeWorkout(i).then((data) => {
+            changingWorkouts.value = data;
+        });
         userWorkouts()
     }
     getUsername()

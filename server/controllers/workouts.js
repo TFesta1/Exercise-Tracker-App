@@ -6,8 +6,18 @@ const router = express.Router();
 router
     .get("/", (req, res) => {
         const list = model.getWorkouts();
+        console.log("hi")
         res.send(list);
     })
+
+
+    .get('/getUserWorkouts/:user', (req, res) => {
+        const user = req.params.user;
+        // console.log("hi")
+        const list = model.getUserWorkouts(user);
+        res.send(list);
+    })
+
     .get('/search/:q', (req, res) => {
         const term = req.params.q;
         // console.log({ term });
@@ -33,9 +43,9 @@ router
         res.send(product);
     })
 
-    .delete('/:title', (req, res) => {
-        const title = req.params.title;
-        const delItem = model.deleteWorkout(title);
+    .delete('/removeWorkout/:i', (req, res) => {
+        const i = req.params.i;
+        const delItem = model.deleteWorkout(i);
         res.send(delItem);
     })
 

@@ -1,0 +1,19 @@
+[
+    {
+        "username": "tanner",
+        "workoutType": "Legs",
+        "description": "Squats 2x4",
+        "intensity": "High"
+
+    },
+
+    {
+        "username": "tanner",
+        "workoutType": "Back",
+        "description": "Pull Ups 2x4, Lat Pull Downs 2x6, Seated Rows 2x10, Deadlifts 2x10, Bent Over Rows 3x5, Shrugs 2x2, Hyperextensions 3x3, Reverse Flys 4x4, Cable Rows 2x6, Face Pulls 4x6",
+        "intensity": "Normal"
+
+    }
+
+   
+]
