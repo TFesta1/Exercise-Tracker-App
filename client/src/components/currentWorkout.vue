@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { ref, reactive, inject, computed, onMounted } from 'vue'
-    import { getWorkouts, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
+    import { type Workout, getWorkouts, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
     import type UserStore from '@/stores/user';
     import { getActivities } from '@/model/activities';
 
@@ -60,7 +60,7 @@
             changingWorkouts.value = data;
         });
 
-        removeWorkout
+        // removeWorkout
 
         return changingWorkouts;
     };
@@ -90,16 +90,19 @@
             description: form.description,
             intensity: form.intensity
         }
+        await addToWorkout(workout)
+        await getUsername()
+        
+        
 
-        addToWorkout(workout)
-        userWorkouts()
     }
 
     async function asyncRemove(i: number){
         // Remove a workout and update the list of users
-        await removeWorkout(i).then((data) => {
-            changingWorkouts.value = data;
-        });
+        // await removeWorkout(i).then((data) => {
+        //     changingWorkouts.value = data;
+        // });
+        removeWorkout(i)
         userWorkouts()
     }
     getUsername()

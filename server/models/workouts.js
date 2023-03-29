@@ -1,5 +1,5 @@
 const data = require("../data/workouts.json");
-const allWorkoutsData = require("../data/allWorkouts.json");
+let allWorkoutsData = require("../data/allWorkouts.json");
 function getWorkouts() {
     return data;
 }
@@ -43,15 +43,14 @@ function getUserWorkouts(user) {
 }
 
 
-function addWorkout(title, body)
+function addWorkout(body)
 {
     while(data === undefined) {
         console.log("waiting for data")
     }
-    // console.log(title)
-    // console.log(body)
-    data[title] = body;
-    return data[title]
+    console.log("adding workout")
+    allWorkoutsData = allWorkoutsData.concat(body)
+    return allWorkoutsData
 }
 
 function deleteWorkout(i) 
@@ -63,10 +62,6 @@ function deleteWorkout(i)
     allWorkoutsData.splice(i, 1);
     return deletedWorkout;
 }
-
-
-
-
 
 
 

@@ -1,6 +1,6 @@
 import allWorkouts from '../data/allWorkouts.json';
 import { ref } from 'vue';
-import { api } from './session';
+import { api, postApi } from './session';
 
 
 export interface Workout {
@@ -22,7 +22,16 @@ export function getUserWorkouts(user: string) : Promise<Workout[]> {
 const workouts = ref(getWorkouts())
 
 export function addToWorkout(workout: Workout){
-    workouts.value.push(workout);
+    // workouts.value.push(workout);
+    /*
+    {
+        "username": "fillIn",
+        "workoutType": "test",
+        "description": "test",
+        "intensity": "Normal"
+    }
+    */
+    return postApi('workouts/addWorkout', workout)
 }
 
 export function removeWorkout(index: number) : Promise<Workout[]>{

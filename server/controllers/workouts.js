@@ -6,10 +6,8 @@ const router = express.Router();
 router
     .get("/", (req, res) => {
         const list = model.getWorkouts();
-        console.log("hi")
         res.send(list);
     })
-
 
     .get('/getUserWorkouts/:user', (req, res) => {
         const user = req.params.user;
@@ -25,15 +23,13 @@ router
         res.send(list);
     })
 
-    .post('/', (req, res) => {
+    .post('/addWorkout', (req, res) => {
         const info = req.body;
-
-        // console.log({ info });
         // console.log( req.query.workoutTitle );
         // console.log( req.params );
         // console.log( req.headers );
 
-        const dataAdded = model.addWorkout(req.query.workoutTitle, info);
+        const dataAdded = model.addWorkout(info);
         res.send(dataAdded);
     })
 
@@ -43,7 +39,7 @@ router
         res.send(product);
     })
 
-    .delete('/removeWorkout/:i', (req, res) => {
+    .get('/removeWorkout/:i', (req, res) => {
         const i = req.params.i;
         const delItem = model.deleteWorkout(i);
         res.send(delItem);

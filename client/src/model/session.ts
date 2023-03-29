@@ -43,7 +43,25 @@ export function api(url: string){
         });
 }
 
-
+export function postApi(url: string, data: any){
+    session.isLoading = true;
+    return myFetch.post(url, data)
+        .then(data => {
+            // handle successful response
+            session.isLoading = false;
+            return data;
+        })
+        .catch(err => {
+            // handle error response
+            console.error(err);
+            session.messages.push({
+                msg: err.message ?? JSON.stringify(err),
+                type: "error"
+            });
+            session.isLoading = false;
+            throw err;
+        });
+}
 
 export function useSession() {
     return session;
