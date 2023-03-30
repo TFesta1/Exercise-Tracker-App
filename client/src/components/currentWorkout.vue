@@ -39,18 +39,10 @@
     async function getUsername() {
         const result = await userStore.getUserName();
         username.value = result;
-        // changingWorkouts.value = getUserWorkouts(result);
         getUserWorkouts(result).then((data) => {
             changingWorkouts.value = data;
         });
         getActivities().then((data) => {
-        //         activities.value = data;
-        // activities.forEach((activity) => {
-            // console.log(data)
-            // for(const item in data)
-            // {
-            //     console.log(data[item])
-            // }
             
             for(const item in data)
             {
@@ -60,14 +52,9 @@
                     rest.value = data[item].rest;
                 }
             }
-        });
-        // });
-            
+        });            
     }
 
-    // onMounted()
-    
-    // getUsername()
     
 
     async function userWorkouts() {
@@ -115,10 +102,6 @@
     }
 
     async function asyncRemove(i: number){
-        // Remove a workout and update the list of users
-        // await removeWorkout(i).then((data) => {
-        //     changingWorkouts.value = data;
-        // });
         removeWorkout(i)
         userWorkouts()
     }
