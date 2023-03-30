@@ -7,15 +7,19 @@
     import type UserStore from '@/stores/user';
     import { getActivities } from '@/model/activities';
     import NavBar from './NavBar.vue';
+
     const route = useRoute()
     const activities = ref() 
     getActivities().then((data) => {
         activities.value = data;
     });
 
+    const activitiesRaw = computed(() => {
+        return activities.value ? activities.value._value : undefined;
+    })
+
     const menuActiveOnShortScreen = ref(false);
     const buttonClickRef = ref<HTMLElement | null>(null);
-    // import userStore from "@/stores/user";
     
     const menuComponentRef = ref(NavBar);
 
@@ -134,15 +138,23 @@
         //     menuElem.classList.remove('menu');
         // }
     })
+
+    const userStore = inject('userStore') as typeof UserStore;
+    const pfp = ref("")
         
-    // watchEffect(() => {
-    //   const screenWidth = window.innerWidth;
-    //   console.log(props.menuRef.value)
-    // //   if (screenWidth <= 769) {
-    // //     props.menuRef.value.style.left('show');
-    // //   } else {
-    // //     props.menuRef.value.classList.remove('show');
-    // //   }
+    // watchEffect(async () => {
+    //     const result = await userStore.getUserName();
+    //     // console.log(result);
+    //     getActivities().then((data) => {
+    //     //         activities.value = data;
+    //     // activities.forEach((activity) => {
+    //         console.log(data[0].username)
+            
+    //         if (data[0].username == result)
+    //         {
+    //             pfp.value = data[0].profilePicture;
+    //         }
+    //     });
     // });
 
 
@@ -174,8 +186,7 @@
         session.user = null;
         // console.log(`Logged out ${session.user}`)
     }
-    const userStore = inject('userStore') as typeof UserStore;
-    const pfp = ref("")
+    
 
     onMounted(userStore.getUser)
     const username = ref("Hello ")
@@ -190,17 +201,22 @@
         // Given the username, log our PFP
         // pfp.value = map()
 
-        
+        // console.log(activitiesRaw.value);
+
 
         getActivities().then((data) => {
         //         activities.value = data;
         // activities.forEach((activity) => {
-            // console.log(data)
-            
-            if (data[0].username == result)
+            for(const item of data)
             {
-                pfp.value = data[0].profilePicture;
+                // console.log(item)
+                if (item.username == result)
+                {
+                    pfp.value = item.profilePicture;
+                }
             }
+            
+            
         });
     }
 
@@ -234,21 +250,22 @@
             return username.value
         }
     })
-    onMounted(async () => {
-        const result = await userStore.getUserName();
+    // onMounted(async () => {
+    //     const result = await userStore.getUserName();
 
 
-        getActivities().then((data) => {
-        //         activities.value = data;
-        // activities.forEach((activity) => {
-            // console.log(data)
+    //     getActivities().then((data) => {
+    //     //         activities.value = data;
+    //     // activities.forEach((activity) => {
+    //         // console.log(data)
             
-            if (data[0].username == result)
-            {
-                pfp.value = data[0].profilePicture;
-            }
-        });
-    })
+    //         if (data[0].username == result)
+    //         {
+    //             console.log("pfp user: " + data[0].username)
+    //             pfp.value = data[0].profilePicture;
+    //         }
+    //     });
+    // })
     const session = useSession();
 
 

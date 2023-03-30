@@ -47,11 +47,18 @@
         //         activities.value = data;
         // activities.forEach((activity) => {
             // console.log(data)
+            // for(const item in data)
+            // {
+            //     console.log(data[item])
+            // }
             
-            if (data[0].username == result)
+            for(const item in data)
             {
-                streak.value = data[0].streak;
-                rest.value = data[0].rest;
+                if (data[item].username == result)
+                {
+                    streak.value = data[item].streak;
+                    rest.value = data[item].rest;
+                }
             }
         });
         // });
