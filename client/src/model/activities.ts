@@ -13,10 +13,10 @@
     },
 */
 
-import activities from '../data/friendsActivities.json';
+import { api, postApi } from './session';
 
 
-export interface Activitiy {
+export interface Activity {
     username: string,
     name: string;
     email: string;
@@ -29,8 +29,9 @@ export interface Activitiy {
 }
 
 
-export function getActivities(): Activitiy[] {
-    return activities;
+export function getActivities(): Promise<Activity[]> {
+    // return activities;
+    return api('workouts/getFriendsActivities')
 }
 
 

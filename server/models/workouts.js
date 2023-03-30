@@ -1,5 +1,6 @@
 const data = require("../data/workouts.json");
 let allWorkoutsData = require("../data/allWorkouts.json");
+const friendsActivities = require("../data/friendsActivities.json");
 function getWorkouts() {
     return data;
 }
@@ -63,6 +64,16 @@ function deleteWorkout(i)
     return deletedWorkout;
 }
 
+function getFriendsActivities()
+{
+    while(data === undefined) {
+        console.log("waiting for data")
+    }
+
+
+    return friendsActivities;
+}
+
 
 
 module.exports = {
@@ -71,4 +82,5 @@ module.exports = {
     addWorkout,
     deleteWorkout,
     getUserWorkouts,
+    getFriendsActivities
 }

@@ -1,11 +1,15 @@
 <script setup lang="ts">
     import { ref, reactive, inject, computed, onMounted } from 'vue'
-    import { type Workout, getWorkouts, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
+    import { type Workout, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
     import type UserStore from '@/stores/user';
     import { getActivities } from '@/model/activities';
 
 
-    const activities = getActivities();
+    const activities = ref() 
+
+    getActivities().then((data) => {
+        activities.value = data;
+    });
     const streak = ref(0);
     const rest = ref(0);
     
@@ -39,13 +43,19 @@
         getUserWorkouts(result).then((data) => {
             changingWorkouts.value = data;
         });
-        activities.forEach((activity) => {
-            if (activity.username == result)
+        getActivities().then((data) => {
+        //         activities.value = data;
+        // activities.forEach((activity) => {
+            // console.log(data)
+            
+            if (data[0].username == result)
             {
-                streak.value = activity.streak;
-                rest.value = activity.rest;
+                streak.value = data[0].streak;
+                rest.value = data[0].rest;
             }
         });
+        // });
+            
     }
 
     // onMounted()

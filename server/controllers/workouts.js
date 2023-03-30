@@ -23,6 +23,11 @@ router
         res.send(list);
     })
 
+    .get("/getFriendsActivities", (req, res) => {
+        const list = model.getFriendsActivities();
+        res.send(list);
+    })
+
     .post('/addWorkout', (req, res) => {
         const info = req.body;
         // console.log( req.query.workoutTitle );
