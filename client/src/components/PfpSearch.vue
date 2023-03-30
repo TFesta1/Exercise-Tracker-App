@@ -8,7 +8,10 @@
     import { getActivities } from '@/model/activities';
     import NavBar from './NavBar.vue';
     const route = useRoute()
-    const activities = getActivities()
+    const activities = ref() 
+    getActivities().then((data) => {
+        activities.value = data;
+    });
 
     const menuActiveOnShortScreen = ref(false);
     const buttonClickRef = ref<HTMLElement | null>(null);
@@ -187,16 +190,40 @@
         // Given the username, log our PFP
         // pfp.value = map()
 
-        for (const activity of activities)
-        {
-            // console.log(activity.username)
-            // console.log(result)
-            if (activity.username == result) {
-                pfp.value = activity.profilePicture
-                // console.log(`pfp ${pfp.value}`)
+        
+
+        getActivities().then((data) => {
+        //         activities.value = data;
+        // activities.forEach((activity) => {
+            // console.log(data)
+            
+            if (data[0].username == result)
+            {
+                pfp.value = data[0].profilePicture;
             }
-        }
+        });
     }
+
+    async function updatePfp()
+    {
+        const result = await userStore.getUserName();
+
+        getActivities().then((data) => {
+        //         activities.value = data;
+        // activities.forEach((activity) => {
+            // console.log(data)
+            
+            if (data[0].username == result)
+            {
+                pfp.value = data[0].profilePicture;
+            }
+        });
+
+    }
+
+    // setInterval(updatePfp, 1);
+
+
     logUserName();
 
     const dynamicLabel = computed(() => {
@@ -207,7 +234,21 @@
             return username.value
         }
     })
+    onMounted(async () => {
+        const result = await userStore.getUserName();
 
+
+        getActivities().then((data) => {
+        //         activities.value = data;
+        // activities.forEach((activity) => {
+            // console.log(data)
+            
+            if (data[0].username == result)
+            {
+                pfp.value = data[0].profilePicture;
+            }
+        });
+    })
     const session = useSession();
 
 
