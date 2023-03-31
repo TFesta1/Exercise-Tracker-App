@@ -475,6 +475,7 @@ h3 {
     align-items: center; /* Align in the middle */
     flex-wrap: wrap; /* If the screen is too small, wrap the boxes */
     margin-top: 40px;
+    z-index: -9999;
 }
 
 .values .val-box {
@@ -523,6 +524,7 @@ h3 {
 .values .val-box h3{
     font-size: 18px;
     font-weight: 600;
+    z-index: 1;
 }
 
 .values .val-box span{

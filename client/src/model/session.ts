@@ -62,3 +62,15 @@ export function login() {
         name: "John Doe",
     };
 }
+
+export function addMessage(msg: string, type: "success" | "danger" | "warning" | "info") {
+    console.log({msg, type});
+    session.messages.push({
+        msg,
+        type,
+    })
+}
+
+export function deleteMessage(index: number) {
+    session.messages.splice(index, 1);
+}

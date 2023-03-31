@@ -7,6 +7,7 @@
     import type UserStore from '@/stores/user';
     import { getActivities } from '@/model/activities';
     import NavBar from './NavBar.vue';
+    import Notifications from './Notifications.vue';
 
     const route = useRoute()
     const activities = ref() 
@@ -318,7 +319,8 @@
 
             <!-- Bell icon and pfp on top right -->
             <div class="profile">
-                <i class="fa fa-bell" aria-hidden="true"></i>
+                <!-- <i class="fa fa-bell" aria-hidden="true"></i> -->
+                <Notifications />
                 <img :src="pfp" alt="pfp" ref="profileDropdown" @click="isDropdownOpen = !isDropdownOpen">
                 
                 
