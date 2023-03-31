@@ -1,4 +1,4 @@
-import prData from '../data/prData.json';
+// import prData from '../data/prData.json';
 import { ref } from 'vue'
 
 
@@ -21,6 +21,6 @@ export interface prDataNumbers {
     deadliftData: number[];
 }
 
-export function getprData(username: string): prDataNumbers[] {
-    return prData.filter(prData => prData.username === username)
-}
+// export function getprData(username: string): prDataNumbers[] {
+//     return prData.filter(prData => prData.username === username)
+// }

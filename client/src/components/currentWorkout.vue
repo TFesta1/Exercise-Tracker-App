@@ -96,9 +96,6 @@
         }
         await addToWorkout(workout)
         await getUsername()
-        
-        
-
     }
 
     async function asyncRemove(i: number){

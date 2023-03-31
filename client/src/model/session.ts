@@ -10,7 +10,7 @@ const session = reactive({
     isLoading: false,
     messages: [] as {
         msg: string,
-        type: "success" | "error" | "warning" | "info"
+        type: "success" | "error" | "warning" | "info" | "danger"
     }[] 
 });
 
@@ -23,44 +23,34 @@ interface User {
     token?: string;
 }
 
-export function api(url: string){
+export function api(url: string) {
     session.isLoading = true;
     return myFetch.api(url)
-        .then(data => {
-            // handle successful response
-            session.isLoading = false;
-            return data;
-        })
         .catch(err => {
-            // handle error response
-            console.error(err);
+            console.error({err});
             session.messages.push({
-                msg: err.message ?? JSON.stringify(err),
-                type: "error"
-            });
+                msg: err.message  ?? JSON.stringify(err),
+                type: "danger",
+            })
+        })
+        .finally(() => {
             session.isLoading = false;
-            throw err;
-        });
+        })
 }
 
 export function postApi(url: string, data: any){
     session.isLoading = true;
     return myFetch.post(url, data)
-        .then(data => {
-            // handle successful response
-            session.isLoading = false;
-            return data;
-        })
         .catch(err => {
-            // handle error response
-            console.error(err);
+            console.error({err});
             session.messages.push({
-                msg: err.message ?? JSON.stringify(err),
-                type: "error"
-            });
+                msg: err.message  ?? JSON.stringify(err),
+                type: "danger",
+            })
+        })
+        .finally(() => {
             session.isLoading = false;
-            throw err;
-        });
+        })
 }
 
 export function useSession() {
