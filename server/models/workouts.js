@@ -29,6 +29,7 @@ function getUserWorkouts(user) {
     while(data === undefined) {
         console.log("waiting for data")
     }
+    throw new Error('Something went wrong');
 
     let filteredData = [];
 

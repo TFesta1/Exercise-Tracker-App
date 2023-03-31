@@ -14,7 +14,7 @@
         </button>
         <div class="notification-list" v-show="isActive">
             <div v-for="msg, i in session.messages" :class="`notification is-light is-${msg.type}`">
-                <button class="delete" @click="deleteMessage(i)"></button>
+                <button class="delete fas fa-times" @click="deleteMessage(i)"></button>
                 {{ msg.msg }}
             </div>
         </div>
