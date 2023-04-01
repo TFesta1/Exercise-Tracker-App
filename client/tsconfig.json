@@ -7,9 +7,9 @@
       "@/*": ["./src/*"]
     },
     "lib": ["es2020", "dom"],
+    "allowJs": true,
+    "ignoreDeprecations": "5.0"
   },
-  "allowJs": true,
-
   "references": [
     {
       "path": "./tsconfig.config.json"

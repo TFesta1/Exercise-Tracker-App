@@ -1,8 +1,12 @@
 <script setup lang="ts">
     import { getActivities } from '@/model/activities';
+    import { ref } from 'vue'
 
 
-    const activities = getActivities();
+    const activities = ref()
+    getActivities().then((data) => {
+        activities.value = data;
+    });
     
 
 </script>

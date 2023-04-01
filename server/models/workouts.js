@@ -29,7 +29,7 @@ function getUserWorkouts(user) {
     while(data === undefined) {
         console.log("waiting for data")
     }
-    throw new Error('Something went wrong');
+    // throw new Error('Something went wrong');
 
     let filteredData = [];
 
@@ -38,7 +38,6 @@ function getUserWorkouts(user) {
         {
             // Append allWorkoutsData[data] to fiilteredWorkouts without putting it as an index, just concatenate
             filteredData = filteredData.concat(allWorkoutsData[data])
-            
         }
     }
     return filteredData;
