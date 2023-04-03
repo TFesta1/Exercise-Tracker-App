@@ -6,26 +6,31 @@ const router = express.Router();
 router
     .get("/", (req, res) => {
         const list = model.getWorkouts();
-        res.send(list);
+        const data = { data: list, total: list.length, isSuccess: true  }
+        res.send(data);
+        // res.send(list);
     })
 
     .get('/getUserWorkouts/:user', (req, res) => {
         const user = req.params.user;
         // console.log("hi")
         const list = model.getUserWorkouts(user);
-        res.send(list);
+        const data = { data: list, total: list.length, isSuccess: true  }
+        res.send(data);
     })
 
     .get('/search/:q', (req, res) => {
         const term = req.params.q;
         // console.log({ term });
         const list = model.searchWorkouts(term);
-        res.send(list);
+        const data = { data: list, total: list.length, isSuccess: true  }
+        res.send(data);
     })
 
     .get("/getFriendsActivities", (req, res) => {
         const list = model.getFriendsActivities();
-        res.send(list);
+        const data = { data: list, total: list.length, isSuccess: true  }
+        res.send(data);
     })
 
     .post('/addWorkout', (req, res) => {
@@ -35,19 +40,23 @@ router
         // console.log( req.headers );
 
         const dataAdded = model.addWorkout(info);
-        res.send(dataAdded);
+        const data = { data: dataAdded, total: list.length, isSuccess: true  }
+        res.send(data);
     })
 
     .patch('/update', (req, res) => {
         const product = req.body;
         model.updateProduct(product);
-        res.send(product);
+        const data = { data: product, total: list.length, isSuccess: true  }
+        res.send(data);
     })
 
     .get('/removeWorkout/:i', (req, res) => {
         const i = req.params.i;
         const delItem = model.deleteWorkout(i);
-        res.send(delItem);
+        const data = { data: delItem, total: list.length, isSuccess: true  }
+        res.send(data);
+        
     })
 
 

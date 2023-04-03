@@ -2,13 +2,13 @@
     import { ref, reactive, inject, computed, onMounted } from 'vue'
     import { type Workout, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
     import type UserStore from '@/stores/user';
-    import { getActivities } from '@/model/activities';
+    import { getActivities, type Activity } from '@/model/activities';
 
 
-    const activities = ref() 
+    const activities = ref({} as Activity[]) 
 
     getActivities().then((data) => {
-        activities.value = data;
+        activities.value = data.data;
     });
     const streak = ref(0);
     const rest = ref(0);
@@ -40,18 +40,46 @@
         const result = await userStore.getUserName();
         username.value = result;
         getUserWorkouts(result).then((data) => {
-            changingWorkouts.value = data;
+            changingWorkouts.value = data.data;
         });
         getActivities().then((data) => {
-            
-            for(const item in data)
-            {
-                if (data[item].username == result)
+            const activities : Activity[] = data.data;
+
+            activities.forEach((activityArray: Activity) => {
+                // console.log(activityArray.username)
+                // activityArray.forEach((activity: Activity) => {
+                //     console.log(activity.username);
+                // });
+                // for(let i = 0; i < activities.length; i++)
+                // {
+                //     const activity : Activity = activityArray[i]
+                //     console.log(activity.username)
+                //     console.log("hi")
+
+                //     // console.log(item)
+                if (activityArray.username == result)
                 {
-                    streak.value = data[item].streak;
-                    rest.value = data[item].rest;
+                    console.log(activityArray.username)
+                    streak.value = activityArray.streak;
+                    rest.value = activityArray.rest;
+                    console.log(streak.value)
                 }
-            }
+                // }
+                // activityArray.forEach((activity: Activity) => {
+                // //     console.log(activity.username);
+                // });
+            });
+            
+            
+                
+                // console.log(data.data[item].values)
+                
+                // console.log("hi")
+                // if (data.data[item] == result)
+                // {
+                //     streak.value = data[item].streak;
+                //     rest.value = data[item].rest;
+                // }
         });            
     }
 

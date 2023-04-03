@@ -1,10 +1,10 @@
 <script setup lang="ts">
     import { ref } from 'vue'
-    import { getActivities } from '@/model/activities';
+    import { getActivities, type Activity } from '@/model/activities';
 
-    const activities = ref();
+    const activities = ref({} as Activity[]);
     getActivities().then((data) => {
-        activities.value = data;
+        activities.value = data.data;
     });
 </script>
 

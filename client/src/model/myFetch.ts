@@ -25,6 +25,16 @@ export function post(url: string, data: any) {
     return fetch(API_URL + url, requestOptions)
       .then(response => response.json())
       .catch(error => console.error('Error:', error));
-  }
+}
+
+export type DataEnvelope<T> = {
+  data: T,
+  isSuccess: boolean,
+  error?: string,
+}
+
+export type DataListEnvelope<T> = DataEnvelope<T[]> & {
+  total: number,
+}
 
 // post('users', { name: 'John Doe', email: 'john@example.com' }) 

@@ -5,19 +5,19 @@
     import { useRoute } from 'vue-router'
     // import type UserStore from '@/stores/user';
     import type UserStore from '@/stores/user';
-    import { getActivities } from '@/model/activities';
+    import { getActivities, type Activity } from '@/model/activities';
     import NavBar from './NavBar.vue';
     import Notifications from './Notifications.vue';
 
     const route = useRoute()
-    const activities = ref() 
+    const activities = ref({} as Activity[]) 
     getActivities().then((data) => {
-        activities.value = data;
+        activities.value = data.data;
     });
 
-    const activitiesRaw = computed(() => {
-        return activities.value ? activities.value._value : undefined;
-    })
+    // const activitiesRaw = computed(() => {
+    //     return activities.value ? activities.value._value : undefined;
+    // })
 
     const menuActiveOnShortScreen = ref(false);
     const buttonClickRef = ref<HTMLElement | null>(null);
@@ -208,7 +208,7 @@
         getActivities().then((data) => {
         //         activities.value = data;
         // activities.forEach((activity) => {
-            for(const item of data)
+            for(const item of data.data)
             {
                 // console.log(item)
                 if (item.username == result)
@@ -221,22 +221,22 @@
         });
     }
 
-    async function updatePfp()
-    {
-        const result = await userStore.getUserName();
+    // async function updatePfp()
+    // {
+    //     const result = await userStore.getUserName();
 
-        getActivities().then((data) => {
-        //         activities.value = data;
-        // activities.forEach((activity) => {
-            // console.log(data)
+    //     getActivities().then((data) => {
+    //     //         activities.value = data;
+    //     // activities.forEach((activity) => {
+    //         // console.log(data)
             
-            if (data[0].username == result)
-            {
-                pfp.value = data[0].profilePicture;
-            }
-        });
+    //         if (data.data[0].username == result)
+    //         {
+    //             pfp.value = data.data[0].profilePicture;
+    //         }
+    //     });
 
-    }
+    // }
 
     // setInterval(updatePfp, 1);
 
@@ -357,6 +357,5 @@
 </template>
 
 <style scoped>
-
 
 </style>

@@ -27,6 +27,15 @@
         position: relative;
         z-index: 99999999;
     }
+
+    /* !important is fine since this is scoped */
+    .notifications button {
+        border: 0 !important;
+        list-style: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        background-color: transparent !important;
+    }
     .notification-list {
         position: absolute;
         margin-top: 5px;

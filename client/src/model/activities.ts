@@ -14,6 +14,8 @@
 */
 
 import { api, postApi } from './session';
+import type { DataListEnvelope } from './myFetch';
+
 
 
 export interface Activity {
@@ -28,8 +30,8 @@ export interface Activity {
     rest: number;
 }
 
-
-export function getActivities(): Promise<Activity[]> {
+export function getActivities(): Promise<DataListEnvelope<Activity>>
+{
     // return activities;
     return api('workouts/getFriendsActivities')
 }
