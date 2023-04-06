@@ -31,7 +31,7 @@
         }
     });
 
-    const changingWorkouts = ref();
+    const changingWorkouts = ref({} as Workout[]);
 
     const router = inject('router') as any;
     const userStore = inject('userStore') as typeof UserStore;
@@ -89,7 +89,7 @@
         const user = await userStore.getUserName();
         // changingWorkouts.value = getUserWorkouts(user);
         getUserWorkouts(user).then((data) => {
-            changingWorkouts.value = data;
+            changingWorkouts.value = data.data;
         });
 
         // removeWorkout
