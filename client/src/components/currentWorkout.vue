@@ -62,7 +62,7 @@
                     console.log(activityArray.username)
                     streak.value = activityArray.streak;
                     rest.value = activityArray.rest;
-                    console.log(streak.value)
+                    // console.log(streak.value)
                 }
                 // }
                 // activityArray.forEach((activity: Activity) => {
@@ -86,6 +86,7 @@
     
 
     async function userWorkouts() {
+        
         const user = await userStore.getUserName();
         // changingWorkouts.value = getUserWorkouts(user);
         getUserWorkouts(user).then((data) => {
@@ -127,8 +128,12 @@
     }
 
     async function asyncRemove(i: number){
-        removeWorkout(i)
-        userWorkouts()
+        await removeWorkout(i)
+        getUserWorkouts(await userStore.getUserName()).then((data) => {
+            changingWorkouts.value = data.data;
+        });
+        await getUsername() //Updates the table
+        // getUsername()
     }
     getUsername()
     
@@ -214,7 +219,7 @@
             Intensity: {{ workout.intensity }}
         </div> 
 
-        <button class="trash-button" @click="asyncRemove(i)">
+        <button class="trash-button" @click="asyncRemove(i)" @change="userWorkouts()">
             <span class="icon">
                 <i class="fas fa-trash"></i>
             </span>

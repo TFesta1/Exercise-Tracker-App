@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { api, postApi } from './session';
+import { api } from './session';
 import type { DataListEnvelope } from './myFetch';
 
 
@@ -10,6 +10,11 @@ export interface Workout {
     intensity: string;
 }
 
+
+export function getAllWorkouts() : Promise<DataListEnvelope<Workout[]>>{
+    // return allWorkouts;
+    return api('workouts')
+}
 
 export function getUserWorkouts(user: string) : Promise<DataListEnvelope<Workout>> {
     // return allWorkouts.filter(workout => workout.username === user);
@@ -28,7 +33,7 @@ export function addToWorkout(workout: Workout){
         "intensity": "Normal"
     }
     */
-    return postApi('workouts/addWorkout', workout)
+    return api('workouts/addWorkout', workout)
 }
 
 export function removeWorkout(index: number) : Promise<DataListEnvelope<Workout[]>>{

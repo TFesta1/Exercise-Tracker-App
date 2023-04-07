@@ -2,6 +2,9 @@ const data = require("../data/workouts.json");
 let allWorkoutsData = require("../data/allWorkouts.json");
 const friendsActivities = require("../data/friendsActivities.json");
 function getWorkouts() {
+    while(data === undefined) {
+        console.log("waiting for data")
+    }
     return data;
 }
 
@@ -10,9 +13,9 @@ function getWorkouts() {
 
 function searchWorkouts(term) {
     // Wait for data to not be undefined
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
+    // while(data === undefined) {
+    //     console.log("waiting for data")
+    // }
 
     const filteredData = {};
     for (const muscle in data) {
@@ -26,9 +29,9 @@ function searchWorkouts(term) {
 
 function getUserWorkouts(user) {
     // Wait for data to not be undefined
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
+    // while(data === undefined) {
+    //     console.log("waiting for data")
+    // }
     // throw new Error('Something went wrong');
 
     let filteredData = [];
@@ -46,9 +49,9 @@ function getUserWorkouts(user) {
 
 function addWorkout(body)
 {
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
+    // while(data === undefined) {
+    //     console.log("waiting for data")
+    // }
     console.log("adding workout")
     allWorkoutsData = allWorkoutsData.concat(body)
     return allWorkoutsData
@@ -56,7 +59,7 @@ function addWorkout(body)
 
 function deleteWorkout(i) 
 {
-    while(data === undefined) {
+    while(allWorkoutsData[i] === undefined) {
         console.log("waiting for data")
     }
     const deletedWorkout = allWorkoutsData[i];
@@ -66,9 +69,9 @@ function deleteWorkout(i)
 
 function getFriendsActivities()
 {
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
+    // while(data === undefined) {
+    //     console.log("waiting for data")
+    // }
 
 
     return friendsActivities;

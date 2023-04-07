@@ -40,21 +40,21 @@ router
         // console.log( req.headers );
 
         const dataAdded = model.addWorkout(info);
-        const data = { data: dataAdded, total: list.length, isSuccess: true  }
+        const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
         res.send(data);
     })
 
     .patch('/update', (req, res) => {
         const product = req.body;
         model.updateProduct(product);
-        const data = { data: product, total: list.length, isSuccess: true  }
+        const data = { data: product, total: product.length, isSuccess: true  }
         res.send(data);
     })
 
     .get('/removeWorkout/:i', (req, res) => {
         const i = req.params.i;
         const delItem = model.deleteWorkout(i);
-        const data = { data: delItem, total: list.length, isSuccess: true  }
+        const data = { data: delItem, total: delItem.length, isSuccess: true  }
         res.send(data);
         
     })

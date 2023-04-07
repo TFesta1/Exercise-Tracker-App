@@ -1,38 +1,68 @@
 {
     "legs": [
         {
-          "sets": 3,
-          "rest": 60,
-          "supersets": true,
-          "squats": 3,
-          "lunges": 10,
-          "leg press": 10
+          "description": "Squats 2x4",
+          "intensity": "High"
         },
         {
-          "sets": 4,
-          "rest": 90,
-          "supersets": false,
-          "deadlifts": 3,
-          "leg curls": 12,
-          "calf raises": 15
+          "description": "Leg press 3x8",
+          "intensity": "Medium"
+        },
+        {
+          "description": "Leg extensions 3x10",
+          "intensity": "Low"
+        },
+        {
+          "description": "Leg curls 3x10",
+          "intensity": "Low"
+        },
+        {
+          "description": "Calf raises 3x10",
+          "intensity": "Low"
         }
     ],
     "back": [
         {
-          "sets": 3,
-          "rest": 60,
-          "supersets": true,
-          "pull-ups": 8,
-          "seated rows": 10,
-          "lat pulldowns": 12
+          "description": "Pull Ups 2x4",
+          "intensity": "High"
         },
         {
-          "sets": 4,
-          "rest": 90,
-          "supersets": false,
-          "barbell rows": 5,
-          "back extensions": 12,
-          "shrugs": 15
+          "description": "Lat Pulldowns 3x8",
+          "intensity": "Medium"
+        },
+        {
+          "description": "Seated Rows 3x10",
+          "intensity": "Low"
+        },
+        {
+          "description": "Bent Over Rows 3x10",
+          "intensity": "Low"
+        },
+        {
+          "description": "Deadlifts 3x10",
+          "intensity": "Low"
+        }
+    ],
+    "chest": [
+        {
+          "description": "Bench Press 2x4",
+          "intensity": "High"
+        },
+        {
+          "description": "Incline Bench Press 3x8",
+          "intensity": "Medium"
+        },
+        {
+          "description": "Chest Flys 3x10",
+          "intensity": "Low"
+        },
+        {
+          "description": "Push Ups 3x10",
+          "intensity": "Low"
+        },
+        {
+          "description": "Dips 3x10",
+          "intensity": "Low"
         }
     ]
 }

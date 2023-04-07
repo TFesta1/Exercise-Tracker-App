@@ -23,9 +23,9 @@ interface User {
     token?: string;
 }
 
-export function api(url: string) {
+export function api(url: string, data?: any, method?: string, headers?: any) {
     session.isLoading = true;
-    return myFetch.api(url)
+    return myFetch.api(url, data, method, headers)
         .catch(err => {
             console.error({err});
             session.messages.push({
@@ -38,20 +38,20 @@ export function api(url: string) {
         })
 }
 
-export function postApi(url: string, data: any){
-    session.isLoading = true;
-    return myFetch.post(url, data)
-        .catch(err => {
-            console.error({err});
-            session.messages.push({
-                msg: err.message  ?? JSON.stringify(err),
-                type: "danger",
-            })
-        })
-        .finally(() => {
-            session.isLoading = false;
-        })
-}
+// export function postApi(url: string, data: any){
+//     session.isLoading = true;
+//     return myFetch.post(url, data)
+//         .catch(err => {
+//             console.error({err});
+//             session.messages.push({
+//                 msg: err.message  ?? JSON.stringify(err),
+//                 type: "danger",
+//             })
+//         })
+//         .finally(() => {
+//             session.isLoading = false;
+//         })
+// }
 
 export function useSession() {
     return session;
