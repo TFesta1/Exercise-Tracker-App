@@ -7,6 +7,7 @@ import { createRouter, createWebHistory, type NavigationGuardNext, type RouteLoc
 import { useSession } from '@/model/session'
 import LoginVue from '@/views/Login.vue'
 import RegisterVue from '@/views/Register.vue'
+import WorkoutVue from '@/views/WorkoutView.vue'
 import userStore from '@/stores/user'
 // import userStore from '@/stores/user'
 
@@ -73,6 +74,13 @@ const router = createRouter({
       
       component: RegisterVue
     },
+    {
+      path: '/workoutList',
+      name: 'workoutList',
+      
+      component: WorkoutVue
+    },
+    
 
     
   ]

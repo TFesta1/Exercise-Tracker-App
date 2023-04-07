@@ -28,7 +28,11 @@
             return 'People Search'
         } else if (route.path === '/admin') {
             return 'Admin'
+        } else if (route.path === '/workoutList') {
+            return 'Workouts'
         }
+        
+        
     })
 
 </script>
@@ -51,6 +55,7 @@
                 <RouterLink to='/activity'><li :class="{ 'add-border': $route.path === '/activity' }"><i class="fas fa-id-badge" aria-hidden="true"><a href="#">Friends Activity</a></i></li></RouterLink>
                 <RouterLink to='/search'><li :class="{ 'add-border': $route.path === '/search' }"><i class="fas fa-filter" aria-hidden="true"><a href="#">People Search</a></i></li></RouterLink>
                 <RouterLink to='/admin'><li :class="{ 'add-border': $route.path === '/admin' }"><i class="fas fa-lock" aria-hidden="true"><a href="#">Admin</a></i></li></RouterLink>
+                <RouterLink to='/workoutList'><li :class="{ 'add-border': $route.path === '/workoutList' }"><i class="fas fa-running6" aria-hidden="true"><a href="#">Workouts</a></i></li></RouterLink>
             </ul>
         </div>
         
