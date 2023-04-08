@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { api } from './session';
-import type { DataListEnvelope } from './myFetch';
+import type { DataListEnvelope, DataEnvelope } from './myFetch';
 
 
 export interface Workout {
@@ -10,8 +10,14 @@ export interface Workout {
     intensity: string;
 }
 
+export interface KindsOfWorkouts {
+    legs: string;
+    back: string;
+    chest: string;
+}
 
-export function getAllWorkouts() : Promise<DataListEnvelope<Workout[]>>{
+
+export function getAllWorkouts() : Promise<DataEnvelope<KindsOfWorkouts>>{
     // return allWorkouts;
     return api('workouts')
 }
