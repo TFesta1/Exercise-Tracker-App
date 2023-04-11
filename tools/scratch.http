@@ -8,6 +8,14 @@ GET http://localhost:3000/api/v1/workouts
 GET http://localhost:3000/api/v1/workouts/search/legs
 
 ###
+GET http://localhost:3000/api/v1/workouts/removeWorkoutFromTable/2
+
+###
+
+GET http://localhost:3000/api/v1/workouts/getWorkoutById/100
+
+
+###
 POST http://localhost:3000/api/v1/workouts?workoutTitle="Cardio"
 Content-Type: application/json
 
