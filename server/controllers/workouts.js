@@ -19,6 +19,13 @@ router
         res.send(data);
     })
 
+    .get("/removeWorkoutFromTable/:i", (req, res) => {
+        const i = req.params.i;
+        const delItem = model.deleteWorkoutFromTable(i);
+        const data = { data: delItem, total: delItem.length, isSuccess: true  }
+        res.send(data);
+    })
+
     .get('/search/:q', (req, res) => {
         const term = req.params.q;
         // console.log({ term });
@@ -33,6 +40,13 @@ router
         res.send(data);
     })
 
+    .get("/getWorkoutById/:id", (req, res) => {
+        const id = req.params.id;
+        const list = model.getWorkoutById(id);
+        const data = { data: list, total: list.length, isSuccess: true  }
+        res.send(data);
+    })
+
     .post('/addWorkout', (req, res) => {
         const info = req.body;
         // console.log( req.query.workoutTitle );
@@ -40,6 +54,14 @@ router
         // console.log( req.headers );
 
         const dataAdded = model.addWorkout(info);
+        const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
+        res.send(data);
+    })
+
+    .post("/editWorkout/:id", (req, res) => {
+        const id = req.params.id;
+        const info = req.body;
+        const dataAdded = model.editWorkout(id, info);
         const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
         res.send(data);
     })

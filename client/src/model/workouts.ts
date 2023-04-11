@@ -17,6 +17,14 @@ export interface KindsOfWorkouts {
 }
 
 
+export interface EditWorkout {
+    description: string;
+    intensity: string;
+}
+
+
+
+
 export function getAllWorkouts() : Promise<DataEnvelope<KindsOfWorkouts>>{
     // return allWorkouts;
     return api('workouts')
@@ -25,6 +33,11 @@ export function getAllWorkouts() : Promise<DataEnvelope<KindsOfWorkouts>>{
 export function getUserWorkouts(user: string) : Promise<DataListEnvelope<Workout>> {
     // return allWorkouts.filter(workout => workout.username === user);
     return api('workouts/getUserWorkouts/' + user)
+}
+
+export function getWorkoutById(id: number) : Promise<DataEnvelope<EditWorkout>>{
+    console.log("getting workout by id " + id)
+    return api('workouts/getWorkoutById/' + id)
 }
 
 // const workouts = ref(getWorkouts())
@@ -47,6 +60,18 @@ export function removeWorkout(index: number) : Promise<DataListEnvelope<Workout[
     console.log("removed workout " + index)
     return api('workouts/removeWorkout/' + index)
     // console.log("Workout removed " + workouts.value )
+}
+
+export function removeWorkoutFromTable(index: number) : Promise<DataEnvelope<KindsOfWorkouts>>{
+    // workouts.value.splice(index, 1);
+    console.log("removing workout on table " + index)
+    return api('workouts/removeWorkoutFromTable/' + index)
+    // console.log("Workout removed " + workouts.value )
+}
+
+export function editWorkout(id: number, workout: EditWorkout) : Promise<DataEnvelope<EditWorkout>>{
+    console.log("editing workout " + id)
+    return api('workouts/editWorkout/' + id, workout)
 }
 
 // export default workouts;

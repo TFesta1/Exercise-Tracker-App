@@ -1,6 +1,8 @@
 const data = require("../data/workouts.json");
 let allWorkoutsData = require("../data/allWorkouts.json");
 const friendsActivities = require("../data/friendsActivities.json");
+
+
 function getWorkouts() {
     while(data === undefined) {
         console.log("waiting for data")
@@ -78,6 +80,90 @@ function getFriendsActivities()
 }
 
 
+function deleteWorkoutFromTable(i)
+{
+    while(data === undefined) {
+        console.log("waiting for data")
+    }
+    for (const workout in data) {
+        const subList = data[workout];
+        // console.log(subList);
+        for (const exercise in subList) {
+            const subExercise = subList[exercise];
+            if (subExercise.id == i) {
+                console.log(subExercise)
+                deletedWorkout = subExercise;
+                // This actually still deletes the workout in the data list because it is a reference
+                subList.splice(exercise, 1);
+                return subExercise;
+            }
+
+            // console.log(subExercise)
+        }
+        // console.log(workout)
+    }
+    // const deletedWorkout = allWorkoutsData[i];
+    // allWorkoutsData.splice(i, 1);
+    // return deletedWorkout;
+    return [];
+}
+
+
+function getWorkoutById(id) {
+    // Wait for data to not be undefined
+    while(data === undefined) {
+        console.log("waiting for data")
+    }
+
+    for (const workout in data) {
+        const subList = data[workout];
+        // console.log(subList);
+        for (const exercise in subList) {
+            const subExercise = subList[exercise];
+            if (subExercise.id == id) {
+                console.log(subExercise)
+                return subExercise;
+            }
+
+            // console.log(subExercise)
+        }
+        // console.log(workout)
+    }
+    return [];
+}
+
+function editWorkout(id, info) {
+    // Wait for data to not be undefined
+    while(data === undefined) {
+        console.log("waiting for data")
+    }
+
+    for (const workout in data) {
+        const subList = data[workout];
+        // console.log(subList);
+        for (const exercise in subList) {
+            const subExercise = subList[exercise];
+            if (subExercise.id == id) {
+                console.log(subExercise)
+                subExercise.name = info.name;
+                subExercise.sets = info.sets;
+                subExercise.reps = info.reps;
+                subExercise.weight = info.weight;
+                subExercise.date = info.date;
+                subExercise.username = info.username;
+                return subExercise;
+            }
+
+            // console.log(subExercise)
+        }
+        // console.log(workout)
+    }
+    return [];
+
+}
+
+
+
 
 module.exports = {
     getWorkouts,
@@ -85,5 +171,7 @@ module.exports = {
     addWorkout,
     deleteWorkout,
     getUserWorkouts,
-    getFriendsActivities
+    getFriendsActivities,
+    deleteWorkoutFromTable,
+    getWorkoutById
 }

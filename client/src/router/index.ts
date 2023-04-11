@@ -8,6 +8,7 @@ import { useSession } from '@/model/session'
 import LoginVue from '@/views/Login.vue'
 import RegisterVue from '@/views/Register.vue'
 import WorkoutVue from '@/views/WorkoutView.vue'
+import EditWorkout from '@/views/EditWorkout.vue'
 import userStore from '@/stores/user'
 // import userStore from '@/stores/user'
 
@@ -80,8 +81,13 @@ const router = createRouter({
       
       component: WorkoutVue
     },
-    
-
+    {
+      path: '/workouts/edit/:id',
+      name: 'editWorkout',
+      component: EditWorkout,
+      props: route => ({ id: Number(route.params.id) })
+      // beforeEnter: secureRoute,
+    },
     
   ]
 })

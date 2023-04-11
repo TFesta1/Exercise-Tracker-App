@@ -7,22 +7,22 @@
         },
         {
           "description": "Leg press 3x8",
-          "intensity": "Medium",
+          "intensity": "Normal",
           "id": 2
         },
         {
           "description": "Leg extensions 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 3
         },
         {
           "description": "Leg curls 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 4
         },
         {
           "description": "Calf raises 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 5
         }
     ],
@@ -34,22 +34,22 @@
         },
         {
           "description": "Lat Pulldowns 3x8",
-          "intensity": "Medium",
+          "intensity": "Normal",
           "id": 7
         },
         {
           "description": "Seated Rows 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 8
         },
         {
           "description": "Bent Over Rows 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 9
         },
         {
           "description": "Deadlifts 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 10
         }
     ],
@@ -61,22 +61,22 @@
         },
         {
           "description": "Incline Bench Press 3x8",
-          "intensity": "Medium",
+          "intensity": "Normal",
           "id": 12
         },
         {
           "description": "Chest Flys 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 13
         },
         {
           "description": "Push Ups 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 14
         },
         {
           "description": "Dips 3x10",
-          "intensity": "Low",
+          "intensity": "Easy",
           "id": 15
         }
     ]
