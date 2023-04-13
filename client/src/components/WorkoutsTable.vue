@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { ref, inject, onMounted} from 'vue'
     import type UserStore from '@/stores/user';
-    import { getAllWorkouts, removeWorkoutFromTable, type KindsOfWorkouts } from '@/model/workouts';
+    import { getAllWorkouts, removeWorkoutFromTable, addWorkoutToWorkouts, type KindsOfWorkouts } from '@/model/workouts';
 
     const username = ref("")
     const userStore = inject('userStore') as typeof UserStore;
@@ -39,6 +39,12 @@
         
     }
 
+    async function asyncAdd(workoutTitle: string, username: string, id: number)
+    {
+        await addWorkoutToWorkouts(workoutTitle, username, id);
+        // await callGetWorkouts()
+    }
+
     
     
 
@@ -71,6 +77,10 @@
                     <td>{{ l.intensity }}
 
                         <div class="adminModify">
+
+                            <button class="icon plusButton" @click="asyncAdd('Legs', username, l.id)">
+                                <i class="fas fa-plus"></i>
+                            </button>
                             
                             <router-link :to="'/workouts/edit/' + l.id" class="button" >
                                 <div class="icon">
@@ -94,7 +104,12 @@
                     <td>{{ c.intensity }}
 
                         <div class="adminModify">
-                            <router-link :to="'/workouts/edit/' + c.id" class="button" >
+
+                            <button class="icon plusButton" @click="asyncAdd('Chest', username, c.id)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+
+                            <router-link :to="'/workouts/edit/' + c.id" class="button">
                                 <div class="icon">
                                     <i class="fas fa-edit"></i>
                                 </div>
@@ -120,6 +135,10 @@
                     <td>{{ b.description }}</td>
                     <td>{{ b.intensity }}
                         <div class="adminModify">
+
+                            <button class="icon plusButton" @click="asyncAdd('Back', username, b.id)">
+                                <i class="fas fa-plus"></i>
+                            </button>
                             <router-link :to="'/workouts/edit/' + b.id" class="button" >
                                 <div class="icon">
                                     <i class="fas fa-edit"></i>
@@ -148,6 +167,27 @@
 </template>
 
 <style scoped>
+
+    .plusButton {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: green;
+        color: black;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .plusButton:active {
+        transform: scale(0.2);
+    }
+
+    
+
     .trash-button {
         background-color: transparent;
         color: blue;
