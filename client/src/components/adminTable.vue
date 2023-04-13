@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { getActivities, type Activity } from '@/model/activities';
     import { ref } from 'vue'
+    
 
 
     const activities = ref({} as Activity[])
