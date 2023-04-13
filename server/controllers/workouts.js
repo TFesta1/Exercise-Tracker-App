@@ -58,6 +58,16 @@ router
         res.send(data);
     })
 
+    .post("/addWorkoutWithId", (req, res) => {
+        const info = req.body;
+        console.log(info)
+        const dataAdded = model.addWorkoutWithId(info);
+        const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
+        res.send(data);
+    })
+
+
+
     .post("/editWorkout/:id", (req, res) => {
         const id = req.params.id;
         const info = req.body;

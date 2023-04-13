@@ -74,6 +74,21 @@ export function editWorkout(id: number, workout: EditWorkout) : Promise<DataEnve
     return api('workouts/editWorkout/' + id, workout)
 }
 
+export function addWorkoutToWorkouts(workoutTitle: string, username: string, id: number) : Promise<DataEnvelope<KindsOfWorkouts>>{
+    console.log("adding workout to table " + id)
+
+    const composeParameter = {
+        workoutTitle: workoutTitle,
+        username: username,
+        id: id
+    }
+
+    // console.log(composeParameter)
+
+
+    return api('workouts/addWorkoutWithId', composeParameter)
+}
+
 // export default workouts;
 
 // export function removeFromCart(index: number){

@@ -51,9 +51,19 @@ function getUserWorkouts(user) {
 
 function addWorkout(body)
 {
-    // while(data === undefined) {
-    //     console.log("waiting for data")
-    // }
+    /*
+    let body : Workout = {
+        username: string;
+        workoutType: string;
+        description: string;
+        intensity: string;
+    }
+
+
+    */
+
+
+
     console.log("adding workout")
     allWorkoutsData = allWorkoutsData.concat(body)
     return allWorkoutsData
@@ -162,6 +172,54 @@ function editWorkout(id, info) {
 
 }
 
+function addWorkoutWithId(body) {
+
+    /*
+    body = {
+        workoutTitle: workoutTitle,
+        username: username,
+        id: id
+    }
+    */
+
+    // Wait for data to not be undefined
+    while(data === undefined) {
+        console.log("waiting for data")
+    }
+
+    let username = body.username;
+    let workoutTitle = body.workoutTitle;
+    let description = ""
+    let intensity = ""
+
+    for (const workout in data) {
+        const subList = data[workout];
+        // console.log(subList);
+        for (const exercise in subList) {
+            const subExercise = subList[exercise];
+            if (subExercise.id == body.id) {
+                console.log(subExercise)
+                description = subExercise.description;
+                intensity = subExercise.intensity;
+            }
+
+            // console.log(subExercise)
+        }
+        // console.log(workout)
+    }
+
+    let workout = {
+        username: username,
+        workoutType: workoutTitle,
+        description: description,
+        intensity: intensity,
+    }
+    
+    allWorkoutsData = allWorkoutsData.concat(workout)
+    return allWorkoutsData
+
+}
+
 
 
 
@@ -173,5 +231,7 @@ module.exports = {
     getUserWorkouts,
     getFriendsActivities,
     deleteWorkoutFromTable,
-    getWorkoutById
+    getWorkoutById,
+    editWorkout,
+    addWorkoutWithId
 }

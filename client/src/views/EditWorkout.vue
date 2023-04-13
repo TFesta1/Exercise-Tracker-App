@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref, inject, onMounted, defineProps, reactive } from 'vue'
+    import { ref, inject, onMounted, reactive } from 'vue'
     import type UserStore from '@/stores/user';
     import { type EditWorkout, getWorkoutById } from '@/model/workouts';
     
@@ -58,7 +58,7 @@
         }
 
         // Edit the data with the thing at that ID
-        
+
 
 
 
