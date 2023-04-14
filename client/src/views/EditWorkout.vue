@@ -15,8 +15,6 @@
         },
     });
 
-    
-
     // const workouts = ref({} as EditWorkout);
     const description = ref("")
     const intensity = ref("")
@@ -58,13 +56,7 @@
         }
 
         // Edit the data with the thing at that ID
-
-
-
-
         router.push('/workoutList')
-
-
 
     }
 
@@ -73,12 +65,6 @@
         description: '',
         intensity: ''
     })
-
-
-
-
-
-    
 
 </script>
 
