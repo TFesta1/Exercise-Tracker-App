@@ -2,9 +2,6 @@
     import { getActivities, type Activity } from '@/model/activities';
     import { ref } from 'vue'
 
-
-
-    
     const activities = ref({} as Activity[])
     getActivities().then((data) => {
         activities.value = data.data;

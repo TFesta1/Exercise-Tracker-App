@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import CurrentWorkout from '@/components/CurrentWorkout.vue';
+    import CurrentWorkout from '@/components/currentWorkout.vue';
     
 </script>
 

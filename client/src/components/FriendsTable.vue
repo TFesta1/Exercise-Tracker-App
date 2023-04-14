@@ -1,10 +1,23 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { ref, inject, onMounted } from 'vue'
     import { getActivities, type Activity } from '@/model/activities';
+    import type UserStore from '@/stores/user';
+
+    const username = ref("")
+    const userStore = inject('userStore') as typeof UserStore;
+
+    async function logUserName() {
+        const result = await userStore.getUserName();
+        username.value = result
+    }
 
     const activities = ref({} as Activity[]);
     getActivities().then((data) => {
         activities.value = data.data;
+    });
+
+    onMounted(async () => {
+        logUserName();
     });
 </script>
 
@@ -24,7 +37,7 @@
             </thead>
             <tbody>
                 <tr v-for="activity in activities">
-                    <td class="people">
+                    <td class="people" v-if="activity.username != username">
                         <!-- Their pfp image -->
                         <!-- <img src="../assets/profile-pictures/1.png" alt="pfp">
                          -->
@@ -33,19 +46,21 @@
                         <!-- <img src = "{{  }}" alt="pfp"> -->
                         <div class="people-de">
                             <!-- Their name -->
-                            <h5>{{ activity.name }}</h5>
+                            <router-link :to="'/viewFriend/' + activity.username" >
+                                <h5>{{ activity.name }}</h5>
+                            </router-link>
                             <!-- Their email -->
                         </div>
                     </td>
 
-                    <td class="people-des">
+                    <td class="people-des" v-if="activity.username != username">
                         <!-- Their intensity -->
                         <h5>{{ activity.intensity }}</h5>
                         <!-- <p>Go at a normal pace</p> -->
                     </td>
 
-                    <td class="active"><p>{{ activity.workout }}</p></td>
-                    <td class="role">
+                    <td class="active" v-if="activity.username != username"><p>{{ activity.workout }}</p></td>
+                    <td class="role" v-if="activity.username != username">
                         <p>{{activity.streak}}</p>
                     </td>
 

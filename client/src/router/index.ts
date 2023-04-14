@@ -9,6 +9,7 @@ import LoginVue from '@/views/Login.vue'
 import RegisterVue from '@/views/Register.vue'
 import WorkoutVue from '@/views/WorkoutView.vue'
 import EditWorkout from '@/views/EditWorkout.vue'
+import DisplayFriendWorkouts from '@/views/DisplayFriendWorkout.vue'
 import userStore from '@/stores/user'
 // import userStore from '@/stores/user'
 
@@ -37,56 +38,63 @@ const router = createRouter({
       path: '/',
       name: 'exercise',
       component: ExerciseView,
-      // beforeEnter: secureRoute,
+      // beforeEnter: secureRoute
     },
     {
       path: '/statistics',
       name: 'statistics',
-      
-      component: StatisticsView
+      component: StatisticsView,
+      // beforeEnter: secureRoute
     },
     {
       path: '/activity',
       name: 'activity',
-      
-      component: ActivityView
+      component: ActivityView,
+      // beforeEnter: secureRoute
     },
     {
       path: '/search',
       name: 'search',
-      
-      component: SearchView
+      component: SearchView,
+      // beforeEnter: secureRoute
     },
     {
       path: '/admin',
       name: 'admin',
-      
-      component: AdminView
+      component: AdminView,
+      // beforeEnter: secureRoute
     },
     {
       path: '/login',
       name: 'login',
-      
-      component: LoginVue
+      component: LoginVue,
+      // beforeEnter: secureRoute
     },
     {
       path: '/register',
       name: 'register',
-      
-      component: RegisterVue
+      component: RegisterVue,
+      // beforeEnter: secureRoute
     },
     {
       path: '/workoutList',
       name: 'workoutList',
-      
-      component: WorkoutVue
+      component: WorkoutVue,
+      // beforeEnter: secureRoute
     },
     {
       path: '/workouts/edit/:id',
       name: 'editWorkout',
       component: EditWorkout,
-      props: route => ({ id: Number(route.params.id) })
-      // beforeEnter: secureRoute,
+      props: route => ({ id: Number(route.params.id) }),
+      // beforeEnter: secureRoute
+    },
+    {
+      path: '/viewFriend/:personName',
+      name: 'viewFriendsWorkout',
+      component: DisplayFriendWorkouts,
+      props: route => ({ personName: route.params.personName }),
+      // beforeEnter: secureRoute
     },
     
   ]

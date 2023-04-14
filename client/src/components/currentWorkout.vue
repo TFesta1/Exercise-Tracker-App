@@ -3,7 +3,7 @@
     import { type Workout, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
     import type UserStore from '@/stores/user';
     import { getActivities, type Activity } from '@/model/activities';
-
+    import listWorkouts from '@/components/listWorkouts.vue';
 
     const activities = ref({} as Activity[]) 
 
@@ -135,6 +135,10 @@
         await getUsername() //Updates the table
         // getUsername()
     }
+
+    const showContent = computed(() => {
+      return changingWorkouts.value !== null && username !== undefined;
+    });
     getUsername()
     
 
@@ -207,7 +211,7 @@
         
     </div>
     
-    <div class="workoutValues" v-for="workout,i in changingWorkouts">
+    <!-- <div class="workoutValues" v-for="workout,i in changingWorkouts">
         <h2>{{ workout.workoutType }}</h2>
         <br>
 
@@ -224,7 +228,11 @@
                 <i class="fas fa-trash"></i>
             </span>
         </button>
-    </div>
+    </div> -->
+
+    <!-- <div v-if="showContent"> -->
+    <listWorkouts :username="username" :showTrash="true"></listWorkouts>
+    <!-- </div> -->
     
     
 </template>
@@ -266,8 +274,6 @@
     position: relative;
     right: -2%;
     top: 10px;
-
-
 }
 
 .close-modal {
