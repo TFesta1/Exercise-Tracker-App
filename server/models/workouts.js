@@ -49,6 +49,37 @@ function getUserWorkouts(user) {
 }
 
 
+function editWorkoutById(body) {
+    // Wait for data to not be undefined
+    while(data === undefined) {
+        console.log("waiting for data")
+    }
+
+    console.log(body)
+
+    for (const workout in data) {
+        const subList = data[workout];
+        // console.log(subList);
+        for (const exercise in subList) {
+            const subExercise = subList[exercise];
+            if (subExercise.id == body.id) {
+                console.log(subExercise)
+                // This actually still deletes the workout in the data list because it is a reference
+                subList[exercise] = body;
+                return subExercise;
+            }
+
+            // console.log(subExercise)
+        }
+        // console.log(workout)
+    }
+    // const deletedWorkout = allWorkoutsData[i];
+    // allWorkoutsData.splice(i, 1);
+    // return deletedWorkout;
+    return [];
+}
+
+
 function addWorkout(body)
 {
     /*
@@ -233,5 +264,6 @@ module.exports = {
     deleteWorkoutFromTable,
     getWorkoutById,
     editWorkout,
-    addWorkoutWithId
+    addWorkoutWithId,
+    editWorkoutById
 }

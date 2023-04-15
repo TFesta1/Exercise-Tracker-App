@@ -22,6 +22,12 @@ export interface EditWorkout {
     intensity: string;
 }
 
+export interface WorkoutWithId {
+    description: string;
+    intensity: string;
+    id: number
+}
+
 
 
 
@@ -39,6 +45,7 @@ export function getWorkoutById(id: number) : Promise<DataEnvelope<EditWorkout>>{
     console.log("getting workout by id " + id)
     return api('workouts/getWorkoutById/' + id)
 }
+
 
 // const workouts = ref(getWorkouts())
 
@@ -69,9 +76,9 @@ export function removeWorkoutFromTable(index: number) : Promise<DataEnvelope<Kin
     // console.log("Workout removed " + workouts.value )
 }
 
-export function editWorkout(id: number, workout: EditWorkout) : Promise<DataEnvelope<EditWorkout>>{
-    console.log("editing workout " + id)
-    return api('workouts/editWorkout/' + id, workout)
+export function editWorkoutWithId(workout: WorkoutWithId) : Promise<DataEnvelope<WorkoutWithId>>{
+    console.log("editing workout " + workout)
+    return api('workouts/editWorkoutById', workout)
 }
 
 export function addWorkoutToWorkouts(workoutTitle: string, username: string, id: number) : Promise<DataEnvelope<KindsOfWorkouts>>{

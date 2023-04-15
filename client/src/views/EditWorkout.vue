@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { ref, inject, onMounted, reactive } from 'vue'
     import type UserStore from '@/stores/user';
-    import { type EditWorkout, getWorkoutById } from '@/model/workouts';
+    import { type EditWorkout, type WorkoutWithId, getWorkoutById, editWorkoutWithId } from '@/model/workouts';
     
 
     const username = ref("")
@@ -56,6 +56,19 @@
         }
 
         // Edit the data with the thing at that ID
+        // editWorkoitById()
+        const ourWorkout : WorkoutWithId = {
+            description: form.description,
+            intensity: form.intensity,
+            id: props.id
+        }
+
+        await editWorkoutWithId(ourWorkout).then((data) => {
+            console.log(data)
+        })
+
+
+        // Go back to the workout list.
         router.push('/workoutList')
 
     }
