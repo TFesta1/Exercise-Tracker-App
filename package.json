@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js --watch server",
-    "build": "npm ci && cd client && npm ci && npm run build-only & cd .."
+    "build": "npm ci && cd client && npm i && npm run build-only & cd .."
   },
   "dependencies": {
     "express": "^4.18.2",
