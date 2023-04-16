@@ -19,6 +19,8 @@ mongoose.connect(uri)
 
 // When a request is made, the server will respond with "Hello World"
 
+// console.log(__dirname)
+
 // Middleware
 app
     .use(express.json())
