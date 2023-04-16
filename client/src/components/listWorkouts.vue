@@ -22,6 +22,7 @@
     const props = defineProps<{
         username: string;
         showTrash?: boolean;
+        changeWorkoutsUpdate?: Workout[];
     }>();
 
     const showTrash = ref(false)
@@ -29,16 +30,23 @@
     // console.log(props.workouts)
     // console.log(props.username)
 
+    
+
+    
+
+    const changingWorkouts = ref({} as Workout[]);
+
     // Continuously update the changingWorkouts variable
-    watchEffect(() => {
+    watchEffect(async () => {
         if (props.username == "")
         {
             // Blocks bad request attempt
             return;
         }
-        getUserWorkouts(props.username).then((data) => {
+        await getUserWorkouts(props.username).then((data) => {
             
             changingWorkouts.value = data.data;
+            // console.log(changingWorkouts.value)
             
         });
 
@@ -46,7 +54,17 @@
 
     });
 
-    const changingWorkouts = ref({} as Workout[]);
+    watch(() => props.changeWorkoutsUpdate, (newVal) => {
+        if (newVal != undefined) {
+            changingWorkouts.value = newVal;
+        }
+    });
+
+    
+
+    // console.log(props.changeWorkoutsUpdate)
+
+    
 
     async function asyncRemove(i: number){
         await removeWorkout(i)

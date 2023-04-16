@@ -17,8 +17,9 @@
 
     const clickedAddWorkout = ref(false)
     // Switch the value whenever we either click AddWorkout, or "Close" so that we can open the modal and hide the add-workout button accordingly
-    function addWorkout() {
+    async function addWorkout() {
         clickedAddWorkout.value = !clickedAddWorkout.value;
+        // await getUsername() //Updates the table
     }
     // const workouts = getWorkouts();
     
@@ -59,7 +60,7 @@
                 //     // console.log(item)
                 if (activityArray.username == result)
                 {
-                    console.log(activityArray.username)
+                    // console.log(activityArray.username)
                     streak.value = activityArray.streak;
                     rest.value = activityArray.rest;
                     // console.log(streak.value)
@@ -110,9 +111,9 @@
 
     async function onSubmit() 
     {
-        console.log(form.name)
-        console.log(form.description)
-        console.log(form.intensity)
+        // console.log(form.name)
+        // console.log(form.description)
+        // console.log(form.intensity)
         if(form.name == '' || form.description == '' || form.intensity == '') {
             alert('Please fill out all fields')
             return
@@ -231,7 +232,7 @@
     </div> -->
 
     <!-- <div v-if="showContent"> -->
-    <listWorkouts :username="username" :showTrash="true"></listWorkouts>
+    <listWorkouts :username="username" :showTrash="true" :changeWorkoutsUpdate="changingWorkouts"></listWorkouts>
     <!-- </div> -->
     
     
