@@ -19,6 +19,9 @@
     //     }
     // })
 
+    const changingWorkouts = ref({} as Workout[]);
+    
+
     const props = defineProps<{
         username: string;
         showTrash?: boolean;
@@ -34,7 +37,6 @@
 
     
 
-    const changingWorkouts = ref({} as Workout[]);
 
     // Continuously update the changingWorkouts variable
     watchEffect(async () => {
@@ -46,7 +48,7 @@
         await getUserWorkouts(props.username).then((data) => {
             
             changingWorkouts.value = data.data;
-            // console.log(changingWorkouts.value)
+            console.log(changingWorkouts.value)
             
         });
 
@@ -57,6 +59,7 @@
     watch(() => props.changeWorkoutsUpdate, (newVal) => {
         if (newVal != undefined) {
             changingWorkouts.value = newVal;
+            // console.log(changingWorkouts.value)
         }
     });
 
@@ -93,30 +96,30 @@
 
         return changingWorkouts;
     };
-
-
-
 </script>
 
 <template>
-    <div class="workoutValues" v-for="workout,i in changingWorkouts">
-        <h2>{{ workout.workoutType }}</h2>
-        <br>
-
-        <p>{{ workout.description.replace(/,/g, ', ') }}</p>
-        
-        
-        <div class="intensity">
+    <div class="values">
+        <div class="workoutValues" v-for="workout,i in changingWorkouts">
+            <h2>{{ workout.workoutType }}</h2>
             <br>
-            Intensity: {{ workout.intensity }}
-        </div> 
 
-        <button v-if="showTrash" class="trash-button" @click="asyncRemove(i)" @change="userWorkouts()">
-            <span class="icon">
-                <i class="fas fa-trash"></i>
-            </span>
-        </button>
+            <p>{{ workout.description.replace(/,/g, ', ') }}</p>
+            
+            
+            <div class="intensity">
+                <br>
+                Intensity: {{ workout.intensity }}
+            </div> 
+
+            <button v-if="showTrash" class="trash-button" @click="asyncRemove(i)" @change="userWorkouts()">
+                <span class="icon">
+                    <i class="fas fa-trash"></i>
+                </span>
+            </button>
+        </div>
     </div>
+    
 </template>
 
 <style scoped>
