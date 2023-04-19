@@ -4,6 +4,13 @@ const router = express.Router();
 
 
 router
+    .get("/getWorkoutsTest", (req, res, next) => {
+        model.getWorkoutsTest()
+            .then(list => {
+                const data = { data: list, total: list.length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+    })
     .get("/", (req, res) => {
         const list = model.getWorkouts();
         const data = { data: list, total: list.length, isSuccess: true  }
