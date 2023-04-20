@@ -1,20 +1,51 @@
 const data = require("../data/workouts.json");
+const fs = require("fs");
+const path = require("path");
 let allWorkoutsData = require("../data/allWorkouts.json");
 const friendsActivities = require("../data/friendsActivities.json");
 const { connect, ObjectId } = require('./mongo');
 
-const COLLECTION_NAME = 'workoutsInfo';
+// const COLLECTION_NAME = 'workoutsInfo';
 
-async function collection() {
+async function collection(COLLECTION_NAME) {
     const db = await connect();
+    // console.log(db.collection(COLLECTION_NAME))
     return db.collection(COLLECTION_NAME);
 }
 
+// Read the file
+const allWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/allWorkouts.json"), "utf-8");
+// console.log(allWorkoutsJSON)
+
+// Parse the JSON
+const allWorkoutsDataScraped = JSON.parse(allWorkoutsJSON);
+
+// console.log(allWorkoutsDataScraped)
+
+
+const workouts = [
+    { type: 'running', distance: 5, duration: 30 },
+    { type: 'cycling', distance: 10, duration: 45 },
+    { type: 'swimming', distance: 0.5, duration: 20 }
+];
+  
+async function insertWorkouts() {
+    const col = await collection('allWorkouts');
+    const result = await col.insertMany(allWorkoutsDataScraped);
+    console.log(`${result.insertedCount} documents inserted`);
+}
+
 async function getWorkoutsTest() {
-    const col = await collection();
+    // await insertWorkouts(); // Insert some documents into the collection
+    const col = await collection('allWorkouts');
+    console.log(col);
+    const count = await col.countDocuments();
+    console.log(`Number of documents in collection: ${count}`);
     const items = await col.find().toArray();
     return items;
 }
+  
+  
 
 
 function getWorkouts() {
