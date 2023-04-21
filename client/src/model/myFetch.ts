@@ -1,6 +1,6 @@
 
 const ENV_URL = import.meta.env.VITE_API_URL;
-const API_URL = ENV_URL ? ENV_URL : "http://localhost:3000/api/v1/";
+const API_URL = ENV_URL ? ENV_URL : "/api/v1/";
 // This only works when it's not live, since this isn't the clients url
 // const API_URL = "http://localhost:3000/api/v1/";
 console.log(API_URL)

@@ -20,24 +20,43 @@ const allWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/allWorkout
 // Parse the JSON
 const allWorkoutsDataScraped = JSON.parse(allWorkoutsJSON);
 
-// console.log(allWorkoutsDataScraped)
+const friendsWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/friendsActivities.json"), "utf-8");
+const friendsWorkoutsDataScraped = JSON.parse(friendsWorkoutsJSON);
+
+const workouts = fs.readFileSync(path.join(__dirname, "../data/workouts.json"), "utf-8");
+const workoutsDataScraped = JSON.parse(workouts);
+// console.log(workoutsDataScraped)
 
 
-const workouts = [
-    { type: 'running', distance: 5, duration: 30 },
-    { type: 'cycling', distance: 10, duration: 45 },
-    { type: 'swimming', distance: 0.5, duration: 20 }
-];
+// const workouts = [
+//     { type: 'running', distance: 5, duration: 30 },
+//     { type: 'cycling', distance: 10, duration: 45 },
+//     { type: 'swimming', distance: 0.5, duration: 20 }
+// ];
   
-async function insertWorkouts() {
-    const col = await collection('allWorkouts');
-    const result = await col.insertMany(allWorkoutsDataScraped);
-    console.log(`${result.insertedCount} documents inserted`);
+async function insertWorkouts(colName, dbScraped) {
+    const col = await collection(colName);
+    const result = await col.insertMany(dbScraped);
+    // console.log(`${result.insertedCount} documents inserted`);
+    // for (const workoutType in dbScraped) {
+    //     for (const workout of dbScraped[workoutType]) {
+    //       const result = await col.insertOne(workout);
+    //       console.log(`${result.insertedCount} document inserted`);
+    //     }
+    // }
+    // for (const workoutType in dbScraped) {
+    //     // [workoutType] -> legs, back, or chest
+    //     // dbScraped[workoutType] -> the array of workouts corresponding to workoutType.
+    //     // This is only for the workouts.json file since it's in this format
+    //     const result = await col.insertOne({ [workoutType]: dbScraped[workoutType] });
+    //     console.log(`${result.insertedCount} document inserted`);
+    // }
 }
 
+
 async function getWorkoutsTest() {
-    // await insertWorkouts(); // Insert some documents into the collection
-    const col = await collection('allWorkouts');
+    // await insertWorkouts("workouts", workoutsDataScraped); // Insert some documents into the collection
+    const col = await collection('workouts');
     console.log(col);
     const count = await col.countDocuments();
     console.log(`Number of documents in collection: ${count}`);
@@ -48,7 +67,7 @@ async function getWorkoutsTest() {
   
 
 
-function getWorkouts() {
+function getAll() {
     while(data === undefined) {
         console.log("waiting for data")
     }
@@ -58,7 +77,7 @@ function getWorkouts() {
 
 
 
-function searchWorkouts(term) {
+function search(term) {
     // Wait for data to not be undefined
     // while(data === undefined) {
     //     console.log("waiting for data")
@@ -74,7 +93,7 @@ function searchWorkouts(term) {
     return filteredData;
 }
 
-function getUserWorkouts(user) {
+function getUser(user) {
     // Wait for data to not be undefined
     // while(data === undefined) {
     //     console.log("waiting for data")
@@ -94,7 +113,7 @@ function getUserWorkouts(user) {
 }
 
 
-function editWorkoutById(body) {
+function editById(body) {
     // Wait for data to not be undefined
     while(data === undefined) {
         console.log("waiting for data")
@@ -125,7 +144,7 @@ function editWorkoutById(body) {
 }
 
 
-function addWorkout(body)
+function add(body)
 {
     /*
     let body : Workout = {
@@ -145,7 +164,7 @@ function addWorkout(body)
     return allWorkoutsData
 }
 
-function deleteWorkout(i) 
+function deleteItem(i) 
 {
     while(allWorkoutsData[i] === undefined) {
         console.log("waiting for data")
@@ -195,7 +214,7 @@ function deleteWorkoutFromTable(i)
 }
 
 
-function getWorkoutById(id) {
+function getById(id) {
     // Wait for data to not be undefined
     while(data === undefined) {
         console.log("waiting for data")
@@ -218,7 +237,7 @@ function getWorkoutById(id) {
     return [];
 }
 
-function editWorkout(id, info) {
+function edit(id, info) {
     // Wait for data to not be undefined
     while(data === undefined) {
         console.log("waiting for data")
@@ -300,16 +319,16 @@ function addWorkoutWithId(body) {
 
 
 module.exports = {
-    getWorkouts,
-    searchWorkouts,
-    addWorkout,
-    deleteWorkout,
-    getUserWorkouts,
+    getAll,
+    search,
+    add,
+    deleteItem,
+    getUser,
     getFriendsActivities,
     deleteWorkoutFromTable,
-    getWorkoutById,
-    editWorkout,
+    getById,
+    edit,
     addWorkoutWithId,
-    editWorkoutById,
+    editById,
     getWorkoutsTest
 }
