@@ -339,7 +339,7 @@ async function deleteFromTable(passedId, page=1, pageSize=30)
     return [];
 }
 
-
+// EDIT WORKOUT TODO make this async
 function getById(id) {
     // Wait for data to not be undefined
     while(data === undefined) {

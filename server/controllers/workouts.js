@@ -40,11 +40,18 @@ router
     })
 
     // Make this ASYNC next
-    .get("/removeWorkoutFromTable/:i", (req, res) => {
+    .get("/removeWorkoutFromTable/:i", (req, res, next) => {
         const i = req.params.i;
-        const delItem = model.deleteFromTable(i);
-        const data = { data: delItem, total: delItem.length, isSuccess: true  }
-        res.send(data);
+        // const delItem = model.deleteFromTable(i);
+        // const data = { data: delItem, total: delItem.length, isSuccess: true  }
+        // res.send(data);
+
+        model.deleteFromTable(i, +req.query.page, +req.query.pageSize)
+        .then(list => {
+            // console.log(list)
+            const data = { data: list.items, total: list.length, isSuccess: true };
+            res.send(data)
+        }).catch(next);
     })
 
     .get('/search/:q', (req, res) => {
