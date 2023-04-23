@@ -11,6 +11,14 @@ router
                 res.send(data)
             }).catch(next);
     })
+
+    .get("/fillWorkouts", (req, res, next) => {
+        model.fillWorkouts()
+            .then(list => {
+                const data = { data: list, total: list.length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+    })
     // This gets all workouts on the table with IDs
     .get("/", (req, res, next) => {
         // const list = model.getAll();

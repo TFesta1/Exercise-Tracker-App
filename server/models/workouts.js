@@ -21,16 +21,13 @@ const COL_WORKOUTS = 'workouts';
 
 // Read the file
 const allWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/allWorkouts.json"), "utf-8");
-// console.log(allWorkoutsJSON)
-
-// Parse the JSON
 const allWorkoutsDataScraped = JSON.parse(allWorkoutsJSON);
 
-// const friendsWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/friendsActivities.json"), "utf-8");
-// const friendsWorkoutsDataScraped = JSON.parse(friendsWorkoutsJSON);
+const friendsWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/friendsActivities.json"), "utf-8");
+const friendsWorkoutsDataScraped = JSON.parse(friendsWorkoutsJSON);
 
-// const workouts = fs.readFileSync(path.join(__dirname, "../data/workouts.json"), "utf-8");
-// const workoutsDataScraped = JSON.parse(workouts);
+const workouts = fs.readFileSync(path.join(__dirname, "../data/workouts.json"), "utf-8");
+const workoutsDataScraped = JSON.parse(workouts);
 // console.log(workoutsDataScraped)
 
 
@@ -66,6 +63,39 @@ async function getWorkoutsTest() {
     console.log(col);
     const count = await col.countDocuments();
     console.log(`Number of documents in collection: ${count}`);
+    const items = await col.find().toArray();
+    return items;
+}
+
+async function fillAllWorkouts() {
+    await insertWorkouts(COL_ALLWORKOUTS, allWorkoutsDataScraped); // Insert some documents into the collection
+    const col = await collection(COL_ALLWORKOUTS);
+    const items = await col.find().toArray();
+    return items;
+}
+
+async function fillFriendsActivities() {
+    await insertWorkouts(COL_FRIENDSACTIVITIES, friendsWorkoutsDataScraped); // Insert some documents into the collection
+    const col = await collection(COL_FRIENDSACTIVITIES);
+    const items = await col.find().toArray();
+    return items;
+}
+
+async function fillWorkouts() {
+    // await insertWorkouts(COL_WORKOUTS, workoutsDataScraped); // Insert some documents into the collection
+    // const items = await col.find().toArray();
+    
+    const col = await collection(COL_WORKOUTS);
+    await col.drop() // Empty the collection
+    
+
+    for (const workoutType in workoutsDataScraped) {
+        // [workoutType] -> legs, back, or chest
+        // dbScraped[workoutType] -> the array of workouts corresponding to workoutType.
+        // This is only for the workouts.json file since it's in this format
+        const result = await col.insertOne({ [workoutType]: workoutsDataScraped[workoutType] });
+        console.log(`${result.insertedCount} document inserted`);
+    }
     const items = await col.find().toArray();
     return items;
 }
@@ -196,7 +226,7 @@ function getItems()
 }
 
 
-async function deleteFromTable(i, pages=1, pageSize=30)
+async function deleteFromTable(passedId, page=1, pageSize=30)
 {
     // while(data === undefined) {
     //     console.log("waiting for data")
@@ -226,17 +256,81 @@ async function deleteFromTable(i, pages=1, pageSize=30)
     // toArray() converts to array
     const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
     const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    let foundId = null;
+    let workoutType = null
     for(const item in items)
     {
-        console.log(item)
+        if (foundId != null)
+        {
+            break;
+        }
+        const itemsList = items[item]
+        // console.log(itemsList['legs'])
+        for(const i in itemsList['legs'])
+        {
+            const foundItem = itemsList['legs'][i]
+            if(foundItem.id == passedId)
+            {
+                console.log(foundItem)
+                // c(foundItem)
+                foundId = foundItem.id
+                workoutType = 'legs'
+                break;
+            }
+            // return foundItem
+        }
+
+        for(const i in itemsList['back'])
+        {
+            const foundItem = itemsList['back'][i]
+            if(foundItem.id == passedId)
+            {
+                console.log(foundItem)
+                foundId = foundItem.id
+                workoutType = 'back'
+                break;
+            }
+            // return foundItem             
+        }
+
+        for(const i in itemsList['chest'])
+        {
+            const foundItem = itemsList['chest'][i]
+            if(foundItem.id == passedId)
+            {
+                console.log(foundItem)
+                foundId = foundItem.id
+                workoutType = 'chest'
+                break;
+            }
+            // return foundItem
+        }
+        // for(const i in itemsList)
+        // {
+            // console.log(itemsList[i][0])
+            // if(itemsList[i].id == i)
+            // {
+            //     col.deleteOne(itemsList[i])
+            // }
+        // }
         // if(item.id == i)
         // {
         //     col.deleteOne(item)
         // }
     }
 
+    if(foundId != null && workoutType != null)
+    {
+        console.log(`Deleted workout with id ${foundId} from ${workoutType}`);
+        await col.updateMany({}, { $pull: { [workoutType]: { id: foundId } } }); //goes through all of the documents to find an id
+    }
+    else
+    {
+        console.log(`Could not find workout with id ${passedId}`);
+    }
+
     // const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
-    return { items, total };
+    return [];
 
 
 
@@ -362,5 +456,8 @@ module.exports = {
     edit,
     addWithId,
     editById,
-    getWorkoutsTest
+    getWorkoutsTest,
+    fillAllWorkouts,
+    fillFriendsActivities,
+    fillWorkouts
 }

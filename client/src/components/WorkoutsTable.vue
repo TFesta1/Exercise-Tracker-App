@@ -33,7 +33,7 @@
     {
         getAllWorkouts().then((data) => {
             const workoutsConst : KindsOfWorkoutsMongo = data.data;
-            console.log(workoutsConst)
+            // console.log(workoutsConst)
             legs.value = workoutsConst[0].legs
             back.value = workoutsConst[1].back
             chest.value = workoutsConst[2].chest
@@ -62,6 +62,13 @@
         callGetWorkouts();
     });
     // Chest, Squat, Deadlift
+    // const button = document.querySelector('.trash-button');
+    // button?.addEventListener('click', () => {
+    //     // Simulate a second click after 500ms
+    //     setTimeout(() => {
+    //         button.dispatchEvent(new MouseEvent('click'));
+    //     }, 500);
+    // });
 </script>
 
 <template>

@@ -6,6 +6,12 @@ GET http://localhost:3000/api/v1/workouts
 
 GET http://localhost:3000/api/v1/workouts/getWorkoutsTest
 
+###
+
+GET http://localhost:3000/api/v1/workouts/fillWorkouts
+
+###
+
 
 ###
 GET http://localhost:3000/api/v1/workouts/search/legs
