@@ -11,13 +11,18 @@ router
                 res.send(data)
             }).catch(next);
     })
-    .get("/", (req, res) => {
-        const list = model.getAll();
-        const data = { data: list, total: list.length, isSuccess: true  }
-        res.send(data);
-        // res.send(list);
+    // This gets all workouts on the table with IDs
+    .get("/", (req, res, next) => {
+        // const list = model.getAll();
+        // const data = { data: list, total: list.length, isSuccess: true  }
+        // res.send(data);
+        model.getAll(+req.query.page, +req.query.pageSize)
+            .then(list => {
+                // console.log(list)
+                const data = { data: list.items, total: list.length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
     })
-
     .get('/getUserWorkouts/:user', (req, res) => {
         const user = req.params.user;
         // console.log("hi")
@@ -26,6 +31,7 @@ router
         res.send(data);
     })
 
+    // Make this ASYNC next
     .get("/removeWorkoutFromTable/:i", (req, res) => {
         const i = req.params.i;
         const delItem = model.deleteFromTable(i);
