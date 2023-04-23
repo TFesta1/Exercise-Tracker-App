@@ -154,33 +154,97 @@ function getUser(user) {
 }
 
 
-function editById(body) {
+async function editById(body, page=1, pageSize=30) {
+    // return []
     // Wait for data to not be undefined
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
+    // while(data === undefined) {
+    //     console.log("waiting for data")
+    // }
 
-    console.log(body)
+    // console.log(body)
 
-    for (const workout in data) {
-        const subList = data[workout];
-        // console.log(subList);
-        for (const exercise in subList) {
-            const subExercise = subList[exercise];
-            if (subExercise.id == body.id) {
-                console.log(subExercise)
-                // This actually still deletes the workout in the data list because it is a reference
-                subList[exercise] = body;
-                return subExercise;
-            }
+    // for (const workout in data) {
+    //     const subList = data[workout];
+    //     // console.log(subList);
+    //     for (const exercise in subList) {
+    //         const subExercise = subList[exercise];
+    //         if (subExercise.id == body.id) {
+    //             console.log(subExercise)
+    //             // This actually still deletes the workout in the data list because it is a reference
+    //             subList[exercise] = body;
+    //             return subExercise;
+    //         }
 
-            // console.log(subExercise)
+    //         // console.log(subExercise)
+    //     }
+    //     // console.log(workout)
+    // }
+    const col = await collection(COL_WORKOUTS);
+    // find() points to all documents
+    // skip() skips the first (page-1) * pageSize documents
+    // limit() limits the number of documents to pageSize
+    // toArray() converts to array
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    let foundId = null;
+    let workoutType = null
+    let foundItem = null
+    for(const item in items)
+    {
+        if (foundId != null)
+        {
+            break;
         }
-        // console.log(workout)
+        const itemsList = items[item]
+        for(const i in itemsList['legs'])
+        {
+            foundItem = itemsList['legs'][i]
+            if(foundItem.id == body.id)
+            {
+                foundId = body.id
+                workoutType = 'legs'
+                break
+            }
+        }
+
+        for(const i in itemsList['back'])
+        {
+            foundItem = itemsList['back'][i]
+            if(foundItem.id == body.id)
+            {
+                foundId = body.id
+                workoutType = 'back'
+                break
+            }
+        }
+
+        for(const i in itemsList['chest'])
+        {
+            foundItem = itemsList['chest'][i]
+            if(foundItem.id == body.id)
+            {
+                foundId = body.id
+                workoutType = 'chest'
+                break
+            }
+        }
     }
-    // const deletedWorkout = allWorkoutsData[i];
-    // allWorkoutsData.splice(i, 1);
-    // return deletedWorkout;
+
+    if(foundId != null && workoutType != null)
+    {
+        console.log(`Updating workout FROM`);
+        console.log(foundItem)
+        console.log(`TO`);
+        console.log(body)
+        // set is for updating a field
+        await col.updateMany({ [`${workoutType}.id`]: foundId }, { $set: { [`${workoutType}.$.description`]: body.description, [`${workoutType}.$.intensity`]: body.intensity } });
+        return body;
+    }
+    else
+    {
+        console.log(`Could not find workout with id to save changes ${passedId}`);
+    }
+    
     return [];
 }
 
@@ -322,6 +386,7 @@ async function deleteFromTable(passedId, page=1, pageSize=30)
     if(foundId != null && workoutType != null)
     {
         console.log(`Deleted workout with id ${foundId} from ${workoutType}`);
+        // pull is specifically for deleting
         await col.updateMany({}, { $pull: { [workoutType]: { id: foundId } } }); //goes through all of the documents to find an id
     }
     else
@@ -331,34 +396,52 @@ async function deleteFromTable(passedId, page=1, pageSize=30)
 
     // const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
     return [];
-
-
-
-
-    
-    return [];
 }
 
 // EDIT WORKOUT TODO make this async
-function getById(id) {
-    // Wait for data to not be undefined
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
-
-    for (const workout in data) {
-        const subList = data[workout];
-        // console.log(subList);
-        for (const exercise in subList) {
-            const subExercise = subList[exercise];
-            if (subExercise.id == id) {
-                console.log(subExercise)
-                return subExercise;
-            }
-
-            // console.log(subExercise)
+async function getById(passedId, page=1, pageSize=30) {
+    const col = await collection(COL_WORKOUTS);
+    // find() points to all documents
+    // skip() skips the first (page-1) * pageSize documents
+    // limit() limits the number of documents to pageSize
+    // toArray() converts to array
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    let foundId = null;
+    let workoutType = null
+    for(const item in items)
+    {
+        if (foundId != null)
+        {
+            break;
         }
-        // console.log(workout)
+        const itemsList = items[item]
+        for(const i in itemsList['legs'])
+        {
+            const foundItem = itemsList['legs'][i]
+            if(foundItem.id == passedId)
+            {
+                return foundItem
+            }
+        }
+
+        for(const i in itemsList['back'])
+        {
+            const foundItem = itemsList['back'][i]
+            if(foundItem.id == passedId)
+            {
+                return foundItem
+            }
+        }
+
+        for(const i in itemsList['chest'])
+        {
+            const foundItem = itemsList['chest'][i]
+            if(foundItem.id == passedId)
+            {
+                return foundItem
+            }
+        }
     }
     return [];
 }

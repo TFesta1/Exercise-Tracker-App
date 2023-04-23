@@ -39,14 +39,13 @@ router
         res.send(data);
     })
 
-    // Make this ASYNC next
     .get("/removeWorkoutFromTable/:i", (req, res, next) => {
-        const i = req.params.i;
+        const id = req.params.i;
         // const delItem = model.deleteFromTable(i);
         // const data = { data: delItem, total: delItem.length, isSuccess: true  }
         // res.send(data);
 
-        model.deleteFromTable(i, +req.query.page, +req.query.pageSize)
+        model.deleteFromTable(id, +req.query.page, +req.query.pageSize)
         .then(list => {
             // console.log(list)
             const data = { data: list.items, total: list.length, isSuccess: true };
@@ -68,11 +67,13 @@ router
         res.send(data);
     })
 
-    .get("/getWorkoutById/:id", (req, res) => {
+    .get("/getWorkoutById/:id", (req, res, next) => {
         const id = req.params.id;
-        const list = model.getById(id);
-        const data = { data: list, total: list.length, isSuccess: true  }
-        res.send(data);
+        model.getById(id, +req.query.page, +req.query.pageSize)
+            .then(list => {
+                const data = { data: list, total: Object.keys(list).length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
     })
 
     .post('/addWorkout', (req, res) => {
@@ -86,12 +87,19 @@ router
         res.send(data);
     })
 
-    .post("/editWorkoutById", (req, res) => {
-        const info = req.body;
+    // MAKE THIS ASYNC NEXT, this is when you hit "Save Changes" to edit a workout
+    .post("/editWorkoutById", (req, res, next) => {
+        const body = req.body;
         // console.log(info)
-        const dataAdded = model.editById(info);
-        const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
-        res.send(data);
+        // const dataAdded = model.editById(body);
+        // const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
+        // res.send(data);
+
+        model.editById(body, +req.query.page, +req.query.pageSize)
+            .then(list => {
+                const data = { data: list, total: Object.keys(list).length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
     })
 
     .post("/addWorkoutWithId", (req, res) => {

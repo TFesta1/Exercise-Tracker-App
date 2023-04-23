@@ -26,7 +26,7 @@
         console.log(props.id)
 
         getWorkoutById(props.id).then((data) => {
-            // console.log(data.data)
+            console.log(data)
             // workouts.value = data.data;
             // console.log(workouts.value)
             // description.value = data.data.description
