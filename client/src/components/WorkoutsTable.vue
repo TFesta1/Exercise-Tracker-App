@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { ref, inject, onMounted} from 'vue'
     import type UserStore from '@/stores/user';
-    import { getAllWorkouts, removeWorkoutFromTable, addWorkoutToWorkouts, type KindsOfWorkouts } from '@/model/workouts';
+    import { getAllWorkouts, removeWorkoutFromTable, addWorkoutToWorkouts, type KindsOfWorkoutsMongo } from '@/model/workouts';
 
     const username = ref("")
     const userStore = inject('userStore') as typeof UserStore;
@@ -11,12 +11,13 @@
         const result = await userStore.getUserName();
         username.value = result
         
-        console.log(username.value)
+        // console.log(username.value)
         if (username.value == "admin") {
             isAdmin.value = true
+            // console.log(`Admin ${username.value} | admin  --> admin`)
         }
         else {
-            console.log(`NOT Admin ${username.value} | admin  --> NOT admin`)
+            // console.log(`NOT Admin ${username.value} | admin  --> NOT admin`)
         }
     }
     logUserName();
@@ -31,11 +32,15 @@
     async function callGetWorkouts()
     {
         getAllWorkouts().then((data) => {
-            const workoutsConst : KindsOfWorkouts = data.data;
-            legs.value = workoutsConst.legs
-            chest.value = workoutsConst.chest
-            back.value = workoutsConst.back
-        });
+            const workoutsConst : KindsOfWorkoutsMongo = data.data;
+            console.log(workoutsConst)
+            legs.value = workoutsConst[0].legs
+            back.value = workoutsConst[1].back
+            chest.value = workoutsConst[2].chest
+        }).catch((err) => {
+            console.log(err)
+        })
+
         
     }
 

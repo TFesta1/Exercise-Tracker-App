@@ -13,6 +13,12 @@ async function collection(COLLECTION_NAME) {
     return db.collection(COLLECTION_NAME);
 }
 
+// Our collection for DB names
+const COL_ALLWORKOUTS = 'allWorkouts';
+const COL_FRIENDSACTIVITIES = 'friendsActivities';
+const COL_WORKOUTS = 'workouts';
+
+
 // Read the file
 const allWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/allWorkouts.json"), "utf-8");
 // console.log(allWorkoutsJSON)
@@ -67,11 +73,16 @@ async function getWorkoutsTest() {
   
 
 
-function getAll() {
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
-    return data;
+async function getAll(page=1, pageSize=30) {
+    // console.log("in getTableById function in workouts.js in the model in server")
+    const col = await collection(COL_WORKOUTS);
+    // find() points to all documents
+    // skip() skips the first (page-1) * pageSize documents
+    // limit() limits the number of documents to pageSize
+    // toArray() converts to array
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    return { items, total };
 }
 
 
@@ -185,31 +196,52 @@ function getItems()
 }
 
 
-function deleteFromTable(i)
+async function deleteFromTable(i, pages=1, pageSize=30)
 {
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
-    for (const workout in data) {
-        const subList = data[workout];
-        // console.log(subList);
-        for (const exercise in subList) {
-            const subExercise = subList[exercise];
-            if (subExercise.id == i) {
-                console.log(subExercise)
-                deletedWorkout = subExercise;
-                // This actually still deletes the workout in the data list because it is a reference
-                subList.splice(exercise, 1);
-                return subExercise;
-            }
+    // while(data === undefined) {
+    //     console.log("waiting for data")
+    // }
+    // for (const workout in data) {
+    //     const subList = data[workout];
+    //     // console.log(subList);
+    //     for (const exercise in subList) {
+    //         const subExercise = subList[exercise];
+    //         if (subExercise.id == i) {
+    //             console.log(subExercise)
+    //             deletedWorkout = subExercise;
+    //             // This actually still deletes the workout in the data list because it is a reference
+    //             subList.splice(exercise, 1);
+    //             return subExercise;
+    //         }
 
-            // console.log(subExercise)
-        }
-        // console.log(workout)
+    //         // console.log(subExercise)
+    //     }
+    //     // console.log(workout)
+    // }
+
+    const col = await collection(COL_WORKOUTS);
+    // find() points to all documents
+    // skip() skips the first (page-1) * pageSize documents
+    // limit() limits the number of documents to pageSize
+    // toArray() converts to array
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    for(const item in items)
+    {
+        console.log(item)
+        // if(item.id == i)
+        // {
+        //     col.deleteOne(item)
+        // }
     }
-    // const deletedWorkout = allWorkoutsData[i];
-    // allWorkoutsData.splice(i, 1);
-    // return deletedWorkout;
+
+    // const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    return { items, total };
+
+
+
+
+    
     return [];
 }
 

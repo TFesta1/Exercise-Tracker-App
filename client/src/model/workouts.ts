@@ -16,6 +16,21 @@ export interface KindsOfWorkouts {
     chest: string;
 }
 
+export interface KindsOfWorkoutsMongo {
+    [key: string]: {
+        legs: {
+            // This is just a raw array of workouts
+        }[];
+        back: {
+    
+        }[];
+        chest: {
+            
+        }[];
+    };
+}
+
+
 
 export interface EditWorkout {
     description: string;
@@ -31,8 +46,9 @@ export interface WorkoutWithId {
 
 
 
-export function getAllWorkouts() : Promise<DataEnvelope<KindsOfWorkouts>>{
+export function getAllWorkouts() : Promise<DataEnvelope<KindsOfWorkoutsMongo>>{
     // return allWorkouts;
+    console.log("getting all workouts")
     return api('workouts')
 }
 
