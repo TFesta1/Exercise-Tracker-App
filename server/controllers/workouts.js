@@ -28,7 +28,7 @@ router
 
     .get("/removeWorkoutFromTable/:i", (req, res) => {
         const i = req.params.i;
-        const delItem = model.deleteWorkoutFromTable(i);
+        const delItem = model.deleteFromTable(i);
         const data = { data: delItem, total: delItem.length, isSuccess: true  }
         res.send(data);
     })
@@ -40,9 +40,9 @@ router
         const data = { data: list, total: list.length, isSuccess: true  }
         res.send(data);
     })
-
+    // This gets friends activities
     .get("/getFriendsActivities", (req, res) => {
-        const list = model.getFriendsActivities();
+        const list = model.getItems();
         const data = { data: list, total: list.length, isSuccess: true  }
         res.send(data);
     })
@@ -76,7 +76,7 @@ router
     .post("/addWorkoutWithId", (req, res) => {
         const info = req.body;
         console.log(info)
-        const dataAdded = model.addWorkoutWithId(info);
+        const dataAdded = model.addWithId(info);
         const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
         res.send(data);
     })
@@ -107,31 +107,6 @@ router
     })
 
 
-//     // List specifics to general
-//     .get("/search/:q", (req, res) => {
-//         const term = req.params.q;
-//         const list = model.searchProducts(term);
-//         res.send(list);
-//     })
-
-//     .get("/:id", (req, res) => { 
-//         const id = +req.params.id; //+ converts to number, - flips sign
-//         const product = model.getProductById(id);
-//         res.send(product);
-//     })
-    
-//     .post("/", (req, res) => { 
-//         const product = req.body;
-
-//         console.log({product})
-//         console.log(req.query)
-//         console.log(req.params)
-//         console.log(req.headers)
-
-
-//         model.addProduct(product);
-//         res.send(product);
-//     })
 //     .patch("/:id", (req, res) => { 
 //         const product = req.body;
 //         model.updateProduct(product);

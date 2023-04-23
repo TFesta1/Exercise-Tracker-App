@@ -59,6 +59,8 @@
 }
 
 .workouts {
+    width: 1000px !important;
+    margin-left: 150px !important;
   /* margin-top: 100px !important; adjust the margin to the desired value */
 }
 

@@ -12,7 +12,54 @@
         "workoutType": "Back",
         "description": "Pull Ups 2x4, Lat Pull Downs 2x6, Seated Rows 2x10, Deadlifts 2x10, Bent Over Rows 3x5, Shrugs 2x2, Hyperextensions 3x3, Reverse Flys 4x4, Cable Rows 2x6, Face Pulls 4x6",
         "intensity": "Normal"
+    },
+    {
+        "username": "admin",
+        "workoutType": "Chest",
+        "description": "Bench Press 2x4",
+        "intensity": "Easy"
+
+    },
+
+    {
+        "username": "admin",
+        "workoutType": "Back",
+        "description": "Seated Rows 2x10",
+        "intensity": "Normal"
+    },
+
+    {
+        "username": "admin",
+        "workoutType": "Legs",
+        "description": "Squats 4x6",
+        "intensity": "Normal"
+    },
+
+    {
+        "username": "humza",
+        "workoutType": "Legs",
+        "description": "Leg curls 3x10",
+        "intensity": "Normal"
+    },
+
+    {
+        "username": "humza",
+        "workoutType": "Chest",
+        "description": "Dips 3x10",
+        "intensity": "Hard"
+    },
+    {
+        "username": "plotkin",
+        "workoutType": "Chest",
+        "description": "Dips 3x10",
+        "intensity": "Hard"
     }
+
+
+
+
+
+    
 
    
 ]

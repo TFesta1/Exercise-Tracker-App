@@ -20,11 +20,11 @@ const allWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/allWorkout
 // Parse the JSON
 const allWorkoutsDataScraped = JSON.parse(allWorkoutsJSON);
 
-const friendsWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/friendsActivities.json"), "utf-8");
-const friendsWorkoutsDataScraped = JSON.parse(friendsWorkoutsJSON);
+// const friendsWorkoutsJSON = fs.readFileSync(path.join(__dirname, "../data/friendsActivities.json"), "utf-8");
+// const friendsWorkoutsDataScraped = JSON.parse(friendsWorkoutsJSON);
 
-const workouts = fs.readFileSync(path.join(__dirname, "../data/workouts.json"), "utf-8");
-const workoutsDataScraped = JSON.parse(workouts);
+// const workouts = fs.readFileSync(path.join(__dirname, "../data/workouts.json"), "utf-8");
+// const workoutsDataScraped = JSON.parse(workouts);
 // console.log(workoutsDataScraped)
 
 
@@ -55,8 +55,8 @@ async function insertWorkouts(colName, dbScraped) {
 
 
 async function getWorkoutsTest() {
-    // await insertWorkouts("workouts", workoutsDataScraped); // Insert some documents into the collection
-    const col = await collection('workouts');
+    // await insertWorkouts("allWorkouts", allWorkoutsDataScraped); // Insert some documents into the collection
+    const col = await collection('allWorkouts');
     console.log(col);
     const count = await col.countDocuments();
     console.log(`Number of documents in collection: ${count}`);
@@ -174,7 +174,7 @@ function deleteItem(i)
     return deletedWorkout;
 }
 
-function getFriendsActivities()
+function getItems()
 {
     // while(data === undefined) {
     //     console.log("waiting for data")
@@ -185,7 +185,7 @@ function getFriendsActivities()
 }
 
 
-function deleteWorkoutFromTable(i)
+function deleteFromTable(i)
 {
     while(data === undefined) {
         console.log("waiting for data")
@@ -267,7 +267,7 @@ function edit(id, info) {
 
 }
 
-function addWorkoutWithId(body) {
+function addWithId(body) {
 
     /*
     body = {
@@ -324,11 +324,11 @@ module.exports = {
     add,
     deleteItem,
     getUser,
-    getFriendsActivities,
-    deleteWorkoutFromTable,
+    getItems,
+    deleteFromTable,
     getById,
     edit,
-    addWorkoutWithId,
+    addWithId,
     editById,
     getWorkoutsTest
 }
