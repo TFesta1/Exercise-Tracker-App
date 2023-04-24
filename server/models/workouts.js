@@ -68,9 +68,11 @@ async function getWorkoutsTest() {
 }
 
 async function fillAllWorkouts() {
-    await insertWorkouts(COL_ALLWORKOUTS, allWorkoutsDataScraped); // Insert some documents into the collection
     const col = await collection(COL_ALLWORKOUTS);
+    // await col.drop() // Empty the collection
+    await insertWorkouts(COL_ALLWORKOUTS, allWorkoutsDataScraped); // Insert some documents into the collection
     const items = await col.find().toArray();
+    console.log(allWorkoutsDataScraped)
     return items;
 }
 
@@ -134,15 +136,25 @@ function search(term) {
     return filteredData;
 }
 
-function getUser(user) {
-    // Wait for data to not be undefined
-    // while(data === undefined) {
-    //     console.log("waiting for data")
-    // }
-    // throw new Error('Something went wrong');
-
+async function getUser(user, page=1, pageSize=30) {
+    const col = await collection(COL_ALLWORKOUTS);
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
     let filteredData = [];
 
+    for(const item in items)
+    {
+        const foundUsername = items[item].username;
+        if(foundUsername == user)
+        {
+            filteredData.push(items[item]);
+        }
+    }
+    // This works
+    return { items: filteredData, total };
+
+
+    // This works for synchronous code, not from mongodb
     for (const data in allWorkoutsData) {
         if(allWorkoutsData[data].username == user)
         {
@@ -269,11 +281,27 @@ function add(body)
     return allWorkoutsData
 }
 
-function deleteItem(i) 
+async function deleteItem(i, page=1, pageSize=30) 
 {
-    while(allWorkoutsData[i] === undefined) {
-        console.log("waiting for data")
+    const col = await collection(COL_ALLWORKOUTS);
+    // find() points to all documents
+    // skip() skips the first (page-1) * pageSize documents
+    // limit() limits the number of documents to pageSize
+    // toArray() converts to array
+    const items = await col.find().toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    const filter = {}; // Empty filter to get all documents in the collection
+    const options = { skip: i, limit: 1 }; // Skip the first i documents and limit to 1 result
+    const workoutToDelete = await col.findOne(filter, options);
+
+    if (workoutToDelete) {
+        await col.deleteOne({ _id: workoutToDelete._id });
+        console.log(workoutToDelete)
+        return workoutToDelete;
     }
+    return {};
+
+
     const deletedWorkout = allWorkoutsData[i];
     allWorkoutsData.splice(i, 1);
     return deletedWorkout;
@@ -398,7 +426,6 @@ async function deleteFromTable(passedId, page=1, pageSize=30)
     return [];
 }
 
-// EDIT WORKOUT TODO make this async
 async function getById(passedId, page=1, pageSize=30) {
     const col = await collection(COL_WORKOUTS);
     // find() points to all documents
@@ -476,7 +503,8 @@ function edit(id, info) {
 
 }
 
-function addWithId(body) {
+// MAKE ASYNC --> This is the function that when you hit the plus button on the workout, it adds to workouts list
+async function addWithId(body, page=1, pageSize=30) {
 
     /*
     body = {
@@ -486,30 +514,87 @@ function addWithId(body) {
     }
     */
 
-    // Wait for data to not be undefined
-    while(data === undefined) {
-        console.log("waiting for data")
-    }
-
     let username = body.username;
     let workoutTitle = body.workoutTitle;
     let description = ""
     let intensity = ""
+    const passedID = body.id
 
-    for (const workout in data) {
-        const subList = data[workout];
-        // console.log(subList);
-        for (const exercise in subList) {
-            const subExercise = subList[exercise];
-            if (subExercise.id == body.id) {
-                console.log(subExercise)
-                description = subExercise.description;
-                intensity = subExercise.intensity;
-            }
+    // for (const workout in data) {
+    //     const subList = data[workout];
+    //     // console.log(subList);
+    //     for (const exercise in subList) {
+    //         const subExercise = subList[exercise];
+    //         if (subExercise.id == body.id) {
+    //             console.log(subExercise)
+    //             description = subExercise.description;
+    //             intensity = subExercise.intensity;
+    //         }
 
-            // console.log(subExercise)
+    //     }
+    // }
+
+
+    
+    // allWorkoutsData = allWorkoutsData.concat(workout)
+    // return allWorkoutsData
+
+
+
+    const col = await collection(COL_WORKOUTS);
+    // find() points to all documents
+    // skip() skips the first (page-1) * pageSize documents
+    // limit() limits the number of documents to pageSize
+    // toArray() converts to array
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    let foundId = null;
+    let workoutType = null
+    for(const item in items)
+    {
+        if (foundId != null)
+        {
+            break;
         }
-        // console.log(workout)
+        const itemsList = items[item]
+        for(const i in itemsList['legs'])
+        {
+            const foundItem = itemsList['legs'][i]
+            if(foundItem.id == passedID)
+            {
+                description = foundItem.description;
+                intensity = foundItem.intensity;
+                break
+            }
+        }
+
+        for(const i in itemsList['back'])
+        {
+            const foundItem = itemsList['back'][i]
+            if(foundItem.id == passedID)
+            {
+                description = foundItem.description;
+                intensity = foundItem.intensity;
+                break
+            }
+        }
+
+        for(const i in itemsList['chest'])
+        {
+            const foundItem = itemsList['chest'][i]
+            if(foundItem.id == passedID)
+            {
+                description = foundItem.description;
+                intensity = foundItem.intensity;
+                break
+            }
+        }
+    }
+
+    if(description == "" || intensity == "")
+    {
+        console.log("Could not find description or intensity")
+        return;
     }
 
     let workout = {
@@ -518,10 +603,30 @@ function addWithId(body) {
         description: description,
         intensity: intensity,
     }
-    
-    allWorkoutsData = allWorkoutsData.concat(workout)
-    return allWorkoutsData
 
+    /*
+    [
+        {
+            "username": "humza",
+            "workoutType": "Chest",
+            "description": "Dips 3x10",
+            "intensity": "Hard"
+        },
+        {
+            "username": "plotkin",
+            "workoutType": "Chest",
+            "description": "Dips 3x10",
+            "intensity": "Hard"
+        }
+    ]
+    */
+    const colOurWorkouts = await collection(COL_ALLWORKOUTS);
+    // Add the workout to the database
+    colOurWorkouts.insertOne(workout); // This is the one that adds to the database
+
+    // REMOVE LATER
+    allWorkoutsData = allWorkoutsData.concat(workout) //Remove this when you get the workouts from the actual DB
+    return allWorkoutsData
 }
 
 

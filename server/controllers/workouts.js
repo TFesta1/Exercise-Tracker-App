@@ -19,6 +19,14 @@ router
                 res.send(data)
             }).catch(next);
     })
+
+    .get("/fillAllWorkouts", (req, res, next) => {
+        model.fillAllWorkouts()
+            .then(list => {
+                const data = { data: list, total: list.length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+    })
     // This gets all workouts on the table with IDs
     .get("/", (req, res, next) => {
         // const list = model.getAll();
@@ -31,12 +39,21 @@ router
                 res.send(data)
             }).catch(next);
     })
-    .get('/getUserWorkouts/:user', (req, res) => {
+
+    // On frontpage lists workouts
+    .get('/getUserWorkouts/:user', (req, res, next) => {
         const user = req.params.user;
         // console.log("hi")
-        const list = model.getUser(user);
-        const data = { data: list, total: list.length, isSuccess: true  }
-        res.send(data);
+        // const list = model.getUser(user);
+        // const data = { data: list, total: list.length, isSuccess: true  }
+        // res.send(data);
+
+        model.getUser(user, +req.query.page, +req.query.pageSize)
+        .then(list => {
+            // console.log(list)
+            const data = { data: list.items, total: list.length, isSuccess: true };
+            res.send(data)
+        }).catch(next);
     })
 
     .get("/removeWorkoutFromTable/:i", (req, res, next) => {
@@ -87,7 +104,6 @@ router
         res.send(data);
     })
 
-    // MAKE THIS ASYNC NEXT, this is when you hit "Save Changes" to edit a workout
     .post("/editWorkoutById", (req, res, next) => {
         const body = req.body;
         // console.log(info)
@@ -102,12 +118,19 @@ router
             }).catch(next);
     })
 
-    .post("/addWorkoutWithId", (req, res) => {
-        const info = req.body;
-        console.log(info)
-        const dataAdded = model.addWithId(info);
-        const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
-        res.send(data);
+    // When we click the plus button on the table, it adds to workouts
+    .post("/addWorkoutWithId", (req, res, next) => {
+        const body = req.body;
+        // console.log(info)
+        // const dataAdded = model.addWithId(info);
+        // const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
+        // res.send(data);
+
+        model.addWithId(body, +req.query.page, +req.query.pageSize)
+            .then(list => {
+                const data = { data: list, total: Object.keys(list).length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
     })
 
 
@@ -127,11 +150,19 @@ router
     //     res.send(data);
     // })
 
-    .get('/removeWorkout/:i', (req, res) => {
+    // On frontpage, this is the trash button to delete a workout. MAKE ASYNC
+    .get('/removeWorkout/:i', (req, res, next) => {
         const i = req.params.i;
-        const delItem = model.deleteItem(i);
-        const data = { data: delItem, total: delItem.length, isSuccess: true  }
-        res.send(data);
+        // const delItem = model.deleteItem(i);
+        // const data = { data: delItem, total: delItem.length, isSuccess: true  }
+        // res.send(data);
+
+        model.deleteItem(i, +req.query.page, +req.query.pageSize)
+            .then(list => {
+                const data = { data: list, total: Object.keys(list).length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+        
         
     })
 
