@@ -1,4 +1,5 @@
 //const data = require('../data/products.json');
+const jwt = require('jsonwebtoken');
 const { connect, ObjectId } = require('./mongo');
 
 const COLLECTION_NAME = 'users';
@@ -86,6 +87,55 @@ async function seed() {
     return result.insertedCount;
 }
 
+async function login(email, password) {
+    const col = await collection();
+    const user = await col.findOne({ email });
+    if (!user) {
+        throw new Error('User not found');
+    }
+    if (user.password !== password) {
+        throw new Error('Invalid password');
+    }
+
+    const cleanUser = { ...user, password: undefined };
+    const token = await generateTokenAsync(cleanUser, process.env.JWT_SECRET, '1d');
+
+    return { user: cleanUser, token };
+}
+
+async function oAuthLogin(provider, accessToken) {
+    // validate the access token
+    // if valid, return the user
+    // if not, create a new user
+    // return the user
+}
+
+function generateTokenAsync(user, secret, expiresIn) {
+    return new Promise( (resolve, reject) => {
+        jwt.sign(user, secret, { expiresIn }, (err, token) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(token);
+            }
+        });
+    });
+}
+
+function verifyTokenAsync(token, secret) {
+    return new Promise( (resolve, reject) => {
+        jwt.verify(token, secret, (err, user) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(user);
+            }
+        });
+    });
+}
+
+
+
 module.exports = {
     getAll,
     getById,
@@ -94,4 +144,8 @@ module.exports = {
     deleteItem,
     search,
     seed,
+    login,
+    oAuthLogin,
+    generateTokenAsync,
+    verifyTokenAsync,
 };
