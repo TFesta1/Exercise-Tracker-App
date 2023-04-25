@@ -3,6 +3,7 @@ const hostname = '127.0.0.1';
 // const port = process.env.PORT || 3000 ; //80 for unsecure HTTP traffic, 443 for secure HTTPS traffic
 const port = process.env.PORT || 3000;
 const express = require('express')
+const users = require('./controllers/users')
 const app = express()
 const workouts = require('./controllers/workouts')
 const path = require('path');
@@ -36,6 +37,7 @@ app
         res.send('Hello World! From Express')
     })
     .use('/api/v1/workouts', workouts)
+    .use('/api/v1/users', users)
 
 
 

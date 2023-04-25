@@ -74,3 +74,9 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/v1/workouts/getFriendsActivities
+
+###
+POST http://localhost:3070/api/v1/users/seed
+
+###
+GET http://localhost:3070/api/v1/users
