@@ -14,7 +14,9 @@
     const activities = ref({} as Activity[]);
     getActivities().then((data) => {
         activities.value = data.data;
+
     });
+    
 
     onMounted(async () => {
         logUserName();

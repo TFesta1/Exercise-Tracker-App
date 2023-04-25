@@ -78,10 +78,15 @@ export function addToWorkout(workout: Workout){
     return api('workouts/addWorkout', workout)
 }
 
-export function removeWorkout(index: number) : Promise<DataListEnvelope<Workout[]>>{
+export function removeWorkout(user: string, desc: string, intensity: string) : Promise<DataListEnvelope<Workout[]>>{
     // workouts.value.splice(index, 1);
-    console.log("removed workout " + index)
-    return api('workouts/removeWorkout/' + index)
+    console.log("removing workout " + user + " " + desc + " " + intensity)
+    const composeParameter = {
+        username: user,
+        description: desc,
+        intensity: intensity
+    }
+    return api('workouts/removeWorkout', composeParameter)
     // console.log("Workout removed " + workouts.value )
 }
 

@@ -120,21 +120,21 @@ async function getAll(page=1, pageSize=30) {
 
 
 
-function search(term) {
-    // Wait for data to not be undefined
-    // while(data === undefined) {
-    //     console.log("waiting for data")
-    // }
+// function search(term) {
+//     // Wait for data to not be undefined
+//     // while(data === undefined) {
+//     //     console.log("waiting for data")
+//     // }
 
-    const filteredData = {};
-    for (const muscle in data) {
-        if (muscle == term) {
-            filteredData[muscle] = data[muscle];
-        }
-        // filteredData[muscle] = data[muscle].filter((exercise) => exercise.sets > 3);
-    }
-    return filteredData;
-}
+//     const filteredData = {};
+//     for (const muscle in data) {
+//         if (muscle == term) {
+//             filteredData[muscle] = data[muscle];
+//         }
+//         // filteredData[muscle] = data[muscle].filter((exercise) => exercise.sets > 3);
+//     }
+//     return filteredData;
+// }
 
 async function getUser(user, page=1, pageSize=30) {
     const col = await collection(COL_ALLWORKOUTS);
@@ -155,14 +155,14 @@ async function getUser(user, page=1, pageSize=30) {
 
 
     // This works for synchronous code, not from mongodb
-    for (const data in allWorkoutsData) {
-        if(allWorkoutsData[data].username == user)
-        {
-            // Append allWorkoutsData[data] to fiilteredWorkouts without putting it as an index, just concatenate
-            filteredData = filteredData.concat(allWorkoutsData[data])
-        }
-    }
-    return filteredData;
+    // for (const data in allWorkoutsData) {
+    //     if(allWorkoutsData[data].username == user)
+    //     {
+    //         // Append allWorkoutsData[data] to fiilteredWorkouts without putting it as an index, just concatenate
+    //         filteredData = filteredData.concat(allWorkoutsData[data])
+    //     }
+    // }
+    // return filteredData;
 }
 
 
@@ -261,7 +261,7 @@ async function editById(body, page=1, pageSize=30) {
 }
 
 
-function add(body)
+async function add(body)
 {
     /*
     let body : Workout = {
@@ -274,47 +274,57 @@ function add(body)
 
     */
 
+    const col = await collection(COL_ALLWORKOUTS);
+    // const filter = { username, description, intensity };
+    col.insertOne(body)
 
 
-    console.log("adding workout")
-    allWorkoutsData = allWorkoutsData.concat(body)
-    return allWorkoutsData
+
+    // console.log("adding workout")
+    // allWorkoutsData = allWorkoutsData.concat(body)
+    // console.log(allWorkoutsData)
+    return body;
 }
 
-async function deleteItem(i, page=1, pageSize=30) 
+async function deleteItem(composeParam, page=1, pageSize=30) 
 {
+    // console.log(composeParam)
+    const username = composeParam.username;
+    const description = composeParam.description;
+    const intensity = composeParam.intensity;
     const col = await collection(COL_ALLWORKOUTS);
-    // find() points to all documents
-    // skip() skips the first (page-1) * pageSize documents
-    // limit() limits the number of documents to pageSize
-    // toArray() converts to array
-    const items = await col.find().toArray();
-    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
-    const filter = {}; // Empty filter to get all documents in the collection
-    const options = { skip: i, limit: 1 }; // Skip the first i documents and limit to 1 result
-    const workoutToDelete = await col.findOne(filter, options);
+    const filter = { username, description, intensity }; // Filter for matching documents
+    const workoutToDelete = await col.findOne(filter);
 
     if (workoutToDelete) {
-        await col.deleteOne({ _id: workoutToDelete._id });
-        console.log(workoutToDelete)
+        await col.deleteOne(filter);
+        console.log(workoutToDelete);
         return workoutToDelete;
     }
+
     return {};
 
 
-    const deletedWorkout = allWorkoutsData[i];
-    allWorkoutsData.splice(i, 1);
-    return deletedWorkout;
+    // const deletedWorkout = allWorkoutsData[i];
+    // allWorkoutsData.splice(i, 1);
+    // return deletedWorkout;
 }
 
-function getItems()
+// MAKE ASYNC --> This just gets the TABLE on the friends page
+async function getItems(page=1, pageSize=30) 
 {
     // while(data === undefined) {
     //     console.log("waiting for data")
     // }
 
-
-    return friendsActivities;
+    const col = await collection(COL_FRIENDSACTIVITIES);
+    // find() points to all documents
+    // skip() skips the first (page-1) * pageSize documents
+    // limit() limits the number of documents to pageSize
+    // toArray() converts to array
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    return items
 }
 
 
@@ -503,7 +513,7 @@ function edit(id, info) {
 
 }
 
-// MAKE ASYNC --> This is the function that when you hit the plus button on the workout, it adds to workouts list
+// This is the function that when you hit the plus button on the workout, it adds to workouts list
 async function addWithId(body, page=1, pageSize=30) {
 
     /*
@@ -634,7 +644,6 @@ async function addWithId(body, page=1, pageSize=30) {
 
 module.exports = {
     getAll,
-    search,
     add,
     deleteItem,
     getUser,

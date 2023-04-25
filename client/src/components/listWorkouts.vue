@@ -69,8 +69,8 @@
 
     
 
-    async function asyncRemove(i: number){
-        await removeWorkout(i)
+    async function asyncRemove(user: string, desc: string, intensity: string){
+        await removeWorkout(user, desc, intensity)
         getUserWorkouts(props.username).then((data) => {
             changingWorkouts.value = data.data;
         });
@@ -112,7 +112,7 @@
                 Intensity: {{ workout.intensity }}
             </div> 
 
-            <button v-if="showTrash" class="trash-button" @click="asyncRemove(i)" @change="userWorkouts()">
+            <button v-if="showTrash" class="trash-button" @click="asyncRemove(props.username, workout.description, workout.intensity)" @change="userWorkouts()">
                 <span class="icon">
                     <i class="fas fa-trash"></i>
                 </span>

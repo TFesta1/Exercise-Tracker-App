@@ -70,18 +70,30 @@ router
         }).catch(next);
     })
 
-    .get('/search/:q', (req, res) => {
-        const term = req.params.q;
-        // console.log({ term });
-        const list = model.search(term);
-        const data = { data: list, total: list.length, isSuccess: true  }
-        res.send(data);
-    })
+    // .get('/search/:q', (req, res) => {
+    //     const term = req.params.q;
+    //     // console.log({ term });
+    //     const list = model.search(term);
+    //     const data = { data: list, total: list.length, isSuccess: true  }
+    //     res.send(data);
+    // })
     // This gets friends activities
-    .get("/getFriendsActivities", (req, res) => {
-        const list = model.getItems();
-        const data = { data: list, total: list.length, isSuccess: true  }
-        res.send(data);
+    .get("/getFriendsActivities", (req, res, next) => {
+        // const list = model.getItems();
+        // console.log("friends list")
+        // console.log(list)
+        // const data = { data: list, total: list.length, isSuccess: true  }
+        // res.send(data);
+
+        model.getItems(+req.query.page, +req.query.pageSize)
+            .then(list => {
+                const data = { data: list, total: Object.keys(list).length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+
+        
+
+
     })
 
     .get("/getWorkoutById/:id", (req, res, next) => {
@@ -93,15 +105,21 @@ router
             }).catch(next);
     })
 
-    .post('/addWorkout', (req, res) => {
+    .post('/addWorkout', (req, res, next) => {
         const info = req.body;
         // console.log( req.query.workoutTitle );
         // console.log( req.params );
         // console.log( req.headers );
 
-        const dataAdded = model.add(info);
-        const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
-        res.send(data);
+        // const dataAdded = model.add(info);
+        // const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
+        // res.send(data);
+
+        model.add(info, +req.query.page, +req.query.pageSize)
+            .then(list => {
+                const data = { data: list, total: Object.keys(list).length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
     })
 
     .post("/editWorkoutById", (req, res, next) => {
@@ -135,12 +153,19 @@ router
 
 
 
-    .post("/editWorkout/:id", (req, res) => {
+    .post("/editWorkout/:id", (req, res, next) => {
         const id = req.params.id;
         const info = req.body;
-        const dataAdded = model.edit(id, info);
-        const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
-        res.send(data);
+        // const dataAdded = model.edit(id, info);
+        // const data = { data: dataAdded, total: dataAdded.length, isSuccess: true  }
+        // res.send(data);
+
+        model.edit(id, info, +req.query.page, +req.query.pageSize)
+            .then(list => {
+                const data = { data: list, total: Object.keys(list).length, isSuccess: true };
+                console.log("actually called?")
+                res.send(data)
+            }).catch(next);
     })
 
     // .patch('/update', (req, res) => {
@@ -151,13 +176,13 @@ router
     // })
 
     // On frontpage, this is the trash button to delete a workout. MAKE ASYNC
-    .get('/removeWorkout/:i', (req, res, next) => {
-        const i = req.params.i;
+    .post('/removeWorkout/', (req, res, next) => {
         // const delItem = model.deleteItem(i);
         // const data = { data: delItem, total: delItem.length, isSuccess: true  }
         // res.send(data);
+        // console.log(req.body)
 
-        model.deleteItem(i, +req.query.page, +req.query.pageSize)
+        model.deleteItem(req.body, +req.query.page, +req.query.pageSize)
             .then(list => {
                 const data = { data: list, total: Object.keys(list).length, isSuccess: true };
                 res.send(data)

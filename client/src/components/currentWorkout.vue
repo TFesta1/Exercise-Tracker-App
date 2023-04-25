@@ -128,14 +128,14 @@
         await getUsername()
     }
 
-    async function asyncRemove(i: number){
-        await removeWorkout(i)
-        getUserWorkouts(await userStore.getUserName()).then((data) => {
-            changingWorkouts.value = data.data;
-        });
-        await getUsername() //Updates the table
-        // getUsername()
-    }
+    // async function asyncRemove(i: number){
+    //     await removeWorkout(i)
+    //     getUserWorkouts(await userStore.getUserName()).then((data) => {
+    //         changingWorkouts.value = data.data;
+    //     });
+    //     await getUsername() //Updates the table
+    //     // getUsername()
+    // }
 
     const showContent = computed(() => {
       return changingWorkouts.value !== null && username !== undefined;
