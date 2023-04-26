@@ -7,6 +7,8 @@ const users = require('./controllers/users')
 const app = express()
 const workouts = require('./controllers/workouts')
 const path = require('path');
+const { requireLogin } = require("./middleware/authorization");
+
 
 const http = require('http'); //https://nodejs.org/en/docs/guides/getting-started-guide/
 
@@ -37,6 +39,7 @@ app
         res.send('Hello World! From Express')
     })
     .use('/api/v1/workouts', workouts)
+    // .use('/api/v1/workouts', requireLogin(), workouts)
     .use('/api/v1/users', users)
 
 
