@@ -82,11 +82,16 @@ const actions: UserStore['actions'] = {
         //     await actions.getUser()
         // }
         // If we find a user, update the state
-        state.name = user.name
-        state.username = user.username
-        state.error = ''
+        
 
-        token.loginRetrieveToken()
+        await token.loginRetrieveToken().then(() => {
+            // console.log(token.getToken())
+            state.name = user.name
+            state.username = user.username
+            state.error = ''
+        }).catch((err) => {
+            console.log(err)
+        })
 
         // console.log(response.data.token);
         // const session = useSession();
