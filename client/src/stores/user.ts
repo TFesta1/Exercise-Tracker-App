@@ -1,9 +1,11 @@
-import { computed, reactive } from 'vue'
+import { computed, reactive, inject } from 'vue'
 import * as Request from '@/requests'
 // Import router from index.ts
 import router from '@/router/index'
+import { api, useSession, addMessage, useLogin } from '@/model/session'
+import token from "@/stores/loginToken"
 
-
+// console.log(token.getToken())
 
 // import { router } from '@/router'
 
@@ -83,6 +85,22 @@ const actions: UserStore['actions'] = {
         state.name = user.name
         state.username = user.username
         state.error = ''
+
+        token.loginRetrieveToken()
+
+        // console.log(response.data.token);
+        // const session = useSession();
+        // session.user = response.data.user;
+        // if(!session.user) {
+        //     addMessage("User not found", "danger");
+        //     return false;
+        // }
+        // session.user.token = response.data.token;
+        // console.log(session.user.token)
+        // useLogin();
+
+
+        
         
 
         // Redirect to our homepage

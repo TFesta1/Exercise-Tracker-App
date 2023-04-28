@@ -4,10 +4,19 @@
   import NavBar from './components/NavBar.vue';
   import { inject } from 'vue'
   import type UserStore from '@/stores/user';
+  import { useLogin } from '@/model/session';
+  import type LoginTokenStore from '@/stores/loginToken'
+
+
+  let token = inject("token") as typeof LoginTokenStore
   const userStore = inject('userStore') as typeof UserStore;
+  // console.log(token)
+  token.loginRetrieveToken()
+  // console.log(token.getters.getToken)
 
   // Just for testing purposes so we don't have to login each time
   userStore.login("tanner", "tanner")
+  
   
 </script>
 
