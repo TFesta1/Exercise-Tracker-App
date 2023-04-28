@@ -94,13 +94,13 @@
                                 <i class="fas fa-plus"></i>
                             </button>
                             
-                            <router-link :to="'/workouts/edit/' + l.id" class="button" >
+                            <router-link :to="'/workouts/edit/' + l.id" class="button" v-if="isAdmin">
                                 <div class="icon">
                                     <i class="fas fa-edit"></i>
                                 </div>
                             </router-link>
                             <!-- @click="asyncRemove(i)" @change="userWorkouts()" -->
-                            <button class="icon trash-button" @click="asyncRemove(l.id)">
+                            <button class="icon trash-button" @click="asyncRemove(l.id)" v-if="isAdmin">
                                 <i class="fas fa-trash"></i>
                             </button>
 
@@ -121,7 +121,7 @@
                                 <i class="fas fa-plus"></i>
                             </button>
 
-                            <router-link :to="'/workouts/edit/' + c.id" class="button">
+                            <router-link :to="'/workouts/edit/' + c.id" class="button" v-if="isAdmin">
                                 <div class="icon">
                                     <i class="fas fa-edit"></i>
                                 </div>
@@ -131,7 +131,7 @@
                                     <i class="fas fa-trash"></i>
                                 </div>
                             </router-link> -->
-                            <button class="icon trash-button" @click="asyncRemove(c.id)">
+                            <button class="icon trash-button" @click="asyncRemove(c.id)" v-if="isAdmin">
                                 <i class="fas fa-trash"></i>
                             </button>
 
@@ -151,7 +151,7 @@
                             <button class="icon plusButton" @click="asyncAdd('Back', username, b.id)">
                                 <i class="fas fa-plus"></i>
                             </button>
-                            <router-link :to="'/workouts/edit/' + b.id" class="button" >
+                            <router-link :to="'/workouts/edit/' + b.id" class="button" v-if="isAdmin">
                                 <div class="icon">
                                     <i class="fas fa-edit"></i>
                                 </div>
@@ -161,7 +161,7 @@
                                     <i class="fas fa-trash"></i>
                                 </div>
                             </router-link> -->
-                            <button class="icon trash-button" @click="asyncRemove(b.id)">
+                            <button class="icon trash-button" @click="asyncRemove(b.id)" v-if="isAdmin">
                                 <i class="fas fa-trash"></i>
                             </button>
 
