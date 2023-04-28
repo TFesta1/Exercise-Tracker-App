@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { useSession, login } from "@/model/session"
+    import { useSession } from "@/model/session"
     import { defineComponent, reactive } from "vue";
     // import userStore from "@/stores/user";
     import { onMounted, provide, inject, ref  } from "vue";

@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { defineComponent, ref, onMounted, onUnmounted, inject, computed, watchEffect, watch } from 'vue';
     import type { Ref } from 'vue'
-    import { useSession, login } from "@/model/session"
+    import { useSession } from "@/model/session"
     import { useRoute } from 'vue-router'
     // import type UserStore from '@/stores/user';
     import type UserStore from '@/stores/user';
