@@ -48,4 +48,18 @@ export type DataListEnvelope<T> = DataEnvelope<T[]> & {
   total: number,
 }
 
+
+export function loadScript(url: string, id: string){
+  return new Promise((resolve, reject) => {
+      if(document.getElementById(id)) return resolve(true);
+      // Create a new script within the document that should specify the script, which will load it.
+      const script = document.createElement('script');
+      script.src = url;
+      script.id = id;
+      script.onload = () => resolve(true);
+      script.onerror = () => reject(false);
+      document.body.appendChild(script);
+  });
+}
+
 // post('users', { name: 'John Doe', email: 'john@example.com' }) 

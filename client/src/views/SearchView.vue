@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { onMounted, ref } from 'vue';
+    import { loadScript } from '@/model/myFetch';
 
     const mapDiv = ref<HTMLDivElement | null>(null);
     
@@ -8,6 +9,7 @@
     async function initMap(): Promise<void> {
 
         console.log(mapDiv.value);
+        await loadScript(`https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_API_KEY}`, "google-maps")
         // The location of New Paltz
         const position = { lat: 41.74712730980122, lng: -74.08695475575296 };
 
