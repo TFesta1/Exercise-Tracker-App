@@ -7,33 +7,33 @@
     import { loadScript, rest } from '@/model/myFetch';
     const userStore = inject('userStore') as typeof UserStore;
     
-    async function googleLogin()
-    {
-        await loadScript('https://accounts.google.com/gsi/client', 'google-login');
-        //await loadScript('https://apis.google.com/js/platform.js', 'gapi');
-        const client = google.accounts.oauth2.initTokenClient({
-            client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-            scope: 'https://www.googleapis.com/auth/calendar.readonly \
-                    https://www.googleapis.com/auth/contacts.readonly',
-            callback: async (tokenResponse: string) => {
-                console.log(tokenResponse);
-                const me = await rest(
-                    'https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses',
-                    null, undefined, {
-                        "Authorization": "Bearer " + tokenResponse.access_token
-                    }
+    // async function googleLogin()
+    // {
+    //     await loadScript('https://accounts.google.com/gsi/client', 'google-login');
+    //     //await loadScript('https://apis.google.com/js/platform.js', 'gapi');
+    //     const client = google.accounts.oauth2.initTokenClient({
+    //         client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+    //         scope: 'https://www.googleapis.com/auth/calendar.readonly \
+    //                 https://www.googleapis.com/auth/contacts.readonly',
+    //         callback: async (tokenResponse: string) => {
+    //             console.log(tokenResponse);
+    //             const me = await rest(
+    //                 'https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses',
+    //                 null, undefined, {
+    //                     "Authorization": "Bearer " + tokenResponse.access_token
+    //                 }
                     
-                    );
-                console.log(me);
-                const calendar = await rest('https://www.googleapis.com/calendar/v3/calendars/primary/events',
-                    null, undefined, {
-                        "Authorization": "Bearer " + tokenResponse.access_token
-                    })
-                console.log(calendar);
-            },
-            });
-            client.requestAccessToken();
-    }
+    //                 );
+    //             console.log(me);
+    //             const calendar = await rest('https://www.googleapis.com/calendar/v3/calendars/primary/events',
+    //                 null, undefined, {
+    //                     "Authorization": "Bearer " + tokenResponse.access_token
+    //                 })
+    //             console.log(calendar);
+    //         },
+    //         });
+    //         client.requestAccessToken();
+    // }
 
     // Bad code since it's using "as any" but it's because it's not a defined type. It's just explicitly exported variables
     const router = inject('router') as any;
@@ -109,11 +109,11 @@
         </div>
 
     </form>
-    <p class="googleButtonWrapper">
+    <!-- <p class="googleButtonWrapper">
         <button class="button is-primary googleButton" @click="googleLogin">
             Login With Google
         </button>
-    </p>
+    </p> -->
 
     <div class="display-pass-user-list">
         <h2>FOR TESTING ONLY</h2>
