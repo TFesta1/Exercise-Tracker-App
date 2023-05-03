@@ -1,6 +1,8 @@
 <script setup lang="ts">
     import ApexCharts from "apexcharts";
     import { ref, onMounted, computed, watchEffect, inject } from 'vue'
+    import { getPrData } from '@/model/workouts';
+
     import type UserStore from '@/stores/user'
 
     const userStore = inject('userStore') as typeof UserStore
@@ -11,11 +13,20 @@
     const chestData = ref([] as number[]);
     const deadliftData = ref([] as number[]);
 
+
     
     async function getUsername() {
         const result = await userStore.getUserName();
         // console.log(`result ${result}`)
         username.value = result;
+        // console.log(`username.value ${username.value}`)
+        getPrData(username.value).then((data) => {
+          console.log(data.data.filteredData[0].chestData)
+          squatData.value = data.data.filteredData[0].squatsData
+          chestData.value = data.data.chestData
+          deadliftData.value = data.data.deadliftData
+          console.log(`squatData.value ${squatData.value} chestData.value ${chestData.value} deadliftData.value ${deadliftData.value}`)
+        })
     }
     // Define a constant reference array of numbers
 
@@ -30,7 +41,8 @@
     const chartData = computed(() => {
         if (title.value == 'Squat Progress')
         {
-            numbers.value = [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10].reverse()
+            console.log(squatData.value)
+            numbers.value = [10, 15, 8, 6, 20, 21, 26, 33, 24, 38, 52, 45]
         }
         else if (title.value == 'Chest Press Progress')
         {

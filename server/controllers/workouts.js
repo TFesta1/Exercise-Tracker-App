@@ -14,6 +14,7 @@ router
 
     .get("/getWorkoutsPrData/:user", (req, res, next) => {
         const user = req.params.user;
+        // console.log("in server statistics")
         model.getAllWithUsername(user)
             .then(list => {
                 const data = { data: list, total: list.length, isSuccess: true };

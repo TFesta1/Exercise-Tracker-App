@@ -11,9 +11,15 @@ export interface Workout {
 }
 
 export interface KindsOfWorkouts {
-    legs: string;
+    sq: string;
     back: string;
     chest: string;
+}
+
+export interface prDataWorkouts {
+    squatsData: number[];
+    deadliftData: number[];
+    chestData: number[];
 }
 
 export interface KindsOfWorkoutsMongo {
@@ -55,6 +61,11 @@ export function getAllWorkouts() : Promise<DataEnvelope<KindsOfWorkoutsMongo>>{
 export function getUserWorkouts(user: string) : Promise<DataListEnvelope<Workout>> {
     // return allWorkouts.filter(workout => workout.username === user);
     return api('workouts/getUserWorkouts/' + user)
+}
+
+export function getPrData(user: string) : Promise<DataEnvelope<prDataWorkouts>>{
+    console.log("getting pr data")
+    return api('workouts/getWorkoutsPrData/' + user)
 }
 
 export function getWorkoutById(id: number) : Promise<DataEnvelope<EditWorkout>>{

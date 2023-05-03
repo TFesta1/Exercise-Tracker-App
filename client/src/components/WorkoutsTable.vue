@@ -37,6 +37,7 @@
             legs.value = workoutsConst[0].legs
             back.value = workoutsConst[1].back
             chest.value = workoutsConst[2].chest
+            console.log(chest)
         }).catch((err) => {
             console.log(err)
         })

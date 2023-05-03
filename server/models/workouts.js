@@ -135,15 +135,17 @@ async function getAllWithUsername(username, page=1, pageSize=30) {
 
     for(const item in items)
     {
+        // console.log(item)
         const foundUsername = items[item].username;
         if(foundUsername == username)
         {
+            // console.log(items[item])
             filteredData.push(items[item]);
             break
         }
     }
     // This works
-    return { items: filteredData, total };
+    return { filteredData, total };
 }
 
 
