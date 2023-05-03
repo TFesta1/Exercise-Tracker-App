@@ -3,6 +3,7 @@
 
 ###
 GET http://localhost:{{port}}/api/v1/workouts
+Authorization: Bearer {{jwt}}
 
 ###
 GET http://localhost:{{port}}/api/v1/workouts
@@ -11,25 +12,32 @@ Authorization: Bearer {{jwt}}
 ###
 
 GET http://localhost:{{port}}/api/v1/workouts/getWorkoutsTest
+Authorization: Bearer {{jwt}}
+
 
 ###
 
 GET http://localhost:{{port}}/api/v1/workouts/fillWorkouts
+Authorization: Bearer {{jwt}}
 
 ###
 
 
 GET http://localhost:{{port}}/api/v1/workouts/fillAllWorkouts
+Authorization: Bearer {{jwt}}
 
 ###
 GET http://localhost:{{port}}/api/v1/workouts/search/legs
+Authorization: Bearer {{jwt}}
 
 ###
 GET http://localhost:{{port}}/api/v1/workouts/removeWorkoutFromTable/2
+Authorization: Bearer {{jwt}}
 
 ###
 
 GET http://localhost:{{port}}/api/v1/workouts/getWorkoutById/100
+Authorization: Bearer {{jwt}}
 
 
 ###
@@ -50,12 +58,14 @@ Content-Type: application/json
 
 ###
 GET http://localhost:{{port}}/api/v1/workouts/getUserWorkouts/tanner
+Authorization: Bearer {{jwt}}
 
 ###
 
 
 ###
 GET http://localhost:{{port}}/api/v1/workouts/removeWorkout/0
+Authorization: Bearer {{jwt}}
 
 ###
 POST http://localhost:{{port}}/api/v1/workouts/addWorkout
@@ -80,12 +90,19 @@ Content-Type: application/json
 
 ###
 GET http://localhost:{{port}}/api/v1/workouts/getFriendsActivities
+Authorization: Bearer {{jwt}}
+
+###
+GET http://localhost:{{port}}/api/v1/workouts/getWorkoutsPrData/humza
+Authorization: Bearer {{jwt}}
 
 ###
 POST http://localhost:{{port}}/api/v1/users/seed
+Authorization: Bearer {{jwt}}
 
 ###
 GET http://localhost:{{port}}/api/v1/users
+Authorization: Bearer {{jwt}}
 
 ###
 # @name login

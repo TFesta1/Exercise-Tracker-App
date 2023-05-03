@@ -17,6 +17,7 @@ async function collection(COLLECTION_NAME) {
 const COL_ALLWORKOUTS = 'allWorkouts';
 const COL_FRIENDSACTIVITIES = 'friendsActivities';
 const COL_WORKOUTS = 'workouts';
+const COL_PRDATA = 'prData';
 
 
 // Read the file
@@ -28,6 +29,9 @@ const friendsWorkoutsDataScraped = JSON.parse(friendsWorkoutsJSON);
 
 const workouts = fs.readFileSync(path.join(__dirname, "../data/workouts.json"), "utf-8");
 const workoutsDataScraped = JSON.parse(workouts);
+
+const prData = fs.readFileSync(path.join(__dirname, "../data/prData.json"), "utf-8");
+const prDataScraped = JSON.parse(prData);
 // console.log(workoutsDataScraped)
 
 
@@ -58,8 +62,8 @@ async function insertWorkouts(colName, dbScraped) {
 
 
 async function getWorkoutsTest() {
-    // await insertWorkouts("allWorkouts", allWorkoutsDataScraped); // Insert some documents into the collection
-    const col = await collection('allWorkouts');
+    // await insertWorkouts(COL_PRDATA, prDataScraped); // Insert some documents into the collection
+    const col = await collection(COL_PRDATA);
     console.log(col);
     const count = await col.countDocuments();
     console.log(`Number of documents in collection: ${count}`);
@@ -117,6 +121,30 @@ async function getAll(page=1, pageSize=30) {
     return { items, total };
 }
 
+
+async function getAllWithUsername(username, page=1, pageSize=30) {
+    // console.log("in getTableById function in workouts.js in the model in server")
+    const col = await collection(COL_PRDATA);
+    // find() points to all documents
+    // skip() skips the first (page-1) * pageSize documents
+    // limit() limits the number of documents to pageSize
+    // toArray() converts to array
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(); // Total documents, which is each box seperated with an ID
+    let filteredData = [];
+
+    for(const item in items)
+    {
+        const foundUsername = items[item].username;
+        if(foundUsername == username)
+        {
+            filteredData.push(items[item]);
+            break
+        }
+    }
+    // This works
+    return { items: filteredData, total };
+}
 
 
 
@@ -656,5 +684,6 @@ module.exports = {
     getWorkoutsTest,
     fillAllWorkouts,
     fillFriendsActivities,
-    fillWorkouts
+    fillWorkouts,
+    getAllWithUsername
 }

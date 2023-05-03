@@ -12,6 +12,16 @@ router
             }).catch(next);
     })
 
+    .get("/getWorkoutsPrData/:user", (req, res, next) => {
+        const user = req.params.user;
+        model.getAllWithUsername(user)
+            .then(list => {
+                const data = { data: list, total: list.length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+    })
+
+
     .get("/fillWorkouts", (req, res, next) => {
         model.fillWorkouts()
             .then(list => {
