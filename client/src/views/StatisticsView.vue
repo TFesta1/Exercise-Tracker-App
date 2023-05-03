@@ -20,13 +20,13 @@
         // console.log(`result ${result}`)
         username.value = result;
         // console.log(`username.value ${username.value}`)
-        getPrData(username.value).then((data) => {
-          console.log(data.data.filteredData[0].chestData)
-          squatData.value = data.data.filteredData[0].squatsData
-          chestData.value = data.data.chestData
-          deadliftData.value = data.data.deadliftData
-          console.log(`squatData.value ${squatData.value} chestData.value ${chestData.value} deadliftData.value ${deadliftData.value}`)
-        })
+        // getPrData(username.value).then((data) => {
+        //   console.log(data.data.filteredData[0].chestData)
+        //   squatData.value = data.data.filteredData[0].squatsData
+        //   chestData.value = data.data.chestData
+        //   deadliftData.value = data.data.deadliftData
+        //   console.log(`squatData.value ${squatData.value} chestData.value ${chestData.value} deadliftData.value ${deadliftData.value}`)
+        // })
     }
     // Define a constant reference array of numbers
 
