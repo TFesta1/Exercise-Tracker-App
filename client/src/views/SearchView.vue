@@ -14,7 +14,7 @@
         const position = { lat: 41.74712730980122, lng: -74.08695475575296 };
 
         const map = new google.maps.Map(
-            mapDiv.value!,
+            mapDiv.value,
             {
             zoom: 14,
             center: position,
@@ -32,7 +32,9 @@
 
 })
 </script>
-
+<script lang="ts">
+    declare const google: any;
+</script>
 
 <template>
     <div>
