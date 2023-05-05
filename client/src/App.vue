@@ -15,7 +15,7 @@
   // console.log(token.getters.getToken)
 
   // Just for testing purposes so we don't have to login each time
-  // userStore.login("tanner", "tanner")
+  userStore.login("tanner", "tanner")
   
   
 </script>
