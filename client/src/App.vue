@@ -11,11 +11,11 @@
   let token = inject("token") as typeof LoginTokenStore
   const userStore = inject('userStore') as typeof UserStore;
   // console.log(token)
-  token.loginRetrieveToken()
+  // token.loginRetrieveToken()
   // console.log(token.getters.getToken)
 
   // Just for testing purposes so we don't have to login each time
-  userStore.login("tanner", "tanner")
+  // userStore.login("tanner", "tanner")
   
   
 </script>
