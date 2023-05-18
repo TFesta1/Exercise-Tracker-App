@@ -11,6 +11,14 @@ router
                 res.send(data)
             }).catch(next);
     })
+    .get("/getAllUsers", (req, res, next) => {
+        model.getAllUsers()
+            .then(list => {
+                const data = { data: list, total: list.length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+    })
+
 
     .get("/getWorkoutsPrData/:user", (req, res, next) => {
         const user = req.params.user;

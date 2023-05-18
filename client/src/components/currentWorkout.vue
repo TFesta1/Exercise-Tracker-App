@@ -1,11 +1,15 @@
 <script setup lang="ts">
-    import { ref, reactive, inject, computed, onMounted } from 'vue'
-    import { type Workout, removeWorkout, addToWorkout, getUserWorkouts } from '@/model/workouts';
+    import { ref, reactive, inject, computed, onMounted, watch } from 'vue'
+    import { type Workout, removeWorkout, addToWorkout, getUserWorkouts, getUsers } from '@/model/workouts';
     import type UserStore from '@/stores/user';
     import { getActivities, type Activity } from '@/model/activities';
     import listWorkouts from '@/components/listWorkouts.vue';
 
-    const activities = ref({} as Activity[]) 
+    const activities = ref({} as Activity[])
+    
+    const searchTerm = ref("")
+
+    
 
     getActivities().then((data) => {
         activities.value = data.data;
@@ -83,6 +87,41 @@
                 // }
         });            
     }
+    const allFilteredUsernames = ref([] as String[])
+
+    async function filterUsernames(searchTerm: string) {
+      if(searchTerm == "") {
+        allFilteredUsernames.value = [];
+        return;
+      }
+      let matches = 0;
+      const usernames = await getUsers().then((data) => {
+        return data.data;
+      });
+
+      // Filter the usernames based on the search term and matches limit
+      const filteredUsernames = usernames.filter(username => {
+        console.log(username);
+        if (username.toLowerCase().includes(searchTerm.toLowerCase()) && matches < 10) {
+          matches++;
+          return true;
+        }
+        return false;
+      });
+
+      allFilteredUsernames.value = filteredUsernames;
+    }
+
+    const searchUsers = computed(() => {
+      return allFilteredUsernames.value;
+    });
+
+    watch(searchTerm, filterUsernames, { immediate: true });
+
+
+    // console.log(searchUsers.value, 'searchUsers')
+    
+    
 
     
 
@@ -98,15 +137,23 @@
 
         return changingWorkouts;
     };
+    const usernames = ref()
 
     onMounted(async () => {
+        // console.log("hello")
+        getUsers().then((data) => {
+            console.log(data.data)
+            usernames.value = data.data;
+        });
+        console.log(usernames.value)
         await getUsername()
     });
 
     const form = reactive({
         name: '',
         description: '',
-        intensity: ''
+        intensity: '',
+        tag: ''
     })
 
     async function onSubmit() 
@@ -196,6 +243,19 @@
                             <option>Easy</option>
                         </select>
                     </label>
+
+                    <label>
+                        Tag:
+                        <input v-model="searchTerm" type="text" name="tag" autocomplete="on" class="move" />
+                    </label>
+                    <ul v-if="allFilteredUsernames.length">
+                        
+                        <li class="usernames"
+                            v-for="name in allFilteredUsernames"
+                        >
+                            {{ name }}
+                        </li>
+                    </ul>
                     <button type="submit" class="submit-modal" @click="addWorkout">Submit</button>
                 </form>
                 <button class="close-modal" @click="addWorkout">Close</button>
@@ -292,6 +352,18 @@
     position: relative;
     top: -20px;
     left: 220px;
+}
+
+.move {
+    position: relative;
+    bottom: -10px;
+}
+
+.usernames {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  color: black;
 }
 
 </style>

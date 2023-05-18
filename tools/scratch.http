@@ -93,6 +93,9 @@ GET http://localhost:{{port}}/api/v1/workouts/getFriendsActivities
 Authorization: Bearer {{jwt}}
 
 ###
+GET http://localhost:{{port}}/api/v1/workouts/getAllUsers
+Authorization: Bearer {{jwt}}
+###
 GET http://localhost:{{port}}/api/v1/workouts/getWorkoutsPrData/humza
 Authorization: Bearer {{jwt}}
 

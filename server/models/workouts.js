@@ -60,6 +60,17 @@ async function insertWorkouts(colName, dbScraped) {
     // }
 }
 
+async function getAllUsers() {
+    // console.log("called")
+    const col = await collection(COL_PRDATA);
+    // console.log(col);
+    const count = await col.countDocuments();
+    // console.log(`Number of documents in collection: ${count}`);
+    const items = (await col.find().toArray()).map(item => item.username);
+    // console.log(items)
+    return items
+}
+
 
 async function getWorkoutsTest() {
     // await insertWorkouts(COL_PRDATA, prDataScraped); // Insert some documents into the collection
@@ -687,5 +698,6 @@ module.exports = {
     fillAllWorkouts,
     fillFriendsActivities,
     fillWorkouts,
-    getAllWithUsername
+    getAllWithUsername,
+    getAllUsers
 }

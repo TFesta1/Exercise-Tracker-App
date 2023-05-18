@@ -63,6 +63,11 @@ export function getUserWorkouts(user: string) : Promise<DataListEnvelope<Workout
     return api('workouts/getUserWorkouts/' + user)
 }
 
+export function getUsers() : Promise<DataListEnvelope<String>> {
+    // return allWorkouts.filter(workout => workout.username === user);
+    return api('workouts/getAllUsers/')
+}
+
 export function getPrData(user: string) : Promise<DataEnvelope<prDataWorkouts>>{
     console.log("getting pr data")
     return api('workouts/getWorkoutsPrData/' + user)

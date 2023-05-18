@@ -33,7 +33,7 @@ h3 {
     cursor: pointer;
     border-radius: 5px;
     position: relative;
-    top: -10px;
+    top: 30px;
     left: 10px;
 }
 
@@ -331,7 +331,7 @@ h3 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -383,8 +383,8 @@ h3 {
     z-index: 99;
     width: 80%;
     max-width: 500px;
-    height: 80%;
-    max-height: 400px;
+    height: 100%;
+    max-height: 500px;
     
     transform: translate(20%, 0%);
     top: 0%;
