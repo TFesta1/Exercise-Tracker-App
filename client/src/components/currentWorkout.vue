@@ -364,6 +364,8 @@
   border: 1px solid #ccc;
   background-color: #f5f5f5;
   color: black;
+  list-style: none;
+  
 }
 
 </style>
